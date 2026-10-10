@@ -63,6 +63,7 @@
     .reveal.visible { opacity:1; transform:none; }
     .form-message { min-height:1.6em; margin-top:1rem; font-size:.86rem; }
     .pending { font-size:.67rem; letter-spacing:.13em; text-transform:uppercase; opacity:.7; }
+    #qr-slot img { width:100%; height:100%; object-fit:contain; background:#fff; border-radius:4px; }
     @media(max-width:640px) {
       .section { padding-block:5rem; }
       .count-grid { gap:.25rem; }
@@ -84,11 +85,10 @@
  </head>
  <body data-template-id="__page-root" class="w-full" style="background: rgb(248, 248, 246);">
 
-  <!-- PORTADA -->
   <header id="apertura" data-template-id="opening-section" class="canva-header cover dark section" style="background: rgb(17, 17, 17);">
    <div class="inner w-full flex justify-between items-center gap-4">
     <span data-template-id="opening-kicker" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;"></span>
-    <span data-template-id="opening-date" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">22.11.2026</span>
+    <span data-template-id="opening-date" id="t-openingDate" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">22.11.2026</span>
    </div>
    <div class="inner w-full grid md:grid-cols-2 gap-9 md:gap-14 items-center py-12">
     <div class="photo-frame cover-photo order-2 md:order-1">
@@ -103,7 +103,6 @@
    <div class="inner w-full rule"></div>
   </header>
 
-  <!-- CONTENIDO -->
   <div id="site-content" hidden="">
    <header class="site-header px-5 md:px-12 py-3">
     <nav class="inner" aria-label="Navegación de la invitación">
@@ -123,12 +122,12 @@
    <main id="inicio">
     <section data-template-id="countdown-section" class="canva-section section" style="background: rgb(248, 248, 246);">
      <div class="inner reveal">
-      <p data-template-id="countdown-kicker" class="canva-text eyebrow mb-10" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">EL TIEMPO HASTA NUESTRO SÍ</p>
+      <p data-template-id="countdown-kicker" id="t-countdownKicker" class="canva-text eyebrow mb-10" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">EL TIEMPO HASTA NUESTRO SÍ</p>
       <div id="count-grid" class="count-grid" role="timer" aria-label="Tiempo restante hasta la boda">
-       <div><div id="days" class="count-number">000</div><span data-template-id="days-label" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">DÍAS</span></div>
-       <div><div id="hours" class="count-number">00</div><span data-template-id="hours-label" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">HORAS</span></div>
-       <div><div id="minutes" class="count-number">00</div><span data-template-id="minutes-label" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">MINUTOS</span></div>
-       <div><div id="seconds" class="count-number">00</div><span data-template-id="seconds-label" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">SEGUNDOS</span></div>
+       <div><div id="days" class="count-number">000</div><span data-template-id="days-label" id="t-daysLabel" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">DÍAS</span></div>
+       <div><div id="hours" class="count-number">00</div><span data-template-id="hours-label" id="t-hoursLabel" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">HORAS</span></div>
+       <div><div id="minutes" class="count-number">00</div><span data-template-id="minutes-label" id="t-minutesLabel" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">MINUTOS</span></div>
+       <div><div id="seconds" class="count-number">00</div><span data-template-id="seconds-label" id="t-secondsLabel" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">SEGUNDOS</span></div>
       </div>
       <p id="count-celebration" data-template-id="count-celebration" class="canva-text serif section-title mt-8 hidden" aria-live="polite" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Hoy comienza nuestro para siempre.</p>
       <div class="rule mt-16"></div>
@@ -137,20 +136,20 @@
 
     <section data-template-id="scripture-section" class="canva-section section dark" style="background: rgb(17, 17, 17);">
      <div class="narrow reveal text-center">
-      <p data-template-id="scripture-kicker" class="canva-text eyebrow mb-12" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">EL AMOR QUE NOS GUÍA</p>
-      <h2 data-template-id="scripture-quote" class="canva-text section-title" style="color: rgb(248, 248, 246); font-weight: 300; font-style: normal; font-size: 24px;">“El amor es paciente, es bondadoso”.</h2>
-      <p data-template-id="scripture-reference" class="canva-text eyebrow mt-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">1 Corintios 13:4</p>
+      <p data-template-id="scripture-kicker" id="t-scriptureKicker" class="canva-text eyebrow mb-12" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">EL AMOR QUE NOS GUÍA</p>
+      <h2 data-template-id="scripture-quote" id="t-scriptureQuote" class="canva-text section-title" style="color: rgb(248, 248, 246); font-weight: 300; font-style: normal; font-size: 24px;">"El amor es paciente, es bondadoso".</h2>
+      <p data-template-id="scripture-reference" id="t-scriptureReference" class="canva-text eyebrow mt-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">1 Corintios 13:4</p>
       <div class="rule my-14"></div>
-      <p data-template-id="blessing-text" class="canva-text copy" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Con gratitud por la bendición de Dios, queremos compartir con ustedes el comienzo de esta nueva etapa.</p>
+      <p data-template-id="blessing-text" id="t-blessingText" class="canva-text copy" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Con gratitud por la bendición de Dios, queremos compartir con ustedes el comienzo de esta nueva etapa.</p>
      </div>
     </section>
 
     <section data-template-id="invitation-section" class="canva-section section" style="background: rgb(248, 248, 246);">
      <div class="inner grid md:grid-cols-2 gap-12 md:gap-24 items-center">
       <div class="reveal">
-       <p data-template-id="invitation-kicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;"></p>
-       <h2 data-template-id="invitation-title" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px;">Un día para recordar.</h2>
-       <p data-template-id="invitation-body" class="canva-text copy mt-10 whitespace-pre-line" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Hoy queremos celebrar el comienzo de nuestro para siempre, rodeados de las personas que forman parte de nuestra historia.
+       <p data-template-id="invitation-kicker" id="t-invitationKicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;"></p>
+       <h2 data-template-id="invitation-title" id="t-invitationTitle" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px;">Un día para recordar.</h2>
+       <p data-template-id="invitation-body" id="t-invitationBody" class="canva-text copy mt-10 whitespace-pre-line" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Hoy queremos celebrar el comienzo de nuestro para siempre, rodeados de las personas que forman parte de nuestra historia.
 Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
       </div>
       <div class="photo-frame reveal" style="aspect-ratio:4/5">
@@ -165,82 +164,82 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
        <img data-template-id="church-photo" id="church-photo" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=FOTO+IGLESIA" alt="FOTO IGLESIA">
       </div>
       <div class="reveal">
-       <p data-template-id="ceremony-kicker" class="canva-text eyebrow mb-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">01 / CEREMONIA RELIGIOSA</p>
-       <h2 data-template-id="ceremony-title" class="canva-text section-title" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 24px;">Nuestro sí.</h2>
+       <p data-template-id="ceremony-kicker" id="t-ceremonyKicker" class="canva-text eyebrow mb-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">01 / CEREMONIA RELIGIOSA</p>
+       <h2 data-template-id="ceremony-title" id="t-ceremonyTitle" class="canva-text section-title" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 24px;">Nuestro sí.</h2>
        <div class="rule my-9"></div>
-       <p data-template-id="ceremony-day" class="canva-text copy" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Domingo 22 de noviembre</p>
-       <p data-template-id="ceremony-time" class="canva-text serif mt-4" style="font-size: 16px; color: rgb(248, 248, 246); font-weight: 400; font-style: normal;">17:00 h.</p>
-       <p data-template-id="ceremony-place" class="canva-text copy mt-5" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Parroquia Sagrado Corazón de Jesús - Vicaría Castrense, Asunción.</p>
-       <a id="church-map" data-template-id="church-map-label" class="canva-link editorial-link dark-link mt-9" href="https://maps.app.goo.gl/u8C23Hu3rsHyibMK8?g_st=aw" target="_blank" rel="noopener noreferrer" style="background: transparent; color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">COMO LLEGAR</a>
+       <p data-template-id="ceremony-day" id="t-ceremonyDay" class="canva-text copy" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Domingo 22 de noviembre</p>
+       <p data-template-id="ceremony-time" id="t-ceremonyTime" class="canva-text serif mt-4" style="font-size: 16px; color: rgb(248, 248, 246); font-weight: 400; font-style: normal;">17:00 h.</p>
+       <p data-template-id="ceremony-place" id="t-ceremonyPlace" class="canva-text copy mt-5" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Parroquia Sagrado Corazón de Jesús - Vicaría Castrense, Asunción.</p>
+       <a id="church-map" data-template-id="church-map-label" href="https://maps.app.goo.gl/u8C23Hu3rsHyibMK8?g_st=aw" target="_blank" rel="noopener noreferrer" class="canva-link editorial-link dark-link mt-9" style="background: transparent; color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">COMO LLEGAR</a>
       </div>
      </div>
     </section>
 
     <section data-template-id="reception-section" class="canva-section section" style="background: rgb(248, 248, 246);">
      <div class="narrow reveal">
-      <p data-template-id="reception-kicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">02 / CEREMONIA CIVIL Y RECEPCIÓN</p>
-      <h2 data-template-id="reception-title" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px;">Y después...</h2>
-      <p data-template-id="reception-time" class="canva-text serif mt-10" style="font-size: 16px; color: rgb(17, 17, 17); font-weight: 400; font-style: normal;">18:00 h.</p>
-      <p data-template-id="reception-place" class="canva-text copy mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Centro de Eventos Vanité, Paseo Carmelitas.</p>
-      <p data-template-id="reception-copy" class="canva-text copy mt-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Después de nuestro sí, nos encantará encontrarnos para compartir una noche inolvidable.</p>
-      <a data-template-id="reception-map-label" class="canva-link editorial-link light-link mt-9" href="https://maps.app.goo.gl/eppQpEGQKhWD2z5W7?g_st=aw" target="_blank" rel="noopener noreferrer" style="background: transparent; color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">CÓMO LLEGAR</a>
+      <p data-template-id="reception-kicker" id="t-receptionKicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">02 / CEREMONIA CIVIL Y RECEPCIÓN</p>
+      <h2 data-template-id="reception-title" id="t-receptionTitle" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px;">Y después...</h2>
+      <p data-template-id="reception-time" id="t-receptionTime" class="canva-text serif mt-10" style="font-size: 16px; color: rgb(17, 17, 17); font-weight: 400; font-style: normal;">18:00 h.</p>
+      <p data-template-id="reception-place" id="t-receptionPlace" class="canva-text copy mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Centro de Eventos Vanité, Paseo Carmelitas.</p>
+      <p data-template-id="reception-copy" id="t-receptionCopy" class="canva-text copy mt-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Después de nuestro sí, nos encantará encontrarnos para compartir una noche inolvidable.</p>
+      <a data-template-id="reception-map-label" href="https://maps.app.goo.gl/eppQpEGQKhWD2z5W7?g_st=aw" target="_blank" rel="noopener noreferrer" class="canva-link editorial-link light-link mt-9" style="background: transparent; color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">CÓMO LLEGAR</a>
      </div>
     </section>
 
     <section data-template-id="dress-section" class="canva-section section dark" style="background: rgb(17, 17, 17);">
      <div class="inner reveal border-y border-white/40 py-14 md:py-24">
-      <p data-template-id="dress-kicker" class="canva-text eyebrow mb-9" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">UNA NOCHE EN NEGRO</p>
-      <h2 data-template-id="dress-title" class="canva-text section-title max-w-4xl" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 24px;">THE BLACK DRESS CODE.</h2>
-      <p data-template-id="dress-copy" class="canva-text copy mt-9 max-w-xl" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Una noche especial merece un look inolvidable. Te invitamos a acompañarnos con vestimenta formal, completamente negra. Una celebración donde la elegancia será parte de cada detalle.</p>
-      <p data-template-id="dress-highlight" class="canva-text eyebrow mt-9" style="color: rgb(248, 248, 246); font-weight: 700; font-style: normal; font-size: 16px;">FORMAL · TOTAL BLACK</p>
-      <a data-template-id="dress-link" class="canva-link editorial-link dark-link mt-11" href="https://pin.it/2F9btGXp9" target="_blank" rel="noopener noreferrer" style="background: transparent; color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">VER INSPIRACIÓN</a>
+      <p data-template-id="dress-kicker" id="t-dressKicker" class="canva-text eyebrow mb-9" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">UNA NOCHE EN NEGRO</p>
+      <h2 data-template-id="dress-title" id="t-dressTitle" class="canva-text section-title max-w-4xl" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 24px;">THE BLACK DRESS CODE.</h2>
+      <p data-template-id="dress-copy" id="t-dressCopy" class="canva-text copy mt-9 max-w-xl" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Una noche especial merece un look inolvidable. Te invitamos a acompañarnos con vestimenta formal, completamente negra. Una celebración donde la elegancia será parte de cada detalle.</p>
+      <p data-template-id="dress-highlight" id="t-dressHighlight" class="canva-text eyebrow mt-9" style="color: rgb(248, 248, 246); font-weight: 700; font-style: normal; font-size: 16px;">FORMAL · TOTAL BLACK</p>
+      <a data-template-id="dress-link" href="https://pin.it/2F9btGXp9" target="_blank" rel="noopener noreferrer" class="canva-link editorial-link dark-link mt-11" style="background: transparent; color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">VER INSPIRACIÓN</a>
      </div>
     </section>
 
     <section data-template-id="adults-section" class="canva-section section" style="background: rgb(248, 248, 246);">
      <div class="narrow reveal text-center">
-      <p data-template-id="adults-kicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">UNA NOTA CON CARIÑO</p>
-      <h2 data-template-id="adults-title" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px;">Solo adultos.</h2>
-      <p data-template-id="adults-copy" class="canva-text copy mt-9" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Queremos compartir esta celebración exclusivamente con adultos. Gracias por comprenderlo y por acompañarnos en una noche tan especial.</p>
+      <p data-template-id="adults-kicker" id="t-adultsKicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">UNA NOTA CON CARIÑO</p>
+      <h2 data-template-id="adults-title" id="t-adultsTitle" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px;">Solo adultos.</h2>
+      <p data-template-id="adults-copy" id="t-adultsCopy" class="canva-text copy mt-9" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Queremos compartir esta celebración exclusivamente con adultos. Gracias por comprenderlo y por acompañarnos en una noche tan especial.</p>
      </div>
     </section>
 
     <section data-template-id="honeymoon-section" class="canva-section section dark" style="background: rgb(17, 17, 17);">
      <div class="inner grid lg:grid-cols-2 gap-14 lg:gap-24">
       <div class="reveal">
-       <p data-template-id="honeymoon-kicker" class="canva-text eyebrow mb-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">DESPUÉS DEL SÍ</p>
-       <h2 data-template-id="honeymoon-title" class="canva-text section-title" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 24px;">NUESTRA PRÓXIMA AVENTURA.</h2>
-       <p data-template-id="honeymoon-copy" class="canva-text copy mt-9" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Nuestra próxima aventura comienza después del sí, quiero. Si deseás formar parte de este nuevo capítulo, podés ayudarnos a sumar kilómetros, descubrir nuevos lugares y crear recuerdos que nos acompañarán toda la vida.</p>
+       <p data-template-id="honeymoon-kicker" id="t-honeymoonKicker" class="canva-text eyebrow mb-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">DESPUÉS DEL SÍ</p>
+       <h2 data-template-id="honeymoon-title" id="t-honeymoonTitle" class="canva-text section-title" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 24px;">NUESTRA PRÓXIMA AVENTURA.</h2>
+       <p data-template-id="honeymoon-copy" id="t-honeymoonCopy" class="canva-text copy mt-9" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Nuestra próxima aventura comienza después del sí, quiero. Si deseás formar parte de este nuevo capítulo, podés ayudarnos a sumar kilómetros, descubrir nuevos lugares y crear recuerdos que nos acompañarán toda la vida.</p>
       </div>
       <div data-template-id="bank-card" class="canva-card bank reveal self-center" style="background: rgb(17, 17, 17);">
-       <p data-template-id="bank-heading" class="canva-text eyebrow mb-7" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">DATOS BANCARIOS</p>
-       <div class="bank-row"><span data-template-id="bank-holder-label" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Titular</span><span data-template-id="bank-holder" class="canva-text break-all" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">JARA SALDIVAR CINTHIA NOEMI</span></div>
-       <div class="bank-row"><span data-template-id="bank-name-label" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Banco</span><span data-template-id="bank-name" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Basa</span></div>
-       <div class="bank-row"><span data-template-id="bank-document-label" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">N.º Documento</span><span data-template-id="bank-document" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">4560498</span></div>
-       <div class="bank-row"><span data-template-id="bank-account-label" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">N.º Cuenta</span><span data-template-id="bank-account" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">155116331</span></div>
-       <div class="bank-row"><span data-template-id="bank-alias-label" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Alias</span><span data-template-id="bank-alias" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">4560498</span></div>
-       <div class="bank-row"><span data-template-id="bank-alias-type-label" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Tipo de Alias</span><span data-template-id="bank-alias-type" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">CI</span></div>
+       <p data-template-id="bank-heading" id="t-bankHeading" class="canva-text eyebrow mb-7" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">DATOS BANCARIOS</p>
+       <div class="bank-row"><span data-template-id="bank-holder-label" id="t-bankHolderLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Titular</span><span data-template-id="bank-holder" id="t-bankHolder" class="canva-text break-all" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">JARA SALDIVAR CINTHIA NOEMI</span></div>
+       <div class="bank-row"><span data-template-id="bank-name-label" id="t-bankNameLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Banco</span><span data-template-id="bank-name" id="t-bankName" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Basa</span></div>
+       <div class="bank-row"><span data-template-id="bank-document-label" id="t-bankDocumentLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">N.º Documento</span><span data-template-id="bank-document" id="t-bankDocument" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">4560498</span></div>
+       <div class="bank-row"><span data-template-id="bank-account-label" id="t-bankAccountLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">N.º Cuenta</span><span data-template-id="bank-account" id="t-bankAccount" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">155116331</span></div>
+       <div class="bank-row"><span data-template-id="bank-alias-label" id="t-bankAliasLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Alias</span><span data-template-id="bank-alias" id="t-bankAlias" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">4560498</span></div>
+       <div class="bank-row"><span data-template-id="bank-alias-type-label" id="t-bankAliasTypeLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Tipo de Alias</span><span data-template-id="bank-alias-type" id="t-bankAliasType" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">CI</span></div>
       </div>
      </div>
     </section>
 
     <section id="rsvp" data-template-id="rsvp-section" class="canva-section section" style="background: rgb(248, 248, 246);">
      <div class="narrow reveal">
-      <p data-template-id="rsvp-kicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">TU RESPUESTA</p>
-      <h2 data-template-id="rsvp-title" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px;">¿NOS ACOMPAÑÁS?</h2>
-      <p data-template-id="rsvp-copy" class="canva-text copy mt-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Tu presencia hará que este día sea todavía más especial. Te pedimos que confirmes tu asistencia.</p>
+      <p data-template-id="rsvp-kicker" id="t-rsvpKicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">TU RESPUESTA</p>
+      <h2 data-template-id="rsvp-title" id="t-rsvpTitle" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px;">¿NOS ACOMPAÑÁS?</h2>
+      <p data-template-id="rsvp-copy" id="t-rsvpCopy" class="canva-text copy mt-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Tu presencia hará que este día sea todavía más especial. Te pedimos que confirmes tu asistencia.</p>
       <form id="rsvp-form" class="mt-10" novalidate="">
-       <label data-template-id="rsvp-name-label" class="canva-text" for="rsvp-name" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Nombre</label>
+       <label data-template-id="rsvp-name-label" id="t-rsvpNameLabel" class="canva-text" for="rsvp-name" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Nombre</label>
        <input id="rsvp-name" class="field" name="nombre" autocomplete="given-name" required="" maxlength="80">
-       <label data-template-id="rsvp-last-label" class="canva-text" for="rsvp-last" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Apellido</label>
+       <label data-template-id="rsvp-last-label" id="t-rsvpLastLabel" class="canva-text" for="rsvp-last" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Apellido</label>
        <input id="rsvp-last" class="field" name="apellido" autocomplete="family-name" required="" maxlength="80">
-       <label data-template-id="rsvp-attendance-label" class="canva-text" for="rsvp-attendance" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Confirmación de asistencia</label>
+       <label data-template-id="rsvp-attendance-label" id="t-rsvpAttendanceLabel" class="canva-text" for="rsvp-attendance" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Confirmación de asistencia</label>
        <select id="rsvp-attendance" class="field" name="asistencia" required="">
         <option value="">Seleccioná una opción</option>
         <option value="Sí, asistiré">Sí, asistiré</option>
         <option value="No podré asistir">No podré asistir</option>
        </select>
-       <button data-template-id="rsvp-submit" class="canva-button editorial-button light-link mt-9" type="submit" style="background: transparent; color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">CONFIRMAR ASISTENCIA</button>
+       <button data-template-id="rsvp-submit" id="t-rsvpSubmit" class="canva-button editorial-button light-link mt-9" type="submit" style="background: transparent; color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">CONFIRMAR ASISTENCIA</button>
        <p id="rsvp-message" class="form-message" role="status" aria-live="polite"></p>
       </form>
      </div>
@@ -248,17 +247,17 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
 
     <section data-template-id="songs-section" class="canva-section section dark" style="background: rgb(17, 17, 17);">
      <div class="narrow reveal">
-      <p data-template-id="songs-kicker" class="canva-text eyebrow mb-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">LA BANDA SONORA</p>
-      <h2 data-template-id="songs-title" class="canva-text section-title" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 24px;">Música para la fiesta.</h2>
-      <p data-template-id="songs-copy" class="canva-text copy mt-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Hay canciones que nos recuerdan momentos y personas. ¿Cuál no puede faltar en nuestra celebración?</p>
+      <p data-template-id="songs-kicker" id="t-songsKicker" class="canva-text eyebrow mb-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">LA BANDA SONORA</p>
+      <h2 data-template-id="songs-title" id="t-songsTitle" class="canva-text section-title" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 24px;">Música para la fiesta.</h2>
+      <p data-template-id="songs-copy" id="t-songsCopy" class="canva-text copy mt-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Hay canciones que nos recuerdan momentos y personas. ¿Cuál no puede faltar en nuestra celebración?</p>
       <form id="song-form" class="mt-10" novalidate="">
-       <label data-template-id="song-name-label" class="canva-text" for="song-name" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Nombre del invitado</label>
+       <label data-template-id="song-name-label" id="t-songNameLabel" class="canva-text" for="song-name" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Nombre del invitado</label>
        <input id="song-name" class="field" name="nombre" autocomplete="name" required="" maxlength="100">
-       <label data-template-id="song-title-label" class="canva-text" for="song-title" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Canción</label>
+       <label data-template-id="song-title-label" id="t-songTitleLabel" class="canva-text" for="song-title" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Canción</label>
        <input id="song-title" class="field" name="cancion" required="" maxlength="150">
-       <label data-template-id="song-artist-label" class="canva-text" for="song-artist" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Artista</label>
+       <label data-template-id="song-artist-label" id="t-songArtistLabel" class="canva-text" for="song-artist" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Artista</label>
        <input id="song-artist" class="field" name="artista" required="" maxlength="150">
-       <button data-template-id="song-submit" class="canva-button editorial-button dark-link mt-9" type="submit" style="background: transparent; color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">ENVIAR CANCIÓN</button>
+       <button data-template-id="song-submit" id="t-songSubmit" class="canva-button editorial-button dark-link mt-9" type="submit" style="background: transparent; color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">ENVIAR CANCIÓN</button>
        <p id="song-message" class="form-message" role="status" aria-live="polite"></p>
       </form>
      </div>
@@ -268,17 +267,17 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
      <div class="inner">
       <div class="reveal flex flex-wrap justify-between items-end gap-6 mb-14">
        <div>
-        <p data-template-id="gallery-kicker" class="canva-text eyebrow mb-6" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">FRAGMENTOS DE NUESTRA HISTORIA</p>
-        <h2 data-template-id="gallery-title" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px;">Nosotros.</h2>
+        <p data-template-id="gallery-kicker" id="t-galleryKicker" class="canva-text eyebrow mb-6" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">FRAGMENTOS DE NUESTRA HISTORIA</p>
+        <h2 data-template-id="gallery-title" id="t-galleryTitle" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px;">Nosotros.</h2>
        </div>
-       <span data-template-id="gallery-count" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">01 — 05</span>
+       <span data-template-id="gallery-count" id="t-galleryCount" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">01 — 05</span>
       </div>
       <div class="gallery">
-       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-01" id="g1" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/c8c8c8/555555.png?text=GALERIA+01" alt="GALERÍA 01"></div><figcaption class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 01</figcaption></figure>
-       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-02" id="g2" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=GALERIA+02" alt="GALERÍA 02"></div><figcaption class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 02</figcaption></figure>
-       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-03" id="g3" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/c8c8c8/555555.png?text=GALERIA+03" alt="GALERÍA 03"></div><figcaption class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 03</figcaption></figure>
-       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-04" id="g4" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/c8c8c8/555555.png?text=GALERIA+04" alt="GALERÍA 04"></div><figcaption class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 04</figcaption></figure>
-       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-05" id="g5" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=GALERIA+05" alt="GALERÍA 05"></div><figcaption class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 05</figcaption></figure>
+       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-01" id="g1" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/c8c8c8/555555.png?text=GALERIA+01" alt="GALERÍA 01"></div><figcaption id="t-galleryCap1" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 01</figcaption></figure>
+       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-02" id="g2" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=GALERIA+02" alt="GALERÍA 02"></div><figcaption id="t-galleryCap2" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 02</figcaption></figure>
+       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-03" id="g3" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/c8c8c8/555555.png?text=GALERIA+03" alt="GALERÍA 03"></div><figcaption id="t-galleryCap3" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 03</figcaption></figure>
+       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-04" id="g4" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/c8c8c8/555555.png?text=GALERIA+04" alt="GALERÍA 04"></div><figcaption id="t-galleryCap4" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 04</figcaption></figure>
+       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-05" id="g5" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=GALERIA+05" alt="GALERÍA 05"></div><figcaption id="t-galleryCap5" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 05</figcaption></figure>
       </div>
      </div>
     </section>
@@ -286,14 +285,14 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
     <section data-template-id="guest-photos-section" class="canva-section section dark" style="background: rgb(17, 17, 17);">
      <div class="inner grid md:grid-cols-[1fr_auto] gap-16 items-center">
       <div class="reveal max-w-2xl">
-       <p data-template-id="guest-photos-kicker" class="canva-text eyebrow mb-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">A TRAVÉS DE TUS OJOS</p>
-       <h2 data-template-id="guest-photos-title" class="canva-text section-title" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 24px;">LOS RECUERDOS QUE CONSTRUIMOS JUNTOS.</h2>
-       <p data-template-id="guest-photos-copy" class="canva-text copy mt-9" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Queremos recordar nuestra boda también a través de tus ojos. Compartí las fotos y videos que captures durante la celebración. Cada sonrisa, abrazo y momento espontáneo será parte de nuestra historia.</p>
+       <p data-template-id="guest-photos-kicker" id="t-guestPhotosKicker" class="canva-text eyebrow mb-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">A TRAVÉS DE TUS OJOS</p>
+       <h2 data-template-id="guest-photos-title" id="t-guestPhotosTitle" class="canva-text section-title" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 24px;">LOS RECUERDOS QUE CONSTRUIMOS JUNTOS.</h2>
+       <p data-template-id="guest-photos-copy" id="t-guestPhotosCopy" class="canva-text copy mt-9" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Queremos recordar nuestra boda también a través de tus ojos. Compartí las fotos y videos que captures durante la celebración. Cada sonrisa, abrazo y momento espontáneo será parte de nuestra historia.</p>
        <button id="share-photos" data-template-id="share-photos-button" class="canva-button editorial-button dark-link mt-9" type="button" disabled="" style="background: transparent; color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">COMPARTIR MIS FOTOS</button>
        <p id="photos-pending" data-template-id="photos-pending-label" class="canva-text pending mt-4" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;"></p>
       </div>
       <div id="qr-slot" data-template-id="qr-placeholder" class="canva-panel border border-white/60 w-48 h-48 flex items-center justify-center p-5 text-center" style="background: rgb(17, 17, 17);">
-       <span data-template-id="qr-pending-label" class="canva-text pending" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">CÓDIGO QR PENDIENTE</span>
+       <span id="qr-placeholder-text" data-template-id="qr-pending-label" class="canva-text pending" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">CÓDIGO QR PENDIENTE</span>
       </div>
      </div>
     </section>
@@ -305,9 +304,9 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
       <img data-template-id="closing-photo" id="closing-photo" class="canva-image" loading="lazy" src="https://placehold.co/1400x800/d3d3d3/555555.png?text=FOTO+CIERRE" alt="FOTO CIERRE">
      </div>
      <div class="narrow text-center reveal pt-20">
-      <p data-template-id="closing-message" class="canva-text serif section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Gracias por ser parte de nuestra historia. El mejor capítulo está por comenzar.</p>
-      <p data-template-id="closing-signature" class="canva-text copy mt-12" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Con amor, Cinthia &amp; Victor ♡</p>
-      <p data-template-id="closing-date" class="canva-text eyebrow mt-7" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">22.11.2026</p>
+      <p data-template-id="closing-message" id="t-closingMessage" class="canva-text serif section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Gracias por ser parte de nuestra historia. El mejor capítulo está por comenzar.</p>
+      <p data-template-id="closing-signature" id="t-closingSignature" class="canva-text copy mt-12" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Con amor, Cinthia &amp; Victor ♡</p>
+      <p data-template-id="closing-date" id="t-closingDate" class="canva-text eyebrow mt-7" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">22.11.2026</p>
      </div>
     </div>
    </footer>
@@ -343,7 +342,7 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
     };
 
     const DEFAULT_MUSIC = {
-      url: 'https://cs1.mp3.pm/download/75502273/N3dFZzlsZlZuS0d6SVc3WEw0cXorOTZvU1h4eVRZSmZNeTY2K01RYlkySlFneURYdXVHTmR5M3V5enRYWWlKTC9PcXhRRGFUQXgvWjR3ajVlcW1NMFFWNUxmeTR5L1o2d00rYnBKdEUwRTlLcmtOeGhKeDlXa2NENkhTWGF2OUc/james_arthur_-_say_u_won_t_let_go_(mp3.pm).mp3',
+      url: '',
       title: 'Say You Won\'t Let Go',
       artist: 'James Arthur'
     };
@@ -352,32 +351,149 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
     const db = getDatabase(app);
     const $ = id => document.getElementById(id);
 
+    // Textos editables - ID del elemento → campo en Firebase
+    const TEXT_FIELDS = {
+      't-openingDate': 'openingDate',
+      't-countdownKicker': 'countdownKicker',
+      't-daysLabel': 'daysLabel',
+      't-hoursLabel': 'hoursLabel',
+      't-minutesLabel': 'minutesLabel',
+      't-secondsLabel': 'secondsLabel',
+      't-scriptureKicker': 'scriptureKicker',
+      't-scriptureQuote': 'scriptureQuote',
+      't-scriptureReference': 'scriptureReference',
+      't-blessingText': 'blessingText',
+      't-invitationKicker': 'invitationKicker',
+      't-invitationTitle': 'invitationTitle',
+      't-invitationBody': 'invitationBody',
+      't-ceremonyKicker': 'ceremonyKicker',
+      't-ceremonyTitle': 'ceremonyTitle',
+      't-ceremonyDay': 'ceremonyDay',
+      't-ceremonyTime': 'ceremonyTime',
+      't-ceremonyPlace': 'ceremonyPlace',
+      't-receptionKicker': 'receptionKicker',
+      't-receptionTitle': 'receptionTitle',
+      't-receptionTime': 'receptionTime',
+      't-receptionPlace': 'receptionPlace',
+      't-receptionCopy': 'receptionCopy',
+      't-dressKicker': 'dressKicker',
+      't-dressTitle': 'dressTitle',
+      't-dressCopy': 'dressCopy',
+      't-dressHighlight': 'dressHighlight',
+      't-adultsKicker': 'adultsKicker',
+      't-adultsTitle': 'adultsTitle',
+      't-adultsCopy': 'adultsCopy',
+      't-honeymoonKicker': 'honeymoonKicker',
+      't-honeymoonTitle': 'honeymoonTitle',
+      't-honeymoonCopy': 'honeymoonCopy',
+      't-bankHeading': 'bankHeading',
+      't-bankHolderLabel': 'bankHolderLabel',
+      't-bankHolder': 'bankHolder',
+      't-bankNameLabel': 'bankNameLabel',
+      't-bankName': 'bankName',
+      't-bankDocumentLabel': 'bankDocumentLabel',
+      't-bankDocument': 'bankDocument',
+      't-bankAccountLabel': 'bankAccountLabel',
+      't-bankAccount': 'bankAccount',
+      't-bankAliasLabel': 'bankAliasLabel',
+      't-bankAlias': 'bankAlias',
+      't-bankAliasTypeLabel': 'bankAliasTypeLabel',
+      't-bankAliasType': 'bankAliasType',
+      't-rsvpKicker': 'rsvpKicker',
+      't-rsvpTitle': 'rsvpTitle',
+      't-rsvpCopy': 'rsvpCopy',
+      't-rsvpNameLabel': 'rsvpNameLabel',
+      't-rsvpLastLabel': 'rsvpLastLabel',
+      't-rsvpAttendanceLabel': 'rsvpAttendanceLabel',
+      't-rsvpSubmit': 'rsvpSubmit',
+      't-songsKicker': 'songsKicker',
+      't-songsTitle': 'songsTitle',
+      't-songsCopy': 'songsCopy',
+      't-songNameLabel': 'songNameLabel',
+      't-songTitleLabel': 'songTitleLabel',
+      't-songArtistLabel': 'songArtistLabel',
+      't-songSubmit': 'songSubmit',
+      't-galleryKicker': 'galleryKicker',
+      't-galleryTitle': 'galleryTitle',
+      't-galleryCount': 'galleryCount',
+      't-galleryCap1': 'galleryCap1',
+      't-galleryCap2': 'galleryCap2',
+      't-galleryCap3': 'galleryCap3',
+      't-galleryCap4': 'galleryCap4',
+      't-galleryCap5': 'galleryCap5',
+      't-guestPhotosKicker': 'guestPhotosKicker',
+      't-guestPhotosTitle': 'guestPhotosTitle',
+      't-guestPhotosCopy': 'guestPhotosCopy',
+      't-closingMessage': 'closingMessage',
+      't-closingSignature': 'closingSignature',
+      't-closingDate': 'closingDate',
+      'qr-placeholder-text': 'qrPlaceholderText'
+    };
+
     function setMusic(url, title, artist) {
       const audio = $('bg-audio');
-      if (!audio) return;
+      if (!audio || !url) return;
       if (audio.src !== url) { audio.src = url; audio.load(); }
       if (title) $('music-title').textContent = title;
       if (artist) $('music-artist').textContent = artist;
       $('music-dock').style.display = 'flex';
     }
 
-    setMusic(DEFAULT_MUSIC.url, DEFAULT_MUSIC.title, DEFAULT_MUSIC.artist);
-
     onValue(ref(db, 'invitacion'), snapshot => {
       const d = snapshot.val() || {};
+
+      // Música
       if (d.musicUrl) {
         setMusic(d.musicUrl, d.musicTitle || DEFAULT_MUSIC.title, d.musicArtist || DEFAULT_MUSIC.artist);
       }
+
+      // Todos los textos editables
+      for (const [elId, key] of Object.entries(TEXT_FIELDS)) {
+        const el = document.getElementById(elId);
+        if (el && d[key] !== undefined && d[key] !== null && d[key] !== '') {
+          el.textContent = d[key];
+        }
+      }
+
+      // Nombres (con manejo especial del &)
       if (d.names) {
         const namesEl = $('names-display');
         if (namesEl) namesEl.innerHTML = d.names.replace('&', '<span aria-hidden="true">&amp;</span>');
       }
       if (d.tagline && $('tagline-display')) $('tagline-display').textContent = d.tagline;
+
+      // Fotos
       if (d.coverPhoto) $('cover-photo').src = d.coverPhoto;
       if (d.storyPhoto) $('story-photo').src = d.storyPhoto;
       if (d.churchPhoto) $('church-photo').src = d.churchPhoto;
       ['g1','g2','g3','g4','g5'].forEach(k => { if (d[k] && $(k)) $(k).src = d[k]; });
       if (d.closingPhoto) $('closing-photo').src = d.closingPhoto;
+
+      // QR editable
+      const qrSlot = $('qr-slot');
+      if (qrSlot) {
+        if (d.qrImage) {
+          qrSlot.innerHTML = `<img src="${d.qrImage}" alt="QR para compartir fotos">`;
+        } else {
+          const txt = d.qrPlaceholderText || 'CÓDIGO QR PENDIENTE';
+          qrSlot.innerHTML = `<span class="canva-text pending" style="color:#f8f8f6;font-size:16px;">${txt}</span>`;
+        }
+      }
+
+      // Botón compartir fotos
+      const shareBtn = $('share-photos');
+      const pendingLabel = $('photos-pending');
+      if (shareBtn) {
+        if (d.photosUrl) {
+          shareBtn.disabled = false;
+          shareBtn.onclick = () => window.open(d.photosUrl, '_blank', 'noopener,noreferrer');
+          if (pendingLabel) pendingLabel.textContent = '';
+        } else {
+          shareBtn.disabled = true;
+          shareBtn.onclick = null;
+          if (pendingLabel) pendingLabel.textContent = d.photosPendingText || 'Enlace pendiente de configuración';
+        }
+      }
     });
 
     $('open-button').addEventListener('click', () => {
