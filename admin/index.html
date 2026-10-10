@@ -10,12 +10,14 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   :root {
-    --bg:#0f0f0f;
-    --panel:#181818;
-    --panel-2:#1f1f1f;
+    --bg:#0a0a0a;
+    --panel:#141414;
+    --panel-2:#1c1c1c;
+    --panel-3:#232323;
     --border:#2a2a2a;
+    --border-hi:#3a3a3a;
     --text:#f5f5f5;
-    --muted:#999;
+    --muted:#8a8a8a;
     --ok:#4ade80;
     --err:#f87171;
     --warn:#facc15;
@@ -30,33 +32,33 @@
     -webkit-font-smoothing:antialiased;
   }
 
-  /* LOGIN */
+  /* ============ LOGIN ============ */
   .login-wrap {
     min-height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
     padding:2rem;
-    background:radial-gradient(circle at 30% 20%, #1a1a1a 0%, #0a0a0a 70%);
+    background:radial-gradient(circle at 30% 20%, #1a1a1a 0%, #050505 70%);
   }
   .login-card {
-    background:var(--panel);
+    background:linear-gradient(180deg, #181818 0%, #121212 100%);
     border:1px solid var(--border);
-    border-radius:16px;
+    border-radius:20px;
     padding:3rem;
     max-width:420px;
     width:100%;
-    box-shadow:0 30px 80px rgba(0,0,0,.5);
+    box-shadow:0 40px 100px rgba(0,0,0,.6);
   }
   .login-card .brand {
     font-family:'Fraunces',serif;
-    font-size:2rem;
+    font-size:2.2rem;
     letter-spacing:-.02em;
     margin-bottom:.4rem;
   }
   .login-card .brand-sub {
-    font-size:.75rem;
-    letter-spacing:.25em;
+    font-size:.72rem;
+    letter-spacing:.28em;
     text-transform:uppercase;
     color:var(--muted);
     margin-bottom:2.5rem;
@@ -68,10 +70,10 @@
     margin-bottom:1.5rem;
   }
 
-  /* FORM */
+  /* ============ FORM ============ */
   label {
     display:block;
-    font-size:.68rem;
+    font-size:.66rem;
     letter-spacing:.15em;
     text-transform:uppercase;
     color:var(--muted);
@@ -79,15 +81,15 @@
     margin-top:1.2rem;
     font-weight:500;
   }
-  input, textarea, select {
+  input[type="text"], input[type="email"], input[type="password"], input[type="url"], textarea, select {
     width:100%;
     padding:.85rem 1rem;
     background:var(--panel-2);
     border:1px solid var(--border);
-    border-radius:8px;
+    border-radius:10px;
     color:var(--text);
     font:inherit;
-    font-size:.92rem;
+    font-size:.9rem;
     outline:none;
     transition:border-color .2s, background .2s;
   }
@@ -95,7 +97,13 @@
     border-color:#555;
     background:#222;
   }
-  input[type="file"] { padding:.6rem; cursor:pointer; }
+  input[type="file"] {
+    width:100%;
+    padding:.6rem;
+    cursor:pointer;
+    color:var(--muted);
+    font-size:.82rem;
+  }
 
   .btn {
     display:inline-flex;
@@ -104,9 +112,9 @@
     gap:.5rem;
     padding:.85rem 1.5rem;
     background:var(--accent);
-    color:#111;
+    color:#0a0a0a;
     border:none;
-    border-radius:8px;
+    border-radius:10px;
     font:inherit;
     font-size:.75rem;
     font-weight:600;
@@ -117,14 +125,14 @@
     margin-top:1.2rem;
     width:100%;
   }
-  .btn:hover { transform:translateY(-1px); box-shadow:0 8px 20px rgba(255,255,255,.08); }
-  .btn:disabled { opacity:.4; cursor:not-allowed; transform:none; }
+  .btn:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 10px 24px rgba(255,255,255,.1); }
+  .btn:disabled { opacity:.4; cursor:not-allowed; }
   .btn.ghost { background:transparent; color:var(--text); border:1px solid var(--border); }
-  .btn.ghost:hover { background:var(--panel-2); }
-  .btn.danger { background:#c0392b; color:#fff; }
-  .btn.ok { background:var(--ok); color:#0a0a0a; }
+  .btn.ghost:hover:not(:disabled) { background:var(--panel-2); border-color:var(--border-hi); }
+  .btn.danger { background:#b91c1c; color:#fff; }
+  .btn.danger:hover:not(:disabled) { background:#dc2626; }
   .btn.small { padding:.55rem 1rem; font-size:.68rem; width:auto; margin-top:0; }
-  .btn.xs { padding:.35rem .7rem; font-size:.62rem; width:auto; margin-top:0; letter-spacing:.08em; }
+  .btn.xs { padding:.35rem .7rem; font-size:.62rem; width:auto; margin-top:0; letter-spacing:.06em; }
 
   .link {
     display:inline-block;
@@ -141,7 +149,7 @@
 
   .msg {
     padding:.85rem 1rem;
-    border-radius:8px;
+    border-radius:10px;
     margin-top:1rem;
     font-size:.85rem;
     display:none;
@@ -151,7 +159,7 @@
   .msg.err { background:rgba(248,113,113,.1); color:var(--err); border:1px solid rgba(248,113,113,.25); }
   @keyframes fadeIn { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
 
-  /* LAYOUT */
+  /* ============ LAYOUT ============ */
   .admin-container { max-width:1280px; margin:0 auto; padding:2rem; }
   .admin-header {
     display:flex;
@@ -176,14 +184,14 @@
     color:var(--muted);
   }
   .avatar {
-    width:36px; height:36px;
+    width:38px; height:38px;
     border-radius:50%;
-    background:linear-gradient(135deg, #333, #555);
+    background:linear-gradient(135deg, #444, #666);
     display:flex; align-items:center; justify-content:center;
     font-weight:600; color:#fff; font-size:.85rem;
   }
 
-  /* TABS */
+  /* ============ TABS ============ */
   .tabs {
     display:flex;
     gap:.4rem;
@@ -208,22 +216,22 @@
     white-space:nowrap;
     transition:all .2s;
   }
-  .tab:hover { color:var(--text); border-color:#444; }
-  .tab.active { background:var(--text); color:#111; border-color:var(--text); }
+  .tab:hover { color:var(--text); border-color:var(--border-hi); }
+  .tab.active { background:var(--text); color:#0a0a0a; border-color:var(--text); }
 
-  /* CARDS */
+  /* ============ CARDS ============ */
   .card {
-    background:var(--panel);
+    background:linear-gradient(180deg, #171717 0%, #121212 100%);
     border:1px solid var(--border);
-    border-radius:14px;
+    border-radius:16px;
     padding:2rem;
     margin-bottom:1.5rem;
   }
   .card h2 {
     font-family:'Fraunces',serif;
     font-weight:400;
-    font-size:1.4rem;
-    margin-bottom:.5rem;
+    font-size:1.35rem;
+    margin-bottom:.4rem;
   }
   .card .desc {
     color:var(--muted);
@@ -231,44 +239,99 @@
     margin-bottom:1.5rem;
   }
 
-  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:1.2rem; }
+  /* Secciones de texto agrupadas */
+  .text-section {
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:1.5rem;
+    margin-bottom:1rem;
+  }
+  .text-section h3 {
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:1rem;
+    color:#d0d0d0;
+    margin-bottom:1rem;
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+  }
+  .text-section h3 .badge-num {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:24px; height:24px;
+    border-radius:50%;
+    background:var(--panel-3);
+    color:var(--muted);
+    font-size:.7rem;
+    font-family:'Inter',sans-serif;
+  }
+  .text-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1rem;
+  }
+  .text-grid.full { grid-template-columns:1fr; }
+  .text-grid label { margin-top:0; }
+  .text-grid input, .text-grid textarea { font-size:.85rem; padding:.7rem .9rem; }
+  .text-grid textarea { resize:vertical; min-height:80px; font-family:inherit; }
 
-  /* PHOTO ITEMS */
+  /* ============ PHOTO ITEMS ============ */
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:1rem; }
+
   .photo-item {
     background:var(--panel-2);
     border:1px solid var(--border);
-    border-radius:10px;
+    border-radius:12px;
     padding:1rem;
     display:flex;
     flex-direction:column;
+    transition:border-color .2s;
   }
-  .photo-item label { margin-top:0; margin-bottom:.6rem; font-size:.65rem; }
+  .photo-item:hover { border-color:var(--border-hi); }
+  .photo-item label {
+    margin-top:0;
+    margin-bottom:.6rem;
+    font-size:.66rem;
+    color:#b0b0b0;
+  }
   .photo-preview {
     width:100%;
-    height:160px;
+    height:170px;
     object-fit:cover;
-    border-radius:6px;
+    border-radius:8px;
     margin-top:.7rem;
-    background:#0a0a0a;
+    background:#080808;
     filter:grayscale(1);
     display:block;
+    border:1px solid var(--border);
   }
-  .photo-actions {
-    display:flex;
-    gap:.4rem;
+  .photo-preview.no-filter { filter:none; }
+  .photo-actions { display:flex; gap:.4rem; margin-top:.7rem; }
+
+  /* ============ DROP ZONE ============ */
+  .dropzone {
     margin-top:.6rem;
+    padding:.9rem;
+    border:1.5px dashed var(--border-hi);
+    border-radius:8px;
+    text-align:center;
+    font-size:.72rem;
+    color:var(--muted);
+    cursor:pointer;
+    transition:all .2s;
+    background:rgba(255,255,255,.01);
   }
-
-  /* EXPORT BAR */
-  .export-bar {
-    display:flex;
-    gap:.6rem;
-    flex-wrap:wrap;
-    align-items:center;
-    margin-bottom:1.5rem;
+  .dropzone:hover, .dropzone.dragover {
+    border-color:#666;
+    background:rgba(255,255,255,.04);
+    color:var(--text);
   }
+  .dropzone input[type="file"] { display:none; }
 
-  /* STATS */
+  /* ============ STATS ============ */
   .stats-grid {
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
@@ -276,13 +339,13 @@
     margin-bottom:1.5rem;
   }
   .stat-box {
-    background:var(--panel-2);
+    background:linear-gradient(180deg, #1c1c1c 0%, #171717 100%);
     border:1px solid var(--border);
     border-radius:12px;
     padding:1.3rem;
   }
   .stat-box .stat-label {
-    font-size:.68rem;
+    font-size:.66rem;
     letter-spacing:.15em;
     text-transform:uppercase;
     color:var(--muted);
@@ -296,7 +359,7 @@
   .stat-box .stat-value.yes { color:var(--ok); }
   .stat-box .stat-value.no { color:var(--err); }
 
-  /* CHARTS */
+  /* ============ CHARTS ============ */
   .charts-grid {
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
@@ -314,15 +377,12 @@
   .chart-box h3 {
     font-family:'Fraunces',serif;
     font-weight:400;
-    font-size:1.05rem;
+    font-size:1rem;
     margin-bottom:1rem;
   }
-  .chart-box .chart-container {
-    position:relative;
-    height:calc(100% - 2rem);
-  }
+  .chart-box .chart-container { position:relative; height:calc(100% - 2rem); }
 
-  /* ENTRIES */
+  /* ============ ENTRIES ============ */
   .entry {
     padding:1rem 1.2rem;
     background:var(--panel-2);
@@ -334,10 +394,12 @@
     align-items:center;
     gap:1rem;
     flex-wrap:wrap;
+    transition:border-color .2s;
   }
+  .entry:hover { border-color:var(--border-hi); }
   .entry .entry-main { flex:1; min-width:0; }
-  .entry .entry-name { font-weight:600; font-size:.95rem; }
-  .entry .entry-detail { color:var(--muted); font-size:.82rem; margin-top:.2rem; }
+  .entry .entry-name { font-weight:600; font-size:.92rem; }
+  .entry .entry-detail { color:var(--muted); font-size:.8rem; margin-top:.2rem; }
   .entry .entry-date { color:#666; font-size:.72rem; white-space:nowrap; }
   .entry .entry-actions { display:flex; gap:.4rem; }
   .entry .badge {
@@ -351,14 +413,9 @@
   .badge.yes { background:rgba(74,222,128,.15); color:var(--ok); }
   .badge.no { background:rgba(248,113,113,.15); color:var(--err); }
 
-  .empty {
-    color:var(--muted);
-    font-size:.85rem;
-    text-align:center;
-    padding:2rem 0;
-  }
+  .empty { color:var(--muted); font-size:.85rem; text-align:center; padding:2rem 0; }
+  .export-bar { display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; margin-bottom:1.5rem; }
 
-  /* MUSIC PREVIEW */
   .music-preview {
     margin-top:1.5rem;
     padding:1rem;
@@ -376,30 +433,28 @@
 
   @media (max-width:640px) {
     .admin-container { padding:1rem; }
-    .card { padding:1.5rem; }
+    .card { padding:1.25rem; }
     .admin-header .user span { display:none; }
     .login-card { padding:2rem; }
     .stats-grid { grid-template-columns:1fr 1fr; }
     .chart-box { height:280px; }
+    .text-grid { grid-template-columns:1fr; }
   }
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
+<!-- ============ LOGIN ============ -->
 <div id="login-view" class="login-wrap">
   <div class="login-card">
     <div class="brand">C & V</div>
     <div class="brand-sub">Panel de administración</div>
-
     <h2 id="login-title">Iniciar sesión</h2>
 
     <label>Email</label>
     <input id="login-email" type="email" placeholder="cjaravb@gmail.com">
-
     <label>Contraseña</label>
     <input id="login-password" type="password" placeholder="••••••••">
-
     <button id="login-btn" class="btn">INGRESAR</button>
     <button id="show-signup-btn" class="link" type="button">¿No tenés cuenta? Crear una</button>
 
@@ -416,12 +471,12 @@
   </div>
 </div>
 
-<!-- PANEL -->
+<!-- ============ PANEL ============ -->
 <div id="admin-view" style="display:none;">
   <div class="admin-container">
 
     <div class="admin-header">
-      <div class="brand">C & Victor · Admin</div>
+      <div class="brand">C & V · Admin</div>
       <div class="user">
         <div class="avatar" id="avatar">C</div>
         <span id="user-email">cjaravb@gmail.com</span>
@@ -438,118 +493,303 @@
       <button class="tab" data-tab="stats">📊 Estadísticas</button>
     </div>
 
-    <!-- TAB FOTOS -->
+    <!-- ============ TAB FOTOS ============ -->
     <div id="tab-fotos" class="tab-content active">
+
       <div class="card">
         <h2>Fotografías</h2>
-        <p class="desc">Subí cada foto. Se alojan en ImgBB y se guardan en Firebase. Se muestran en blanco y negro automáticamente.</p>
+        <p class="desc">Arrastrá las fotos o tocá para subirlas. Se alojan en ImgBB.</p>
         <div class="grid">
           <div class="photo-item">
             <label>Portada</label>
+            <div class="dropzone" data-drop="coverPhoto">Arrastrá o tocá para subir</div>
             <input type="file" accept="image/*" data-photo="coverPhoto">
             <img id="prev-coverPhoto" class="photo-preview">
-            <div class="photo-actions">
-              <button class="btn danger xs" data-delete-photo="coverPhoto">🗑 Borrar</button>
-            </div>
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="coverPhoto">🗑 Borrar</button></div>
           </div>
           <div class="photo-item">
             <label>Historia</label>
+            <div class="dropzone" data-drop="storyPhoto">Arrastrá o tocá para subir</div>
             <input type="file" accept="image/*" data-photo="storyPhoto">
             <img id="prev-storyPhoto" class="photo-preview">
-            <div class="photo-actions">
-              <button class="btn danger xs" data-delete-photo="storyPhoto">🗑 Borrar</button>
-            </div>
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="storyPhoto">🗑 Borrar</button></div>
           </div>
           <div class="photo-item">
             <label>Iglesia</label>
+            <div class="dropzone" data-drop="churchPhoto">Arrastrá o tocá para subir</div>
             <input type="file" accept="image/*" data-photo="churchPhoto">
             <img id="prev-churchPhoto" class="photo-preview">
-            <div class="photo-actions">
-              <button class="btn danger xs" data-delete-photo="churchPhoto">🗑 Borrar</button>
-            </div>
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="churchPhoto">🗑 Borrar</button></div>
           </div>
           <div class="photo-item">
             <label>Galería 1</label>
+            <div class="dropzone" data-drop="g1">Arrastrá o tocá para subir</div>
             <input type="file" accept="image/*" data-photo="g1">
             <img id="prev-g1" class="photo-preview">
-            <div class="photo-actions">
-              <button class="btn danger xs" data-delete-photo="g1">🗑 Borrar</button>
-            </div>
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="g1">🗑 Borrar</button></div>
           </div>
           <div class="photo-item">
             <label>Galería 2</label>
+            <div class="dropzone" data-drop="g2">Arrastrá o tocá para subir</div>
             <input type="file" accept="image/*" data-photo="g2">
             <img id="prev-g2" class="photo-preview">
-            <div class="photo-actions">
-              <button class="btn danger xs" data-delete-photo="g2">🗑 Borrar</button>
-            </div>
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="g2">🗑 Borrar</button></div>
           </div>
           <div class="photo-item">
             <label>Galería 3</label>
+            <div class="dropzone" data-drop="g3">Arrastrá o tocá para subir</div>
             <input type="file" accept="image/*" data-photo="g3">
             <img id="prev-g3" class="photo-preview">
-            <div class="photo-actions">
-              <button class="btn danger xs" data-delete-photo="g3">🗑 Borrar</button>
-            </div>
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="g3">🗑 Borrar</button></div>
           </div>
           <div class="photo-item">
             <label>Galería 4</label>
+            <div class="dropzone" data-drop="g4">Arrastrá o tocá para subir</div>
             <input type="file" accept="image/*" data-photo="g4">
             <img id="prev-g4" class="photo-preview">
-            <div class="photo-actions">
-              <button class="btn danger xs" data-delete-photo="g4">🗑 Borrar</button>
-            </div>
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="g4">🗑 Borrar</button></div>
           </div>
           <div class="photo-item">
             <label>Galería 5</label>
+            <div class="dropzone" data-drop="g5">Arrastrá o tocá para subir</div>
             <input type="file" accept="image/*" data-photo="g5">
             <img id="prev-g5" class="photo-preview">
-            <div class="photo-actions">
-              <button class="btn danger xs" data-delete-photo="g5">🗑 Borrar</button>
-            </div>
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="g5">🗑 Borrar</button></div>
           </div>
           <div class="photo-item">
             <label>Cierre</label>
+            <div class="dropzone" data-drop="closingPhoto">Arrastrá o tocá para subir</div>
             <input type="file" accept="image/*" data-photo="closingPhoto">
             <img id="prev-closingPhoto" class="photo-preview">
-            <div class="photo-actions">
-              <button class="btn danger xs" data-delete-photo="closingPhoto">🗑 Borrar</button>
-            </div>
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="closingPhoto">🗑 Borrar</button></div>
           </div>
         </div>
         <div id="fotos-msg" class="msg"></div>
       </div>
+
+      <div class="card">
+        <h2>QR de compartir fotos</h2>
+        <p class="desc">Subí la imagen del código QR (Dots Memories u otro servicio) y pegá el link.</p>
+        <div class="grid">
+          <div class="photo-item">
+            <label>Imagen del QR</label>
+            <div class="dropzone" data-drop="qrImage">Arrastrá o tocá para subir</div>
+            <input type="file" accept="image/*" data-photo="qrImage">
+            <img id="prev-qrImage" class="photo-preview no-filter">
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="qrImage">🗑 Borrar QR</button></div>
+          </div>
+          <div class="photo-item" style="grid-column: span 2;">
+            <label>Link para compartir fotos</label>
+            <input id="in-photos-url" type="url" placeholder="https://dotsmemories.com/...">
+            <button id="save-photos-url-btn" class="btn">GUARDAR LINK</button>
+            <button id="clear-photos-url-btn" class="btn danger">🗑 QUITAR LINK</button>
+            <p style="margin-top:.8rem;font-size:.75rem;color:var(--muted);">
+              URL actual: <span id="current-photos-url" style="word-break:break-all;color:#ccc;">(ninguna)</span>
+            </p>
+          </div>
+        </div>
+        <div id="qr-msg" class="msg"></div>
+      </div>
     </div>
 
-    <!-- TAB TEXTOS -->
+    <!-- ============ TAB TEXTOS ============ -->
     <div id="tab-textos" class="tab-content">
       <div class="card">
-        <h2>Textos principales</h2>
-        <p class="desc">Nombres y frase que aparecen en la portada.</p>
-        <label>Nombres</label>
-        <input id="in-names" type="text" placeholder="Cinthia & Victor">
-        <label>Frase portada</label>
-        <input id="in-tagline" type="text" placeholder="Nuestra historia favorita...">
-        <button id="save-texts-btn" class="btn">GUARDAR TEXTOS</button>
+        <h2>Editor de textos</h2>
+        <p class="desc">Todo lo que se ve en la web. Se guarda automáticamente al tocar "Guardar".</p>
+
+        <!-- Portada -->
+        <div class="text-section">
+          <h3><span class="badge-num">1</span> Portada</h3>
+          <div class="text-grid">
+            <div><label>Nombres</label><input data-text="names" type="text"></div>
+            <div><label>Fecha</label><input data-text="openingDate" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Frase de portada</label><input data-text="tagline" type="text"></div>
+          </div>
+        </div>
+
+        <!-- Cuenta regresiva -->
+        <div class="text-section">
+          <h3><span class="badge-num">2</span> Cuenta regresiva</h3>
+          <div class="text-grid">
+            <div class="full" style="grid-column:1/-1;"><label>Título</label><input data-text="countdownKicker" type="text"></div>
+            <div><label>Etiqueta días</label><input data-text="daysLabel" type="text"></div>
+            <div><label>Etiqueta horas</label><input data-text="hoursLabel" type="text"></div>
+            <div><label>Etiqueta minutos</label><input data-text="minutesLabel" type="text"></div>
+            <div><label>Etiqueta segundos</label><input data-text="secondsLabel" type="text"></div>
+          </div>
+        </div>
+
+        <!-- Versículo -->
+        <div class="text-section">
+          <h3><span class="badge-num">3</span> Mensaje bíblico</h3>
+          <div class="text-grid">
+            <div class="full" style="grid-column:1/-1;"><label>Kicker</label><input data-text="scriptureKicker" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Cita</label><input data-text="scriptureQuote" type="text"></div>
+            <div><label>Referencia</label><input data-text="scriptureReference" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Mensaje adicional</label><textarea data-text="blessingText"></textarea></div>
+          </div>
+        </div>
+
+        <!-- Invitación -->
+        <div class="text-section">
+          <h3><span class="badge-num">4</span> Invitación</h3>
+          <div class="text-grid">
+            <div class="full" style="grid-column:1/-1;"><label>Título</label><input data-text="invitationTitle" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Cuerpo del mensaje</label><textarea data-text="invitationBody"></textarea></div>
+          </div>
+        </div>
+
+        <!-- Ceremonia religiosa -->
+        <div class="text-section">
+          <h3><span class="badge-num">5</span> Ceremonia religiosa</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="ceremonyKicker" type="text"></div>
+            <div><label>Título</label><input data-text="ceremonyTitle" type="text"></div>
+            <div><label>Día</label><input data-text="ceremonyDay" type="text"></div>
+            <div><label>Hora</label><input data-text="ceremonyTime" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Lugar</label><input data-text="ceremonyPlace" type="text"></div>
+          </div>
+        </div>
+
+        <!-- Recepción -->
+        <div class="text-section">
+          <h3><span class="badge-num">6</span> Recepción</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="receptionKicker" type="text"></div>
+            <div><label>Título</label><input data-text="receptionTitle" type="text"></div>
+            <div><label>Hora</label><input data-text="receptionTime" type="text"></div>
+            <div><label>Lugar</label><input data-text="receptionPlace" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Texto adicional</label><textarea data-text="receptionCopy"></textarea></div>
+          </div>
+        </div>
+
+        <!-- Dress code -->
+        <div class="text-section">
+          <h3><span class="badge-num">7</span> Dress code</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="dressKicker" type="text"></div>
+            <div><label>Título</label><input data-text="dressTitle" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Descripción</label><textarea data-text="dressCopy"></textarea></div>
+            <div class="full" style="grid-column:1/-1;"><label>Highlight</label><input data-text="dressHighlight" type="text"></div>
+          </div>
+        </div>
+
+        <!-- Solo adultos -->
+        <div class="text-section">
+          <h3><span class="badge-num">8</span> Solo adultos</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="adultsKicker" type="text"></div>
+            <div><label>Título</label><input data-text="adultsTitle" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Mensaje</label><textarea data-text="adultsCopy"></textarea></div>
+          </div>
+        </div>
+
+        <!-- Luna de miel -->
+        <div class="text-section">
+          <h3><span class="badge-num">9</span> Luna de miel</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="honeymoonKicker" type="text"></div>
+            <div><label>Título</label><input data-text="honeymoonTitle" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Descripción</label><textarea data-text="honeymoonCopy"></textarea></div>
+            <div class="full" style="grid-column:1/-1;"><label>Encabezado tarjeta</label><input data-text="bankHeading" type="text"></div>
+            <div><label>Etiqueta titular</label><input data-text="bankHolderLabel" type="text"></div>
+            <div><label>Titular</label><input data-text="bankHolder" type="text"></div>
+            <div><label>Etiqueta banco</label><input data-text="bankNameLabel" type="text"></div>
+            <div><label>Banco</label><input data-text="bankName" type="text"></div>
+            <div><label>Etiqueta documento</label><input data-text="bankDocumentLabel" type="text"></div>
+            <div><label>Documento</label><input data-text="bankDocument" type="text"></div>
+            <div><label>Etiqueta cuenta</label><input data-text="bankAccountLabel" type="text"></div>
+            <div><label>Cuenta</label><input data-text="bankAccount" type="text"></div>
+            <div><label>Etiqueta alias</label><input data-text="bankAliasLabel" type="text"></div>
+            <div><label>Alias</label><input data-text="bankAlias" type="text"></div>
+            <div><label>Etiqueta tipo alias</label><input data-text="bankAliasTypeLabel" type="text"></div>
+            <div><label>Tipo alias</label><input data-text="bankAliasType" type="text"></div>
+          </div>
+        </div>
+
+        <!-- RSVP -->
+        <div class="text-section">
+          <h3><span class="badge-num">10</span> RSVP</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="rsvpKicker" type="text"></div>
+            <div><label>Título</label><input data-text="rsvpTitle" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Descripción</label><textarea data-text="rsvpCopy"></textarea></div>
+            <div><label>Etiqueta "Nombre"</label><input data-text="rsvpNameLabel" type="text"></div>
+            <div><label>Etiqueta "Apellido"</label><input data-text="rsvpLastLabel" type="text"></div>
+            <div><label>Etiqueta "Asistencia"</label><input data-text="rsvpAttendanceLabel" type="text"></div>
+            <div><label>Texto del botón</label><input data-text="rsvpSubmit" type="text"></div>
+          </div>
+        </div>
+
+        <!-- Canciones -->
+        <div class="text-section">
+          <h3><span class="badge-num">11</span> Banda sonora</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="songsKicker" type="text"></div>
+            <div><label>Título</label><input data-text="songsTitle" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Descripción</label><textarea data-text="songsCopy"></textarea></div>
+            <div><label>Etiqueta "Nombre"</label><input data-text="songNameLabel" type="text"></div>
+            <div><label>Etiqueta "Canción"</label><input data-text="songTitleLabel" type="text"></div>
+            <div><label>Etiqueta "Artista"</label><input data-text="songArtistLabel" type="text"></div>
+            <div><label>Texto del botón</label><input data-text="songSubmit" type="text"></div>
+          </div>
+        </div>
+
+        <!-- Galería -->
+        <div class="text-section">
+          <h3><span class="badge-num">12</span> Galería</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="galleryKicker" type="text"></div>
+            <div><label>Título</label><input data-text="galleryTitle" type="text"></div>
+            <div><label>Contador</label><input data-text="galleryCount" type="text"></div>
+            <div><label>Caption 1</label><input data-text="galleryCap1" type="text"></div>
+            <div><label>Caption 2</label><input data-text="galleryCap2" type="text"></div>
+            <div><label>Caption 3</label><input data-text="galleryCap3" type="text"></div>
+            <div><label>Caption 4</label><input data-text="galleryCap4" type="text"></div>
+            <div><label>Caption 5</label><input data-text="galleryCap5" type="text"></div>
+          </div>
+        </div>
+
+        <!-- Fotos invitados -->
+        <div class="text-section">
+          <h3><span class="badge-num">13</span> Fotos de invitados</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="guestPhotosKicker" type="text"></div>
+            <div><label>Título</label><input data-text="guestPhotosTitle" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Descripción</label><textarea data-text="guestPhotosCopy"></textarea></div>
+            <div class="full" style="grid-column:1/-1;"><label>Texto del QR placeholder</label><input data-text="qrPlaceholderText" type="text"></div>
+          </div>
+        </div>
+
+        <!-- Cierre -->
+        <div class="text-section">
+          <h3><span class="badge-num">14</span> Cierre</h3>
+          <div class="text-grid">
+            <div class="full" style="grid-column:1/-1;"><label>Mensaje final</label><textarea data-text="closingMessage"></textarea></div>
+            <div><label>Firma</label><input data-text="closingSignature" type="text"></div>
+            <div><label>Fecha</label><input data-text="closingDate" type="text"></div>
+          </div>
+        </div>
+
+        <button id="save-all-texts-btn" class="btn" style="margin-top:1.5rem;">GUARDAR TODOS LOS TEXTOS</button>
         <div id="texts-msg" class="msg"></div>
       </div>
     </div>
 
-    <!-- TAB MÚSICA -->
+    <!-- ============ TAB MÚSICA ============ -->
     <div id="tab-musica" class="tab-content">
       <div class="card">
         <h2>Música de fondo</h2>
-        <p class="desc">Pegá una URL directa. Se reproduce en el sitio de los invitados.</p>
+        <p class="desc">Pegá una URL directa (HTTPS). Se reproduce cuando los invitados tocan "Abrir invitación".</p>
 
         <label>Título de la canción</label>
         <input id="in-music-title" type="text" placeholder="Say You Won't Let Go">
-
         <label>Artista</label>
         <input id="in-music-artist" type="text" placeholder="James Arthur">
-
-        <label style="margin-top:2rem;">URL directa</label>
+        <label>URL directa</label>
         <input id="in-music-url" type="url" placeholder="https://...">
-        <button id="save-music-url-btn" class="btn">GUARDAR URL</button>
+        <button id="save-music-url-btn" class="btn">GUARDAR MÚSICA</button>
         <button id="clear-music-btn" class="btn danger">🗑 QUITAR MÚSICA</button>
 
         <p style="margin-top:1rem;font-size:.8rem;color:var(--muted);">
@@ -565,36 +805,21 @@
       </div>
     </div>
 
-    <!-- TAB RSVP -->
+    <!-- ============ TAB RSVP ============ -->
     <div id="tab-rsvp" class="tab-content">
       <div class="card">
         <h2>Confirmaciones de asistencia</h2>
         <p class="desc">Respuestas recibidas en tiempo real.</p>
 
         <div class="stats-grid">
-          <div class="stat-box">
-            <div class="stat-label">Total respuestas</div>
-            <div class="stat-value" id="stat-total">0</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-label">Confirmados</div>
-            <div class="stat-value yes" id="stat-yes">0</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-label">No asisten</div>
-            <div class="stat-value no" id="stat-no">0</div>
-          </div>
+          <div class="stat-box"><div class="stat-label">Total respuestas</div><div class="stat-value" id="stat-total">0</div></div>
+          <div class="stat-box"><div class="stat-label">Confirmados</div><div class="stat-value yes" id="stat-yes">0</div></div>
+          <div class="stat-box"><div class="stat-label">No asisten</div><div class="stat-value no" id="stat-no">0</div></div>
         </div>
 
         <div class="charts-grid">
-          <div class="chart-box">
-            <h3>Asistencia</h3>
-            <div class="chart-container"><canvas id="chart-attendance"></canvas></div>
-          </div>
-          <div class="chart-box">
-            <h3>Respuestas por día</h3>
-            <div class="chart-container"><canvas id="chart-daily"></canvas></div>
-          </div>
+          <div class="chart-box"><h3>Asistencia</h3><div class="chart-container"><canvas id="chart-attendance"></canvas></div></div>
+          <div class="chart-box"><h3>Respuestas por día</h3><div class="chart-container"><canvas id="chart-daily"></canvas></div></div>
         </div>
 
         <div class="export-bar">
@@ -605,28 +830,19 @@
       </div>
     </div>
 
-    <!-- TAB CANCIONES -->
+    <!-- ============ TAB CANCIONES ============ -->
     <div id="tab-canciones" class="tab-content">
       <div class="card">
         <h2>Canciones sugeridas</h2>
         <p class="desc">Lista de canciones que los invitados quieren escuchar.</p>
 
         <div class="stats-grid">
-          <div class="stat-box">
-            <div class="stat-label">Total canciones</div>
-            <div class="stat-value" id="stat-songs">0</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-label">Artistas únicos</div>
-            <div class="stat-value" id="stat-artists">0</div>
-          </div>
+          <div class="stat-box"><div class="stat-label">Total canciones</div><div class="stat-value" id="stat-songs">0</div></div>
+          <div class="stat-box"><div class="stat-label">Artistas únicos</div><div class="stat-value" id="stat-artists">0</div></div>
         </div>
 
         <div class="charts-grid">
-          <div class="chart-box">
-            <h3>Top 5 artistas</h3>
-            <div class="chart-container"><canvas id="chart-artists"></canvas></div>
-          </div>
+          <div class="chart-box"><h3>Top 5 artistas</h3><div class="chart-container"><canvas id="chart-artists"></canvas></div></div>
         </div>
 
         <div class="export-bar">
@@ -637,29 +853,17 @@
       </div>
     </div>
 
-    <!-- TAB STATS -->
+    <!-- ============ TAB STATS ============ -->
     <div id="tab-stats" class="tab-content">
       <div class="card">
         <h2>Resumen general</h2>
         <p class="desc">Todo lo que está pasando con tu invitación.</p>
 
         <div class="stats-grid">
-          <div class="stat-box">
-            <div class="stat-label">Total invitados</div>
-            <div class="stat-value" id="stat-total2">0</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-label">Confirmados</div>
-            <div class="stat-value yes" id="stat-yes2">0</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-label">No asisten</div>
-            <div class="stat-value no" id="stat-no2">0</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-label">Canciones pedidas</div>
-            <div class="stat-value" id="stat-songs2">0</div>
-          </div>
+          <div class="stat-box"><div class="stat-label">Total invitados</div><div class="stat-value" id="stat-total2">0</div></div>
+          <div class="stat-box"><div class="stat-label">Confirmados</div><div class="stat-value yes" id="stat-yes2">0</div></div>
+          <div class="stat-box"><div class="stat-label">No asisten</div><div class="stat-value no" id="stat-no2">0</div></div>
+          <div class="stat-box"><div class="stat-label">Canciones pedidas</div><div class="stat-value" id="stat-songs2">0</div></div>
         </div>
 
         <div class="charts-grid">
@@ -678,7 +882,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut }
   from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
-import { getDatabase, ref, onValue, update, push, remove, set }
+import { getDatabase, ref, onValue, update, remove, set }
   from "https://www.gstatic.com/firebasejs/13.0.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -691,9 +895,6 @@ const firebaseConfig = {
   appId: "1:940398343769:web:5f12f45489c78071466348"
 };
 
-// ============================================================
-// ⚙️ CONFIGURACIÓN: API Key de ImgBB
-// ============================================================
 const IMGBB_API_KEY = '588023b3a033560bf5cf1d272cf3a4ae';
 
 const app = initializeApp(firebaseConfig);
@@ -714,67 +915,17 @@ function showMsg(id, text, type = 'ok') {
   if (type === 'ok') setTimeout(() => { el.classList.remove('show'); }, 3500);
 }
 
-// ============ SUBIR A IMGBB ============
 async function uploadToImgBB(file) {
   const formData = new FormData();
   formData.append('image', file);
-
   const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
     method: 'POST',
     body: formData
   });
-
   const result = await response.json();
-
-  if (!result.success) {
-    throw new Error(result.error?.message || 'Error al subir a ImgBB');
-  }
-
+  if (!result.success) throw new Error(result.error?.message || 'Error al subir a ImgBB');
   return result.data.display_url || result.data.url;
 }
-
-// ============ SUBIR FOTO ============
-document.querySelectorAll('input[data-photo]').forEach(input => {
-  input.addEventListener('change', async e => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    if (file.size > 10 * 1024 * 1024) {
-      showMsg('fotos-msg', '❌ La imagen es muy grande. Máximo 10MB.', 'err');
-      return;
-    }
-
-    const key = e.target.dataset.photo;
-    showMsg('fotos-msg', `Subiendo ${key} a ImgBB...`, 'ok');
-
-    try {
-      const imageUrl = await uploadToImgBB(file);
-      await update(ref(db, 'invitacion'), { [key]: imageUrl });
-      showMsg('fotos-msg', `✅ ${key} actualizado.`, 'ok');
-      const prev = $('prev-' + key);
-      if (prev) prev.src = imageUrl;
-    } catch (err) {
-      showMsg('fotos-msg', '❌ Error: ' + err.message, 'err');
-    }
-  });
-});
-
-// ============ BORRAR FOTO ============
-document.querySelectorAll('button[data-delete-photo]').forEach(btn => {
-  btn.addEventListener('click', async () => {
-    const key = btn.dataset.deletePhoto;
-    if (!confirm(`¿Borrar la foto de "${key}"?`)) return;
-
-    try {
-      await remove(ref(db, 'invitacion/' + key));
-      const prev = $('prev-' + key);
-      if (prev) prev.src = '';
-      showMsg('fotos-msg', `🗑 ${key} borrado.`, 'ok');
-    } catch (err) {
-      showMsg('fotos-msg', '❌ Error al borrar: ' + err.message, 'err');
-    }
-  });
-});
 
 // ============ LOGIN / SIGNUP ============
 $('show-signup-btn').addEventListener('click', () => {
@@ -785,7 +936,6 @@ $('show-signup-btn').addEventListener('click', () => {
   $('show-signup-btn').style.display = 'none';
   $('signup-block').style.display = 'block';
 });
-
 $('show-login-btn').addEventListener('click', () => {
   $('login-title').textContent = 'Iniciar sesión';
   $('login-email').style.display = 'block';
@@ -799,41 +949,22 @@ $('login-btn').addEventListener('click', async () => {
   const email = $('login-email').value.trim();
   const password = $('login-password').value;
   $('login-msg').classList.remove('show');
-
-  if (email !== ALLOWED_EMAIL) {
-    showMsg('login-msg', 'Solo la cuenta autorizada puede ingresar.', 'err');
-    return;
-  }
-
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch {
-    showMsg('login-msg', 'Credenciales incorrectas o cuenta no creada.', 'err');
-  }
+  if (email !== ALLOWED_EMAIL) { showMsg('login-msg', 'Solo la cuenta autorizada puede ingresar.', 'err'); return; }
+  try { await signInWithEmailAndPassword(auth, email, password); }
+  catch { showMsg('login-msg', 'Credenciales incorrectas o cuenta no creada.', 'err'); }
 });
 
 $('signup-btn').addEventListener('click', async () => {
   const email = $('signup-email').value.trim();
   const password = $('signup-password').value;
-
-  if (email !== ALLOWED_EMAIL) {
-    showMsg('login-msg', `Solo se puede crear la cuenta ${ALLOWED_EMAIL}.`, 'err');
-    return;
-  }
-  if (password.length < 6) {
-    showMsg('login-msg', 'La contraseña debe tener al menos 6 caracteres.', 'err');
-    return;
-  }
-
+  if (email !== ALLOWED_EMAIL) { showMsg('login-msg', `Solo se puede crear la cuenta ${ALLOWED_EMAIL}.`, 'err'); return; }
+  if (password.length < 6) { showMsg('login-msg', 'La contraseña debe tener al menos 6 caracteres.', 'err'); return; }
   try {
     await createUserWithEmailAndPassword(auth, email, password);
     showMsg('login-msg', '¡Cuenta creada! Ya podés entrar.', 'ok');
   } catch (err) {
-    if (err.code === 'auth/email-already-in-use') {
-      showMsg('login-msg', 'La cuenta ya existe. Podés iniciar sesión.', 'err');
-    } else {
-      showMsg('login-msg', 'Error: ' + err.message, 'err');
-    }
+    if (err.code === 'auth/email-already-in-use') showMsg('login-msg', 'La cuenta ya existe.', 'err');
+    else showMsg('login-msg', 'Error: ' + err.message, 'err');
   }
 });
 
@@ -863,17 +994,92 @@ document.querySelectorAll('.tab').forEach(tab => {
   });
 });
 
+// ============ DROPZONE ============
+document.querySelectorAll('.dropzone').forEach(dz => {
+  const key = dz.dataset.drop;
+  const input = document.querySelector(`input[data-photo="${key}"]`);
+  if (!input) return;
+
+  dz.addEventListener('click', () => input.click());
+
+  dz.addEventListener('dragover', e => {
+    e.preventDefault();
+    dz.classList.add('dragover');
+  });
+  dz.addEventListener('dragleave', () => dz.classList.remove('dragover'));
+  dz.addEventListener('drop', e => {
+    e.preventDefault();
+    dz.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      const dt = new DataTransfer();
+      dt.items.add(file);
+      input.files = dt.files;
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  });
+});
+
+// ============ SUBIR FOTO ============
+document.querySelectorAll('input[data-photo]').forEach(input => {
+  input.addEventListener('change', async e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 10 * 1024 * 1024) {
+      showMsg('fotos-msg', '❌ La imagen es muy grande. Máximo 10MB.', 'err');
+      return;
+    }
+    const key = e.target.dataset.photo;
+    const msgId = key === 'qrImage' ? 'qr-msg' : 'fotos-msg';
+    showMsg(msgId, `Subiendo ${key} a ImgBB...`, 'ok');
+
+    try {
+      const imageUrl = await uploadToImgBB(file);
+      await update(ref(db, 'invitacion'), { [key]: imageUrl });
+      showMsg(msgId, `✅ ${key} actualizado.`, 'ok');
+      const prev = $('prev-' + key);
+      if (prev) prev.src = imageUrl;
+    } catch (err) {
+      showMsg(msgId, '❌ Error: ' + err.message, 'err');
+    }
+  });
+});
+
+// ============ BORRAR FOTO ============
+document.querySelectorAll('button[data-delete-photo]').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const key = btn.dataset.deletePhoto;
+    if (!confirm(`¿Borrar la foto de "${key}"?`)) return;
+    const msgId = key === 'qrImage' ? 'qr-msg' : 'fotos-msg';
+    try {
+      await remove(ref(db, 'invitacion/' + key));
+      const prev = $('prev-' + key);
+      if (prev) prev.src = '';
+      showMsg(msgId, `🗑 ${key} borrado.`, 'ok');
+    } catch (err) {
+      showMsg(msgId, '❌ Error al borrar: ' + err.message, 'err');
+    }
+  });
+});
+
 // ============ CARGAR DATOS ============
 function cargarDatos() {
   onValue(ref(db, 'invitacion'), snap => {
     const d = snap.val() || {};
-    $('in-names').value = d.names || '';
-    $('in-tagline').value = d.tagline || '';
+
+    // Todos los textos
+    document.querySelectorAll('[data-text]').forEach(el => {
+      const key = el.dataset.text;
+      if (d[key] !== undefined && d[key] !== null) {
+        el.value = d[key];
+      }
+    });
+
+    // Música
     $('in-music-title').value = d.musicTitle || '';
     $('in-music-artist').value = d.musicArtist || '';
     $('current-music-url').textContent = d.musicUrl || '(ninguna)';
     $('in-music-url').value = d.musicUrl || '';
-
     if (d.musicUrl) {
       $('music-preview-box').style.display = 'flex';
       const previewAudio = $('music-preview-audio');
@@ -882,22 +1088,89 @@ function cargarDatos() {
       $('music-preview-box').style.display = 'none';
     }
 
-    ['coverPhoto','storyPhoto','churchPhoto','g1','g2','g3','g4','g5','closingPhoto'].forEach(k => {
+    // QR link
+    $('in-photos-url').value = d.photosUrl || '';
+    $('current-photos-url').textContent = d.photosUrl || '(ninguna)';
+
+    // Fotos
+    ['coverPhoto','storyPhoto','churchPhoto','g1','g2','g3','g4','g5','closingPhoto','qrImage'].forEach(k => {
       const prev = $('prev-' + k);
       if (prev) prev.src = d[k] || '';
     });
   });
 
-  onValue(ref(db, 'rsvp'), snap => {
-    rsvpData = snap.val() || {};
-    renderRSVP();
-  });
-
-  onValue(ref(db, 'canciones'), snap => {
-    songsData = snap.val() || {};
-    renderSongs();
-  });
+  onValue(ref(db, 'rsvp'), snap => { rsvpData = snap.val() || {}; renderRSVP(); });
+  onValue(ref(db, 'canciones'), snap => { songsData = snap.val() || {}; renderSongs(); });
 }
+
+// ============ GUARDAR TODOS LOS TEXTOS ============
+$('save-all-texts-btn').addEventListener('click', async () => {
+  const payload = {};
+  document.querySelectorAll('[data-text]').forEach(el => {
+    payload[el.dataset.text] = el.value.trim();
+  });
+  try {
+    await update(ref(db, 'invitacion'), payload);
+    showMsg('texts-msg', '✅ Todos los textos guardados.', 'ok');
+  } catch (err) {
+    showMsg('texts-msg', '❌ Error: ' + err.message, 'err');
+  }
+});
+
+// ============ GUARDAR LINK FOTOS ============
+$('save-photos-url-btn').addEventListener('click', async () => {
+  const url = $('in-photos-url').value.trim();
+  if (!url.startsWith('http')) { showMsg('qr-msg', 'Pegá una URL válida.', 'err'); return; }
+  try {
+    await update(ref(db, 'invitacion'), { photosUrl: url });
+    showMsg('qr-msg', '✅ Link guardado.', 'ok');
+  } catch (err) { showMsg('qr-msg', '❌ Error: ' + err.message, 'err'); }
+});
+
+$('clear-photos-url-btn').addEventListener('click', async () => {
+  if (!confirm('¿Quitar el link de fotos?')) return;
+  try {
+    await remove(ref(db, 'invitacion/photosUrl'));
+    showMsg('qr-msg', '🗑 Link quitado.', 'ok');
+  } catch (err) { showMsg('qr-msg', '❌ Error: ' + err.message, 'err'); }
+});
+
+// ============ MÚSICA ============
+$('save-music-url-btn').addEventListener('click', async () => {
+  const url = $('in-music-url').value.trim();
+  if (!url.startsWith('http')) { showMsg('music-msg', 'Pegá una URL válida.', 'err'); return; }
+  try {
+    await update(ref(db, 'invitacion'), {
+      musicUrl: url,
+      musicTitle: $('in-music-title').value.trim() || 'Nuestra canción',
+      musicArtist: $('in-music-artist').value.trim() || ''
+    });
+    showMsg('music-msg', '✅ Música guardada.', 'ok');
+  } catch (err) { showMsg('music-msg', '❌ Error: ' + err.message, 'err'); }
+});
+
+$('clear-music-btn').addEventListener('click', async () => {
+  if (!confirm('¿Quitar la música actual?')) return;
+  try {
+    await remove(ref(db, 'invitacion/musicUrl'));
+    await remove(ref(db, 'invitacion/musicTitle'));
+    await remove(ref(db, 'invitacion/musicArtist'));
+    showMsg('music-msg', '🗑 Música quitada.', 'ok');
+  } catch (err) { showMsg('music-msg', '❌ Error: ' + err.message, 'err'); }
+});
+
+// ============ BORRAR TODAS ============
+$('clear-rsvp-btn').addEventListener('click', async () => {
+  if (!confirm('⚠️ ¿Borrar TODAS las confirmaciones?')) return;
+  if (!confirm('¿Estás seguro? No se puede deshacer.')) return;
+  try { await set(ref(db, 'rsvp'), null); } catch (err) { alert('Error: ' + err.message); }
+});
+
+$('clear-songs-btn').addEventListener('click', async () => {
+  if (!confirm('⚠️ ¿Borrar TODAS las canciones?')) return;
+  if (!confirm('¿Estás seguro? No se puede deshacer.')) return;
+  try { await set(ref(db, 'canciones'), null); } catch (err) { alert('Error: ' + err.message); }
+});
 
 // ============ RENDER RSVP ============
 function renderRSVP() {
@@ -920,25 +1193,16 @@ function renderRSVP() {
       <div class="entry">
         <div class="entry-main">
           <div class="entry-name">${r.nombre || ''} ${r.apellido || ''}</div>
-          <div class="entry-detail">
-            <span class="badge ${(r.asistencia || '').includes('Sí') ? 'yes' : 'no'}">${r.asistencia || ''}</span>
-          </div>
+          <div class="entry-detail"><span class="badge ${(r.asistencia || '').includes('Sí') ? 'yes' : 'no'}">${r.asistencia || ''}</span></div>
         </div>
         <div class="entry-date">${r.timestamp ? new Date(r.timestamp).toLocaleString('es-PY') : ''}</div>
-        <div class="entry-actions">
-          <button class="btn danger xs" data-delete-rsvp="${id}">🗑</button>
-        </div>
+        <div class="entry-actions"><button class="btn danger xs" data-delete-rsvp="${id}">🗑</button></div>
       </div>
     `).join('');
-
-    // Listener para borrar cada respuesta
     document.querySelectorAll('[data-delete-rsvp]').forEach(btn => {
       btn.addEventListener('click', async () => {
-        const id = btn.dataset.deleteRsvp;
         if (!confirm('¿Borrar esta respuesta?')) return;
-        try {
-          await remove(ref(db, 'rsvp/' + id));
-        } catch (err) { alert('Error: ' + err.message); }
+        try { await remove(ref(db, 'rsvp/' + btn.dataset.deleteRsvp)); } catch (err) { alert('Error: ' + err.message); }
       });
     });
   }
@@ -948,21 +1212,8 @@ function renderRSVP() {
   if (ctxA) {
     charts.attendance = new Chart(ctxA, {
       type: 'doughnut',
-      data: {
-        labels: ['Confirmados', 'No asisten'],
-        datasets: [{
-          data: [yes, no],
-          backgroundColor: ['#4ade80', '#f87171'],
-          borderColor: '#181818',
-          borderWidth: 3
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { labels: { color: '#f5f5f5', font: { family: 'Inter', size: 12 } } } },
-        cutout: '65%'
-      }
+      data: { labels: ['Confirmados', 'No asisten'], datasets: [{ data: [yes, no], backgroundColor: ['#4ade80', '#f87171'], borderColor: '#1c1c1c', borderWidth: 3 }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#f5f5f5', font: { family: 'Inter', size: 12 } } } }, cutout: '65%' }
     });
   }
 
@@ -977,31 +1228,10 @@ function renderRSVP() {
     });
     const days = Object.keys(byDay).sort();
     const counts = days.map(d => byDay[d]);
-
     charts.daily = new Chart(ctxD, {
       type: 'line',
-      data: {
-        labels: days.map(d => { const [y,m,dd] = d.split('-'); return `${dd}/${m}`; }),
-        datasets: [{
-          label: 'Respuestas',
-          data: counts,
-          borderColor: '#f5f5f5',
-          backgroundColor: 'rgba(245,245,245,0.1)',
-          tension: 0.35,
-          fill: true,
-          pointBackgroundColor: '#f5f5f5',
-          pointRadius: 4
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { ticks: { color: '#999', font: { size: 11 } }, grid: { color: '#2a2a2a' } },
-          y: { ticks: { color: '#999', font: { size: 11 }, stepSize: 1 }, grid: { color: '#2a2a2a' }, beginAtZero: true }
-        }
-      }
+      data: { labels: days.map(d => { const [,m,dd] = d.split('-'); return `${dd}/${m}`; }), datasets: [{ label: 'Respuestas', data: counts, borderColor: '#f5f5f5', backgroundColor: 'rgba(245,245,245,0.1)', tension: 0.35, fill: true, pointBackgroundColor: '#f5f5f5', pointRadius: 4 }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: '#999', font: { size: 11 } }, grid: { color: '#2a2a2a' } }, y: { ticks: { color: '#999', font: { size: 11 }, stepSize: 1 }, grid: { color: '#2a2a2a' }, beginAtZero: true } } }
     });
   }
 }
@@ -1026,19 +1256,13 @@ function renderSongs() {
           <div class="entry-detail">Pedida por ${r.nombre || ''}</div>
         </div>
         <div class="entry-date">${r.timestamp ? new Date(r.timestamp).toLocaleString('es-PY') : ''}</div>
-        <div class="entry-actions">
-          <button class="btn danger xs" data-delete-song="${id}">🗑</button>
-        </div>
+        <div class="entry-actions"><button class="btn danger xs" data-delete-song="${id}">🗑</button></div>
       </div>
     `).join('');
-
     document.querySelectorAll('[data-delete-song]').forEach(btn => {
       btn.addEventListener('click', async () => {
-        const id = btn.dataset.deleteSong;
         if (!confirm('¿Borrar esta canción?')) return;
-        try {
-          await remove(ref(db, 'canciones/' + id));
-        } catch (err) { alert('Error: ' + err.message); }
+        try { await remove(ref(db, 'canciones/' + btn.dataset.deleteSong)); } catch (err) { alert('Error: ' + err.message); }
       });
     });
   }
@@ -1053,25 +1277,10 @@ function renderSongs() {
       artistCount[a] = (artistCount[a] || 0) + 1;
     });
     const sorted = Object.entries(artistCount).sort((a,b) => b[1] - a[1]).slice(0, 5);
-    const labels = sorted.map(s => s[0]);
-    const data = sorted.map(s => s[1]);
-
     charts.artists = new Chart(ctxA, {
       type: 'bar',
-      data: {
-        labels,
-        datasets: [{ label: 'Canciones pedidas', data, backgroundColor: '#f5f5f5', borderRadius: 6 }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        indexAxis: 'y',
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { ticks: { color: '#999', font: { size: 11 }, stepSize: 1 }, grid: { color: '#2a2a2a' }, beginAtZero: true },
-          y: { ticks: { color: '#f5f5f5', font: { size: 12 } }, grid: { display: false } }
-        }
-      }
+      data: { labels: sorted.map(s => s[0]), datasets: [{ label: 'Canciones', data: sorted.map(s => s[1]), backgroundColor: '#f5f5f5', borderRadius: 6 }] },
+      options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { ticks: { color: '#999', font: { size: 11 }, stepSize: 1 }, grid: { color: '#2a2a2a' }, beginAtZero: true }, y: { ticks: { color: '#f5f5f5', font: { size: 12 } }, grid: { display: false } } } }
     });
   }
 
@@ -1082,124 +1291,26 @@ function renderSongs() {
     const no = Object.values(rsvpData).filter(r => (r.asistencia || '').includes('No')).length;
     charts.general = new Chart(ctxG, {
       type: 'bar',
-      data: {
-        labels: ['Confirmados', 'No asisten', 'Canciones'],
-        datasets: [{
-          data: [yes, no, total],
-          backgroundColor: ['#4ade80', '#f87171', '#facc15'],
-          borderRadius: 8
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { ticks: { color: '#f5f5f5', font: { size: 12 } }, grid: { display: false } },
-          y: { ticks: { color: '#999', font: { size: 11 }, stepSize: 1 }, grid: { color: '#2a2a2a' }, beginAtZero: true }
-        }
-      }
+      data: { labels: ['Confirmados', 'No asisten', 'Canciones'], datasets: [{ data: [yes, no, total], backgroundColor: ['#4ade80', '#f87171', '#facc15'], borderRadius: 8 }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: '#f5f5f5', font: { size: 12 } }, grid: { display: false } }, y: { ticks: { color: '#999', font: { size: 11 }, stepSize: 1 }, grid: { color: '#2a2a2a' }, beginAtZero: true } } }
     });
   }
 }
-
-// ============ GUARDAR TEXTOS ============
-$('save-texts-btn').addEventListener('click', async () => {
-  try {
-    await update(ref(db, 'invitacion'), {
-      names: $('in-names').value.trim(),
-      tagline: $('in-tagline').value.trim()
-    });
-    showMsg('texts-msg', '✅ Textos guardados.', 'ok');
-  } catch (err) {
-    showMsg('texts-msg', '❌ Error: ' + err.message, 'err');
-  }
-});
-
-// ============ MÚSICA ============
-$('save-music-url-btn').addEventListener('click', async () => {
-  const url = $('in-music-url').value.trim();
-  if (!url.startsWith('http')) {
-    showMsg('music-msg', 'Pegá una URL válida (que empiece con http).', 'err');
-    return;
-  }
-  try {
-    await update(ref(db, 'invitacion'), {
-      musicUrl: url,
-      musicTitle: $('in-music-title').value.trim() || 'Nuestra canción',
-      musicArtist: $('in-music-artist').value.trim() || ''
-    });
-    showMsg('music-msg', '✅ URL guardada.', 'ok');
-  } catch (err) {
-    showMsg('music-msg', '❌ Error: ' + err.message, 'err');
-  }
-});
-
-$('clear-music-btn').addEventListener('click', async () => {
-  if (!confirm('¿Quitar la música actual?')) return;
-  try {
-    await remove(ref(db, 'invitacion/musicUrl'));
-    await remove(ref(db, 'invitacion/musicTitle'));
-    await remove(ref(db, 'invitacion/musicArtist'));
-    showMsg('music-msg', '🗑 Música quitada.', 'ok');
-  } catch (err) {
-    showMsg('music-msg', '❌ Error: ' + err.message, 'err');
-  }
-});
-
-// ============ BORRAR TODAS LAS RESPUESTAS RSVP ============
-$('clear-rsvp-btn').addEventListener('click', async () => {
-  if (!confirm('⚠️ ¿Borrar TODAS las confirmaciones de asistencia? Esta acción no se puede deshacer.')) return;
-  if (!confirm('¿Estás seguro? Se van a borrar todas las respuestas.')) return;
-  try {
-    await set(ref(db, 'rsvp'), null);
-    showMsg('rsvp-message', '🗑 Todas las respuestas fueron borradas.', 'ok');
-  } catch (err) {
-    alert('Error: ' + err.message);
-  }
-});
-
-// ============ BORRAR TODAS LAS CANCIONES ============
-$('clear-songs-btn').addEventListener('click', async () => {
-  if (!confirm('⚠️ ¿Borrar TODAS las canciones sugeridas? Esta acción no se puede deshacer.')) return;
-  if (!confirm('¿Estás seguro? Se van a borrar todas las sugerencias.')) return;
-  try {
-    await set(ref(db, 'canciones'), null);
-    showMsg('song-message', '🗑 Todas las canciones fueron borradas.', 'ok');
-  } catch (err) {
-    alert('Error: ' + err.message);
-  }
-});
 
 // ============ EXPORTAR RSVP ============
 $('export-rsvp-btn').addEventListener('click', () => {
   const entries = Object.entries(rsvpData);
   if (!entries.length) { alert('No hay respuestas.'); return; }
-
-  const rows = entries.map(([, r]) => ({
-    'Nombre': r.nombre || '',
-    'Apellido': r.apellido || '',
-    'Asistencia': r.asistencia || '',
-    'Fecha de respuesta': r.timestamp ? new Date(r.timestamp).toLocaleString('es-PY') : ''
-  }));
-
+  const rows = entries.map(([, r]) => ({ 'Nombre': r.nombre || '', 'Apellido': r.apellido || '', 'Asistencia': r.asistencia || '', 'Fecha': r.timestamp ? new Date(r.timestamp).toLocaleString('es-PY') : '' }));
   const ws = XLSX.utils.json_to_sheet(rows);
   ws['!cols'] = [{wch:20},{wch:20},{wch:18},{wch:25}];
-
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'RSVP');
-
-  const confirmados = rows.filter(r => r.Asistencia.includes('Sí')).length;
-  const rechazados = rows.filter(r => r.Asistencia.includes('No')).length;
-  const resumen = [
-    { 'Métrica': 'Total respuestas', 'Cantidad': rows.length },
-    { 'Métrica': 'Confirmados', 'Cantidad': confirmados },
-    { 'Métrica': 'No asisten', 'Cantidad': rechazados }
-  ];
-  const ws2 = XLSX.utils.json_to_sheet(resumen);
+  const yes = rows.filter(r => r.Asistencia.includes('Sí')).length;
+  const no = rows.filter(r => r.Asistencia.includes('No')).length;
+  const ws2 = XLSX.utils.json_to_sheet([{ 'Métrica': 'Total', 'Cantidad': rows.length }, { 'Métrica': 'Confirmados', 'Cantidad': yes }, { 'Métrica': 'No asisten', 'Cantidad': no }]);
   ws2['!cols'] = [{wch:25},{wch:12}];
   XLSX.utils.book_append_sheet(wb, ws2, 'Resumen');
-
   XLSX.writeFile(wb, `RSVP_Cinthia_Victor_${new Date().toISOString().split('T')[0]}.xlsx`);
 });
 
@@ -1207,17 +1318,9 @@ $('export-rsvp-btn').addEventListener('click', () => {
 $('export-songs-btn').addEventListener('click', () => {
   const entries = Object.entries(songsData);
   if (!entries.length) { alert('No hay canciones.'); return; }
-
-  const rows = entries.map(([, r]) => ({
-    'Invitado': r.nombre || '',
-    'Canción': r.cancion || '',
-    'Artista': r.artista || '',
-    'Fecha': r.timestamp ? new Date(r.timestamp).toLocaleString('es-PY') : ''
-  }));
-
+  const rows = entries.map(([, r]) => ({ 'Invitado': r.nombre || '', 'Canción': r.cancion || '', 'Artista': r.artista || '', 'Fecha': r.timestamp ? new Date(r.timestamp).toLocaleString('es-PY') : '' }));
   const ws = XLSX.utils.json_to_sheet(rows);
   ws['!cols'] = [{wch:22},{wch:35},{wch:28},{wch:25}];
-
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'Canciones');
   XLSX.writeFile(wb, `Canciones_Cinthia_Victor_${new Date().toISOString().split('T')[0]}.xlsx`);
