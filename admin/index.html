@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · Cinthia & Victor</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --bg:#0f0f0f;
+    --panel:#181818;
+    --panel-2:#1f1f1f;
+    --border:#2a2a2a;
+    --text:#f5f5f5;
+    --muted:#999;
+    --ok:#4ade80;
+    --err:#f87171;
+    --warn:#facc15;
+    --accent:#f5f5f5;
+  }
+  body {
+    font-family:'Inter',-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* LOGIN */
+  .login-wrap {
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:2rem;
+    background:radial-gradient(circle at 30% 20%, #1a1a1a 0%, #0a0a0a 70%);
+  }
+  .login-card {
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:3rem;
+    max-width:420px;
+    width:100%;
+    box-shadow:0 30px 80px rgba(0,0,0,.5);
+  }
+  .login-card .brand {
+    font-family:'Fraunces',serif;
+    font-size:2rem;
+    letter-spacing:-.02em;
+    margin-bottom:.4rem;
+  }
+  .login-card .brand-sub {
+    font-size:.75rem;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:2.5rem;
+  }
+  .login-card h2 {
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:1.4rem;
+    margin-bottom:1.5rem;
+  }
+
+  /* FORM */
+  label {
+    display:block;
+    font-size:.68rem;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:.5rem;
+    margin-top:1.2rem;
+    font-weight:500;
+  }
+  input, textarea, select {
+    width:100%;
+    padding:.85rem 1rem;
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:8px;
+    color:var(--text);
+    font:inherit;
+    font-size:.92rem;
+    outline:none;
+    transition:border-color .2s, background .2s;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color:#555;
+    background:#222;
+  }
+  input[type="file"] { padding:.6rem; cursor:pointer; }
+
+  .btn {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:.5rem;
+    padding:.85rem 1.5rem;
+    background:var(--accent);
+    color:#111;
+    border:none;
+    border-radius:8px;
+    font:inherit;
+    font-size:.75rem;
+    font-weight:600;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:transform .2s, box-shadow .2s, background .2s;
+    margin-top:1.2rem;
+    width:100%;
+  }
+  .btn:hover { transform:translateY(-1px); box-shadow:0 8px 20px rgba(255,255,255,.08); }
+  .btn:disabled { opacity:.4; cursor:not-allowed; transform:none; }
+  .btn.ghost { background:transparent; color:var(--text); border:1px solid var(--border); }
+  .btn.ghost:hover { background:var(--panel-2); }
+  .btn.danger { background:#c0392b; color:#fff; }
+  .btn.ok { background:var(--ok); color:#0a0a0a; }
+  .btn.small { padding:.55rem 1rem; font-size:.68rem; width:auto; margin-top:0; }
+  .btn.xs { padding:.35rem .7rem; font-size:.62rem; width:auto; margin-top:0; letter-spacing:.08em; }
+
+  .link {
+    display:inline-block;
+    margin-top:1.2rem;
+    color:var(--muted);
+    font-size:.78rem;
+    text-decoration:underline;
+    cursor:pointer;
+    background:none;
+    border:none;
+    font-family:inherit;
+  }
+  .link:hover { color:var(--text); }
+
+  .msg {
+    padding:.85rem 1rem;
+    border-radius:8px;
+    margin-top:1rem;
+    font-size:.85rem;
+    display:none;
+  }
+  .msg.show { display:block; animation:fadeIn .3s ease; }
+  .msg.ok { background:rgba(74,222,128,.1); color:var(--ok); border:1px solid rgba(74,222,128,.25); }
+  .msg.err { background:rgba(248,113,113,.1); color:var(--err); border:1px solid rgba(248,113,113,.25); }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
+
+  /* LAYOUT */
+  .admin-container { max-width:1280px; margin:0 auto; padding:2rem; }
+  .admin-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1.5rem 0;
+    margin-bottom:1.5rem;
+    border-bottom:1px solid var(--border);
+    gap:1rem;
+    flex-wrap:wrap;
+  }
+  .admin-header .brand {
+    font-family:'Fraunces',serif;
+    font-size:1.6rem;
+    letter-spacing:-.02em;
+  }
+  .admin-header .user {
+    display:flex;
+    align-items:center;
+    gap:1rem;
+    font-size:.85rem;
+    color:var(--muted);
+  }
+  .avatar {
+    width:36px; height:36px;
+    border-radius:50%;
+    background:linear-gradient(135deg, #333, #555);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:600; color:#fff; font-size:.85rem;
+  }
+
+  /* TABS */
+  .tabs {
+    display:flex;
+    gap:.4rem;
+    margin-bottom:2rem;
+    overflow-x:auto;
+    padding-bottom:.5rem;
+    scrollbar-width:thin;
+  }
+  .tabs::-webkit-scrollbar { height:6px; }
+  .tabs::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+  .tab {
+    padding:.7rem 1.2rem;
+    background:var(--panel);
+    color:var(--muted);
+    border:1px solid var(--border);
+    border-radius:100px;
+    cursor:pointer;
+    font:inherit;
+    font-size:.78rem;
+    font-weight:500;
+    letter-spacing:.05em;
+    white-space:nowrap;
+    transition:all .2s;
+  }
+  .tab:hover { color:var(--text); border-color:#444; }
+  .tab.active { background:var(--text); color:#111; border-color:var(--text); }
+
+  /* CARDS */
+  .card {
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:2rem;
+    margin-bottom:1.5rem;
+  }
+  .card h2 {
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:1.4rem;
+    margin-bottom:.5rem;
+  }
+  .card .desc {
+    color:var(--muted);
+    font-size:.85rem;
+    margin-bottom:1.5rem;
+  }
+
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:1.2rem; }
+
+  /* PHOTO ITEMS */
+  .photo-item {
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:1rem;
+    display:flex;
+    flex-direction:column;
+  }
+  .photo-item label { margin-top:0; margin-bottom:.6rem; font-size:.65rem; }
+  .photo-preview {
+    width:100%;
+    height:160px;
+    object-fit:cover;
+    border-radius:6px;
+    margin-top:.7rem;
+    background:#0a0a0a;
+    filter:grayscale(1);
+    display:block;
+  }
+  .photo-actions {
+    display:flex;
+    gap:.4rem;
+    margin-top:.6rem;
+  }
+
+  /* EXPORT BAR */
+  .export-bar {
+    display:flex;
+    gap:.6rem;
+    flex-wrap:wrap;
+    align-items:center;
+    margin-bottom:1.5rem;
+  }
+
+  /* STATS */
+  .stats-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    gap:1rem;
+    margin-bottom:1.5rem;
+  }
+  .stat-box {
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:1.3rem;
+  }
+  .stat-box .stat-label {
+    font-size:.68rem;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:.5rem;
+  }
+  .stat-box .stat-value {
+    font-family:'Fraunces',serif;
+    font-size:2rem;
+    line-height:1;
+  }
+  .stat-box .stat-value.yes { color:var(--ok); }
+  .stat-box .stat-value.no { color:var(--err); }
+
+  /* CHARTS */
+  .charts-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+    gap:1.5rem;
+    margin-bottom:1.5rem;
+  }
+  .chart-box {
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:1.5rem;
+    height:320px;
+    position:relative;
+  }
+  .chart-box h3 {
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:1.05rem;
+    margin-bottom:1rem;
+  }
+  .chart-box .chart-container {
+    position:relative;
+    height:calc(100% - 2rem);
+  }
+
+  /* ENTRIES */
+  .entry {
+    padding:1rem 1.2rem;
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    margin-bottom:.7rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:1rem;
+    flex-wrap:wrap;
+  }
+  .entry .entry-main { flex:1; min-width:0; }
+  .entry .entry-name { font-weight:600; font-size:.95rem; }
+  .entry .entry-detail { color:var(--muted); font-size:.82rem; margin-top:.2rem; }
+  .entry .entry-date { color:#666; font-size:.72rem; white-space:nowrap; }
+  .entry .entry-actions { display:flex; gap:.4rem; }
+  .entry .badge {
+    display:inline-block;
+    padding:.25rem .7rem;
+    border-radius:100px;
+    font-size:.7rem;
+    font-weight:500;
+    letter-spacing:.03em;
+  }
+  .badge.yes { background:rgba(74,222,128,.15); color:var(--ok); }
+  .badge.no { background:rgba(248,113,113,.15); color:var(--err); }
+
+  .empty {
+    color:var(--muted);
+    font-size:.85rem;
+    text-align:center;
+    padding:2rem 0;
+  }
+
+  /* MUSIC PREVIEW */
+  .music-preview {
+    margin-top:1.5rem;
+    padding:1rem;
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    gap:1rem;
+  }
+  .music-preview audio { flex:1; height:36px; }
+
+  .tab-content { display:none; }
+  .tab-content.active { display:block; animation:fadeIn .3s ease; }
+
+  @media (max-width:640px) {
+    .admin-container { padding:1rem; }
+    .card { padding:1.5rem; }
+    .admin-header .user span { display:none; }
+    .login-card { padding:2rem; }
+    .stats-grid { grid-template-columns:1fr 1fr; }
+    .chart-box { height:280px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-view" class="login-wrap">
+  <div class="login-card">
+    <div class="brand">C & V</div>
+    <div class="brand-sub">Panel de administración</div>
+
+    <h2 id="login-title">Iniciar sesión</h2>
+
+    <label>Email</label>
+    <input id="login-email" type="email" placeholder="cjaravb@gmail.com">
+
+    <label>Contraseña</label>
+    <input id="login-password" type="password" placeholder="••••••••">
+
+    <button id="login-btn" class="btn">INGRESAR</button>
+    <button id="show-signup-btn" class="link" type="button">¿No tenés cuenta? Crear una</button>
+
+    <div id="signup-block" style="display:none;">
+      <label>Email autorizado</label>
+      <input id="signup-email" type="email" placeholder="cjaravb@gmail.com">
+      <label>Contraseña nueva</label>
+      <input id="signup-password" type="password" placeholder="Mínimo 6 caracteres">
+      <button id="signup-btn" class="btn">CREAR CUENTA</button>
+      <button id="show-login-btn" class="link" type="button">← Volver a iniciar sesión</button>
+    </div>
+
+    <div id="login-msg" class="msg"></div>
+  </div>
+</div>
+
+<!-- PANEL -->
+<div id="admin-view" style="display:none;">
+  <div class="admin-container">
+
+    <div class="admin-header">
+      <div class="brand">C & Victor · Admin</div>
+      <div class="user">
+        <div class="avatar" id="avatar">C</div>
+        <span id="user-email">cjaravb@gmail.com</span>
+        <button id="logout-btn" class="btn danger small">Salir</button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="fotos">📷 Fotos</button>
+      <button class="tab" data-tab="textos">📝 Textos</button>
+      <button class="tab" data-tab="musica">🎵 Música</button>
+      <button class="tab" data-tab="rsvp">💌 RSVP</button>
+      <button class="tab" data-tab="canciones">🎶 Canciones</button>
+      <button class="tab" data-tab="stats">📊 Estadísticas</button>
+    </div>
+
+    <!-- TAB FOTOS -->
+    <div id="tab-fotos" class="tab-content active">
+      <div class="card">
+        <h2>Fotografías</h2>
+        <p class="desc">Subí cada foto. Se alojan en ImgBB y se guardan en Firebase. Se muestran en blanco y negro automáticamente.</p>
+        <div class="grid">
+          <div class="photo-item">
+            <label>Portada</label>
+            <input type="file" accept="image/*" data-photo="coverPhoto">
+            <img id="prev-coverPhoto" class="photo-preview">
+            <div class="photo-actions">
+              <button class="btn danger xs" data-delete-photo="coverPhoto">🗑 Borrar</button>
+            </div>
+          </div>
+          <div class="photo-item">
+            <label>Historia</label>
+            <input type="file" accept="image/*" data-photo="storyPhoto">
+            <img id="prev-storyPhoto" class="photo-preview">
+            <div class="photo-actions">
+              <button class="btn danger xs" data-delete-photo="storyPhoto">🗑 Borrar</button>
+            </div>
+          </div>
+          <div class="photo-item">
+            <label>Iglesia</label>
+            <input type="file" accept="image/*" data-photo="churchPhoto">
+            <img id="prev-churchPhoto" class="photo-preview">
+            <div class="photo-actions">
+              <button class="btn danger xs" data-delete-photo="churchPhoto">🗑 Borrar</button>
+            </div>
+          </div>
+          <div class="photo-item">
+            <label>Galería 1</label>
+            <input type="file" accept="image/*" data-photo="g1">
+            <img id="prev-g1" class="photo-preview">
+            <div class="photo-actions">
+              <button class="btn danger xs" data-delete-photo="g1">🗑 Borrar</button>
+            </div>
+          </div>
+          <div class="photo-item">
+            <label>Galería 2</label>
+            <input type="file" accept="image/*" data-photo="g2">
+            <img id="prev-g2" class="photo-preview">
+            <div class="photo-actions">
+              <button class="btn danger xs" data-delete-photo="g2">🗑 Borrar</button>
+            </div>
+          </div>
+          <div class="photo-item">
+            <label>Galería 3</label>
+            <input type="file" accept="image/*" data-photo="g3">
+            <img id="prev-g3" class="photo-preview">
+            <div class="photo-actions">
+              <button class="btn danger xs" data-delete-photo="g3">🗑 Borrar</button>
+            </div>
+          </div>
+          <div class="photo-item">
+            <label>Galería 4</label>
+            <input type="file" accept="image/*" data-photo="g4">
+            <img id="prev-g4" class="photo-preview">
+            <div class="photo-actions">
+              <button class="btn danger xs" data-delete-photo="g4">🗑 Borrar</button>
+            </div>
+          </div>
+          <div class="photo-item">
+            <label>Galería 5</label>
+            <input type="file" accept="image/*" data-photo="g5">
+            <img id="prev-g5" class="photo-preview">
+            <div class="photo-actions">
+              <button class="btn danger xs" data-delete-photo="g5">🗑 Borrar</button>
+            </div>
+          </div>
+          <div class="photo-item">
+            <label>Cierre</label>
+            <input type="file" accept="image/*" data-photo="closingPhoto">
+            <img id="prev-closingPhoto" class="photo-preview">
+            <div class="photo-actions">
+              <button class="btn danger xs" data-delete-photo="closingPhoto">🗑 Borrar</button>
+            </div>
+          </div>
+        </div>
+        <div id="fotos-msg" class="msg"></div>
+      </div>
+    </div>
+
+    <!-- TAB TEXTOS -->
+    <div id="tab-textos" class="tab-content">
+      <div class="card">
+        <h2>Textos principales</h2>
+        <p class="desc">Nombres y frase que aparecen en la portada.</p>
+        <label>Nombres</label>
+        <input id="in-names" type="text" placeholder="Cinthia & Victor">
+        <label>Frase portada</label>
+        <input id="in-tagline" type="text" placeholder="Nuestra historia favorita...">
+        <button id="save-texts-btn" class="btn">GUARDAR TEXTOS</button>
+        <div id="texts-msg" class="msg"></div>
+      </div>
+    </div>
+
+    <!-- TAB MÚSICA -->
+    <div id="tab-musica" class="tab-content">
+      <div class="card">
+        <h2>Música de fondo</h2>
+        <p class="desc">Pegá una URL directa. Se reproduce en el sitio de los invitados.</p>
+
+        <label>Título de la canción</label>
+        <input id="in-music-title" type="text" placeholder="Say You Won't Let Go">
+
+        <label>Artista</label>
+        <input id="in-music-artist" type="text" placeholder="James Arthur">
+
+        <label style="margin-top:2rem;">URL directa</label>
+        <input id="in-music-url" type="url" placeholder="https://...">
+        <button id="save-music-url-btn" class="btn">GUARDAR URL</button>
+        <button id="clear-music-btn" class="btn danger">🗑 QUITAR MÚSICA</button>
+
+        <p style="margin-top:1rem;font-size:.8rem;color:var(--muted);">
+          URL actual: <span id="current-music-url" style="word-break:break-all;color:#ccc;">(ninguna)</span>
+        </p>
+
+        <div class="music-preview" id="music-preview-box" style="display:none;">
+          <span style="font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;">Vista previa:</span>
+          <audio id="music-preview-audio" controls preload="none"></audio>
+        </div>
+
+        <div id="music-msg" class="msg"></div>
+      </div>
+    </div>
+
+    <!-- TAB RSVP -->
+    <div id="tab-rsvp" class="tab-content">
+      <div class="card">
+        <h2>Confirmaciones de asistencia</h2>
+        <p class="desc">Respuestas recibidas en tiempo real.</p>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-label">Total respuestas</div>
+            <div class="stat-value" id="stat-total">0</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Confirmados</div>
+            <div class="stat-value yes" id="stat-yes">0</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">No asisten</div>
+            <div class="stat-value no" id="stat-no">0</div>
+          </div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-box">
+            <h3>Asistencia</h3>
+            <div class="chart-container"><canvas id="chart-attendance"></canvas></div>
+          </div>
+          <div class="chart-box">
+            <h3>Respuestas por día</h3>
+            <div class="chart-container"><canvas id="chart-daily"></canvas></div>
+          </div>
+        </div>
+
+        <div class="export-bar">
+          <button id="export-rsvp-btn" class="btn small">📥 DESCARGAR EXCEL</button>
+          <button id="clear-rsvp-btn" class="btn danger small">🗑 BORRAR TODAS</button>
+        </div>
+        <div id="rsvp-list">Cargando...</div>
+      </div>
+    </div>
+
+    <!-- TAB CANCIONES -->
+    <div id="tab-canciones" class="tab-content">
+      <div class="card">
+        <h2>Canciones sugeridas</h2>
+        <p class="desc">Lista de canciones que los invitados quieren escuchar.</p>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-label">Total canciones</div>
+            <div class="stat-value" id="stat-songs">0</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Artistas únicos</div>
+            <div class="stat-value" id="stat-artists">0</div>
+          </div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-box">
+            <h3>Top 5 artistas</h3>
+            <div class="chart-container"><canvas id="chart-artists"></canvas></div>
+          </div>
+        </div>
+
+        <div class="export-bar">
+          <button id="export-songs-btn" class="btn small">📥 DESCARGAR EXCEL</button>
+          <button id="clear-songs-btn" class="btn danger small">🗑 BORRAR TODAS</button>
+        </div>
+        <div id="canciones-list">Cargando...</div>
+      </div>
+    </div>
+
+    <!-- TAB STATS -->
+    <div id="tab-stats" class="tab-content">
+      <div class="card">
+        <h2>Resumen general</h2>
+        <p class="desc">Todo lo que está pasando con tu invitación.</p>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-label">Total invitados</div>
+            <div class="stat-value" id="stat-total2">0</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Confirmados</div>
+            <div class="stat-value yes" id="stat-yes2">0</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">No asisten</div>
+            <div class="stat-value no" id="stat-no2">0</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Canciones pedidas</div>
+            <div class="stat-value" id="stat-songs2">0</div>
+          </div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-box" style="height:360px;">
+            <h3>Distribución general</h3>
+            <div class="chart-container"><canvas id="chart-general"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut }
+  from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+import { getDatabase, ref, onValue, update, push, remove, set }
+  from "https://www.gstatic.com/firebasejs/13.0.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBXl5uzDa89nfjDHPUwGYfmOVZOLH6OaRI",
+  authDomain: "bodacyv22112026.firebaseapp.com",
+  databaseURL: "https://bodacyv22112026-default-rtdb.firebaseio.com",
+  projectId: "bodacyv22112026",
+  storageBucket: "bodacyv22112026.firebasestorage.app",
+  messagingSenderId: "940398343769",
+  appId: "1:940398343769:web:5f12f45489c78071466348"
+};
+
+// ============================================================
+// ⚙️ CONFIGURACIÓN: API Key de ImgBB
+// ============================================================
+const IMGBB_API_KEY = '588023b3a033560bf5cf1d272cf3a4ae';
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+const ALLOWED_EMAIL = 'cjaravb@gmail.com';
+const $ = id => document.getElementById(id);
+
+let rsvpData = {};
+let songsData = {};
+let charts = {};
+
+// ============ UTILIDADES ============
+function showMsg(id, text, type = 'ok') {
+  const el = $(id);
+  el.textContent = text;
+  el.className = 'msg show ' + type;
+  if (type === 'ok') setTimeout(() => { el.classList.remove('show'); }, 3500);
+}
+
+// ============ SUBIR A IMGBB ============
+async function uploadToImgBB(file) {
+  const formData = new FormData();
+  formData.append('image', file);
+
+  const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+    method: 'POST',
+    body: formData
+  });
+
+  const result = await response.json();
+
+  if (!result.success) {
+    throw new Error(result.error?.message || 'Error al subir a ImgBB');
+  }
+
+  return result.data.display_url || result.data.url;
+}
+
+// ============ SUBIR FOTO ============
+document.querySelectorAll('input[data-photo]').forEach(input => {
+  input.addEventListener('change', async e => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (file.size > 10 * 1024 * 1024) {
+      showMsg('fotos-msg', '❌ La imagen es muy grande. Máximo 10MB.', 'err');
+      return;
+    }
+
+    const key = e.target.dataset.photo;
+    showMsg('fotos-msg', `Subiendo ${key} a ImgBB...`, 'ok');
+
+    try {
+      const imageUrl = await uploadToImgBB(file);
+      await update(ref(db, 'invitacion'), { [key]: imageUrl });
+      showMsg('fotos-msg', `✅ ${key} actualizado.`, 'ok');
+      const prev = $('prev-' + key);
+      if (prev) prev.src = imageUrl;
+    } catch (err) {
+      showMsg('fotos-msg', '❌ Error: ' + err.message, 'err');
+    }
+  });
+});
+
+// ============ BORRAR FOTO ============
+document.querySelectorAll('button[data-delete-photo]').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const key = btn.dataset.deletePhoto;
+    if (!confirm(`¿Borrar la foto de "${key}"?`)) return;
+
+    try {
+      await remove(ref(db, 'invitacion/' + key));
+      const prev = $('prev-' + key);
+      if (prev) prev.src = '';
+      showMsg('fotos-msg', `🗑 ${key} borrado.`, 'ok');
+    } catch (err) {
+      showMsg('fotos-msg', '❌ Error al borrar: ' + err.message, 'err');
+    }
+  });
+});
+
+// ============ LOGIN / SIGNUP ============
+$('show-signup-btn').addEventListener('click', () => {
+  $('login-title').textContent = 'Crear cuenta';
+  $('login-email').style.display = 'none';
+  $('login-password').style.display = 'none';
+  $('login-btn').style.display = 'none';
+  $('show-signup-btn').style.display = 'none';
+  $('signup-block').style.display = 'block';
+});
+
+$('show-login-btn').addEventListener('click', () => {
+  $('login-title').textContent = 'Iniciar sesión';
+  $('login-email').style.display = 'block';
+  $('login-password').style.display = 'block';
+  $('login-btn').style.display = 'block';
+  $('show-signup-btn').style.display = 'inline-block';
+  $('signup-block').style.display = 'none';
+});
+
+$('login-btn').addEventListener('click', async () => {
+  const email = $('login-email').value.trim();
+  const password = $('login-password').value;
+  $('login-msg').classList.remove('show');
+
+  if (email !== ALLOWED_EMAIL) {
+    showMsg('login-msg', 'Solo la cuenta autorizada puede ingresar.', 'err');
+    return;
+  }
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch {
+    showMsg('login-msg', 'Credenciales incorrectas o cuenta no creada.', 'err');
+  }
+});
+
+$('signup-btn').addEventListener('click', async () => {
+  const email = $('signup-email').value.trim();
+  const password = $('signup-password').value;
+
+  if (email !== ALLOWED_EMAIL) {
+    showMsg('login-msg', `Solo se puede crear la cuenta ${ALLOWED_EMAIL}.`, 'err');
+    return;
+  }
+  if (password.length < 6) {
+    showMsg('login-msg', 'La contraseña debe tener al menos 6 caracteres.', 'err');
+    return;
+  }
+
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    showMsg('login-msg', '¡Cuenta creada! Ya podés entrar.', 'ok');
+  } catch (err) {
+    if (err.code === 'auth/email-already-in-use') {
+      showMsg('login-msg', 'La cuenta ya existe. Podés iniciar sesión.', 'err');
+    } else {
+      showMsg('login-msg', 'Error: ' + err.message, 'err');
+    }
+  }
+});
+
+$('logout-btn').addEventListener('click', () => signOut(auth));
+
+onAuthStateChanged(auth, user => {
+  if (user && user.email === ALLOWED_EMAIL) {
+    $('login-view').style.display = 'none';
+    $('admin-view').style.display = 'block';
+    $('user-email').textContent = user.email;
+    $('avatar').textContent = user.email[0].toUpperCase();
+    cargarDatos();
+  } else {
+    $('login-view').style.display = 'flex';
+    $('admin-view').style.display = 'none';
+  }
+});
+
+// ============ TABS ============
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    $(`tab-${tab.dataset.tab}`).classList.add('active');
+    setTimeout(() => { Object.values(charts).forEach(c => c && c.resize()); }, 50);
+  });
+});
+
+// ============ CARGAR DATOS ============
+function cargarDatos() {
+  onValue(ref(db, 'invitacion'), snap => {
+    const d = snap.val() || {};
+    $('in-names').value = d.names || '';
+    $('in-tagline').value = d.tagline || '';
+    $('in-music-title').value = d.musicTitle || '';
+    $('in-music-artist').value = d.musicArtist || '';
+    $('current-music-url').textContent = d.musicUrl || '(ninguna)';
+    $('in-music-url').value = d.musicUrl || '';
+
+    if (d.musicUrl) {
+      $('music-preview-box').style.display = 'flex';
+      const previewAudio = $('music-preview-audio');
+      if (previewAudio.src !== d.musicUrl) previewAudio.src = d.musicUrl;
+    } else {
+      $('music-preview-box').style.display = 'none';
+    }
+
+    ['coverPhoto','storyPhoto','churchPhoto','g1','g2','g3','g4','g5','closingPhoto'].forEach(k => {
+      const prev = $('prev-' + k);
+      if (prev) prev.src = d[k] || '';
+    });
+  });
+
+  onValue(ref(db, 'rsvp'), snap => {
+    rsvpData = snap.val() || {};
+    renderRSVP();
+  });
+
+  onValue(ref(db, 'canciones'), snap => {
+    songsData = snap.val() || {};
+    renderSongs();
+  });
+}
+
+// ============ RENDER RSVP ============
+function renderRSVP() {
+  const entries = Object.entries(rsvpData).sort((a,b) => new Date(b[1].timestamp) - new Date(a[1].timestamp));
+  const total = entries.length;
+  const yes = entries.filter(([,r]) => (r.asistencia || '').includes('Sí')).length;
+  const no = entries.filter(([,r]) => (r.asistencia || '').includes('No')).length;
+
+  $('stat-total').textContent = total;
+  $('stat-yes').textContent = yes;
+  $('stat-no').textContent = no;
+  if ($('stat-total2')) $('stat-total2').textContent = total;
+  if ($('stat-yes2')) $('stat-yes2').textContent = yes;
+  if ($('stat-no2')) $('stat-no2').textContent = no;
+
+  if (!entries.length) {
+    $('rsvp-list').innerHTML = '<p class="empty">Sin respuestas todavía.</p>';
+  } else {
+    $('rsvp-list').innerHTML = entries.map(([id, r]) => `
+      <div class="entry">
+        <div class="entry-main">
+          <div class="entry-name">${r.nombre || ''} ${r.apellido || ''}</div>
+          <div class="entry-detail">
+            <span class="badge ${(r.asistencia || '').includes('Sí') ? 'yes' : 'no'}">${r.asistencia || ''}</span>
+          </div>
+        </div>
+        <div class="entry-date">${r.timestamp ? new Date(r.timestamp).toLocaleString('es-PY') : ''}</div>
+        <div class="entry-actions">
+          <button class="btn danger xs" data-delete-rsvp="${id}">🗑</button>
+        </div>
+      </div>
+    `).join('');
+
+    // Listener para borrar cada respuesta
+    document.querySelectorAll('[data-delete-rsvp]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.deleteRsvp;
+        if (!confirm('¿Borrar esta respuesta?')) return;
+        try {
+          await remove(ref(db, 'rsvp/' + id));
+        } catch (err) { alert('Error: ' + err.message); }
+      });
+    });
+  }
+
+  if (charts.attendance) charts.attendance.destroy();
+  const ctxA = $('chart-attendance');
+  if (ctxA) {
+    charts.attendance = new Chart(ctxA, {
+      type: 'doughnut',
+      data: {
+        labels: ['Confirmados', 'No asisten'],
+        datasets: [{
+          data: [yes, no],
+          backgroundColor: ['#4ade80', '#f87171'],
+          borderColor: '#181818',
+          borderWidth: 3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: '#f5f5f5', font: { family: 'Inter', size: 12 } } } },
+        cutout: '65%'
+      }
+    });
+  }
+
+  if (charts.daily) charts.daily.destroy();
+  const ctxD = $('chart-daily');
+  if (ctxD) {
+    const byDay = {};
+    entries.forEach(([, r]) => {
+      if (!r.timestamp) return;
+      const day = new Date(r.timestamp).toISOString().split('T')[0];
+      byDay[day] = (byDay[day] || 0) + 1;
+    });
+    const days = Object.keys(byDay).sort();
+    const counts = days.map(d => byDay[d]);
+
+    charts.daily = new Chart(ctxD, {
+      type: 'line',
+      data: {
+        labels: days.map(d => { const [y,m,dd] = d.split('-'); return `${dd}/${m}`; }),
+        datasets: [{
+          label: 'Respuestas',
+          data: counts,
+          borderColor: '#f5f5f5',
+          backgroundColor: 'rgba(245,245,245,0.1)',
+          tension: 0.35,
+          fill: true,
+          pointBackgroundColor: '#f5f5f5',
+          pointRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: '#999', font: { size: 11 } }, grid: { color: '#2a2a2a' } },
+          y: { ticks: { color: '#999', font: { size: 11 }, stepSize: 1 }, grid: { color: '#2a2a2a' }, beginAtZero: true }
+        }
+      }
+    });
+  }
+}
+
+// ============ RENDER CANCIONES ============
+function renderSongs() {
+  const entries = Object.entries(songsData).sort((a,b) => new Date(b[1].timestamp) - new Date(a[1].timestamp));
+  const total = entries.length;
+  const artistas = new Set(entries.map(([,r]) => (r.artista || '').toLowerCase().trim()));
+
+  $('stat-songs').textContent = total;
+  $('stat-artists').textContent = artistas.size;
+  if ($('stat-songs2')) $('stat-songs2').textContent = total;
+
+  if (!entries.length) {
+    $('canciones-list').innerHTML = '<p class="empty">Sin sugerencias todavía.</p>';
+  } else {
+    $('canciones-list').innerHTML = entries.map(([id, r]) => `
+      <div class="entry">
+        <div class="entry-main">
+          <div class="entry-name">"${r.cancion || ''}" — ${r.artista || ''}</div>
+          <div class="entry-detail">Pedida por ${r.nombre || ''}</div>
+        </div>
+        <div class="entry-date">${r.timestamp ? new Date(r.timestamp).toLocaleString('es-PY') : ''}</div>
+        <div class="entry-actions">
+          <button class="btn danger xs" data-delete-song="${id}">🗑</button>
+        </div>
+      </div>
+    `).join('');
+
+    document.querySelectorAll('[data-delete-song]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.deleteSong;
+        if (!confirm('¿Borrar esta canción?')) return;
+        try {
+          await remove(ref(db, 'canciones/' + id));
+        } catch (err) { alert('Error: ' + err.message); }
+      });
+    });
+  }
+
+  if (charts.artists) charts.artists.destroy();
+  const ctxA = $('chart-artists');
+  if (ctxA) {
+    const artistCount = {};
+    entries.forEach(([, r]) => {
+      const a = (r.artista || '').trim();
+      if (!a) return;
+      artistCount[a] = (artistCount[a] || 0) + 1;
+    });
+    const sorted = Object.entries(artistCount).sort((a,b) => b[1] - a[1]).slice(0, 5);
+    const labels = sorted.map(s => s[0]);
+    const data = sorted.map(s => s[1]);
+
+    charts.artists = new Chart(ctxA, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{ label: 'Canciones pedidas', data, backgroundColor: '#f5f5f5', borderRadius: 6 }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: '#999', font: { size: 11 }, stepSize: 1 }, grid: { color: '#2a2a2a' }, beginAtZero: true },
+          y: { ticks: { color: '#f5f5f5', font: { size: 12 } }, grid: { display: false } }
+        }
+      }
+    });
+  }
+
+  if (charts.general) charts.general.destroy();
+  const ctxG = $('chart-general');
+  if (ctxG) {
+    const yes = Object.values(rsvpData).filter(r => (r.asistencia || '').includes('Sí')).length;
+    const no = Object.values(rsvpData).filter(r => (r.asistencia || '').includes('No')).length;
+    charts.general = new Chart(ctxG, {
+      type: 'bar',
+      data: {
+        labels: ['Confirmados', 'No asisten', 'Canciones'],
+        datasets: [{
+          data: [yes, no, total],
+          backgroundColor: ['#4ade80', '#f87171', '#facc15'],
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: '#f5f5f5', font: { size: 12 } }, grid: { display: false } },
+          y: { ticks: { color: '#999', font: { size: 11 }, stepSize: 1 }, grid: { color: '#2a2a2a' }, beginAtZero: true }
+        }
+      }
+    });
+  }
+}
+
+// ============ GUARDAR TEXTOS ============
+$('save-texts-btn').addEventListener('click', async () => {
+  try {
+    await update(ref(db, 'invitacion'), {
+      names: $('in-names').value.trim(),
+      tagline: $('in-tagline').value.trim()
+    });
+    showMsg('texts-msg', '✅ Textos guardados.', 'ok');
+  } catch (err) {
+    showMsg('texts-msg', '❌ Error: ' + err.message, 'err');
+  }
+});
+
+// ============ MÚSICA ============
+$('save-music-url-btn').addEventListener('click', async () => {
+  const url = $('in-music-url').value.trim();
+  if (!url.startsWith('http')) {
+    showMsg('music-msg', 'Pegá una URL válida (que empiece con http).', 'err');
+    return;
+  }
+  try {
+    await update(ref(db, 'invitacion'), {
+      musicUrl: url,
+      musicTitle: $('in-music-title').value.trim() || 'Nuestra canción',
+      musicArtist: $('in-music-artist').value.trim() || ''
+    });
+    showMsg('music-msg', '✅ URL guardada.', 'ok');
+  } catch (err) {
+    showMsg('music-msg', '❌ Error: ' + err.message, 'err');
+  }
+});
+
+$('clear-music-btn').addEventListener('click', async () => {
+  if (!confirm('¿Quitar la música actual?')) return;
+  try {
+    await remove(ref(db, 'invitacion/musicUrl'));
+    await remove(ref(db, 'invitacion/musicTitle'));
+    await remove(ref(db, 'invitacion/musicArtist'));
+    showMsg('music-msg', '🗑 Música quitada.', 'ok');
+  } catch (err) {
+    showMsg('music-msg', '❌ Error: ' + err.message, 'err');
+  }
+});
+
+// ============ BORRAR TODAS LAS RESPUESTAS RSVP ============
+$('clear-rsvp-btn').addEventListener('click', async () => {
+  if (!confirm('⚠️ ¿Borrar TODAS las confirmaciones de asistencia? Esta acción no se puede deshacer.')) return;
+  if (!confirm('¿Estás seguro? Se van a borrar todas las respuestas.')) return;
+  try {
+    await set(ref(db, 'rsvp'), null);
+    showMsg('rsvp-message', '🗑 Todas las respuestas fueron borradas.', 'ok');
+  } catch (err) {
+    alert('Error: ' + err.message);
+  }
+});
+
+// ============ BORRAR TODAS LAS CANCIONES ============
+$('clear-songs-btn').addEventListener('click', async () => {
+  if (!confirm('⚠️ ¿Borrar TODAS las canciones sugeridas? Esta acción no se puede deshacer.')) return;
+  if (!confirm('¿Estás seguro? Se van a borrar todas las sugerencias.')) return;
+  try {
+    await set(ref(db, 'canciones'), null);
+    showMsg('song-message', '🗑 Todas las canciones fueron borradas.', 'ok');
+  } catch (err) {
+    alert('Error: ' + err.message);
+  }
+});
+
+// ============ EXPORTAR RSVP ============
+$('export-rsvp-btn').addEventListener('click', () => {
+  const entries = Object.entries(rsvpData);
+  if (!entries.length) { alert('No hay respuestas.'); return; }
+
+  const rows = entries.map(([, r]) => ({
+    'Nombre': r.nombre || '',
+    'Apellido': r.apellido || '',
+    'Asistencia': r.asistencia || '',
+    'Fecha de respuesta': r.timestamp ? new Date(r.timestamp).toLocaleString('es-PY') : ''
+  }));
+
+  const ws = XLSX.utils.json_to_sheet(rows);
+  ws['!cols'] = [{wch:20},{wch:20},{wch:18},{wch:25}];
+
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'RSVP');
+
+  const confirmados = rows.filter(r => r.Asistencia.includes('Sí')).length;
+  const rechazados = rows.filter(r => r.Asistencia.includes('No')).length;
+  const resumen = [
+    { 'Métrica': 'Total respuestas', 'Cantidad': rows.length },
+    { 'Métrica': 'Confirmados', 'Cantidad': confirmados },
+    { 'Métrica': 'No asisten', 'Cantidad': rechazados }
+  ];
+  const ws2 = XLSX.utils.json_to_sheet(resumen);
+  ws2['!cols'] = [{wch:25},{wch:12}];
+  XLSX.utils.book_append_sheet(wb, ws2, 'Resumen');
+
+  XLSX.writeFile(wb, `RSVP_Cinthia_Victor_${new Date().toISOString().split('T')[0]}.xlsx`);
+});
+
+// ============ EXPORTAR CANCIONES ============
+$('export-songs-btn').addEventListener('click', () => {
+  const entries = Object.entries(songsData);
+  if (!entries.length) { alert('No hay canciones.'); return; }
+
+  const rows = entries.map(([, r]) => ({
+    'Invitado': r.nombre || '',
+    'Canción': r.cancion || '',
+    'Artista': r.artista || '',
+    'Fecha': r.timestamp ? new Date(r.timestamp).toLocaleString('es-PY') : ''
+  }));
+
+  const ws = XLSX.utils.json_to_sheet(rows);
+  ws['!cols'] = [{wch:22},{wch:35},{wch:28},{wch:25}];
+
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Canciones');
+  XLSX.writeFile(wb, `Canciones_Cinthia_Victor_${new Date().toISOString().split('T')[0]}.xlsx`);
+});
+</script>
+
+</body>
+</html>
