@@ -59,11 +59,162 @@
     .gallery figure:nth-child(5) { grid-column:7/13; margin-top:5rem; }
     .gallery .photo-frame { aspect-ratio:4/5; }
     .gallery figure:nth-child(3) .photo-frame { aspect-ratio:3/2; }
+
+    /* ============ ITINERARIO - HORIZONTAL EN PC ============ */
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: .5rem;
+      position: relative;
+      margin-top: 3rem;
+      padding-bottom: 2rem;
+    }
+    .timeline-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .timeline-time {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      white-space: nowrap;
+    }
+    .timeline-icon {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--paper);
+      margin-bottom: 0;
+      position: relative;
+      z-index: 2;
+    }
+    .timeline-icon svg {
+      width: 38px;
+      height: 38px;
+      stroke: var(--ink);
+      stroke-width: 1.4;
+      fill: none;
+    }
+    .timeline-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: .62rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      padding-top: .9rem;
+      margin-top: 1rem;
+      /* ⬇️ Saqué la línea que separaba el texto de la imagen */
+      border-top: 0;
+      width: 100%;
+      line-height: 1.3;
+    }
+
+    /* Línea horizontal que une los íconos */
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7%;
+      right: 7%;
+      top: calc(1rem + 1.2rem + 21px);
+      height: 1px;
+      background: rgba(17,17,17,.3);
+      z-index: 0;
+    }
+
+    /* Tablet: 4 columnas */
+    @media(max-width:1000px) {
+      .timeline { grid-template-columns: repeat(4, 1fr); gap: 2rem 1rem; }
+      .timeline::before { display: none; }
+    }
+
+    /* ============ MÓVIL: VERTICAL (HORA | ICONO | TEXTO) ============ */
+    @media(max-width:640px) {
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        position: relative;
+        margin-top: 2rem;
+        padding-left: 0;
+        padding-bottom: 0;
+        max-width: 360px;
+        margin-inline: auto;
+      }
+      .timeline::before {
+        display: block;
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 20px;
+        bottom: 20px;
+        width: 1px;
+        height: auto;
+        right: auto;
+        background: rgba(17,17,17,.25);
+        transform: translateX(-50%);
+      }
+      .timeline-item {
+        display: grid;
+        grid-template-columns: 1fr 42px 1fr;
+        align-items: center;
+        gap: .8rem;
+        padding: 1.2rem 0;
+        text-align: left;
+        position: relative;
+      }
+      .timeline-time {
+        grid-column: 1;
+        text-align: right;
+        margin-bottom: 0;
+        font-size: .75rem;
+        padding-right: .4rem;
+        white-space: nowrap;
+      }
+      .timeline-icon {
+        grid-column: 2;
+        width: 42px;
+        height: 42px;
+        margin-bottom: 0;
+        background: var(--paper);
+        border: 1px solid rgba(17,17,17,.25);
+        border-radius: 50%;
+        padding: 6px;
+        position: relative;
+        z-index: 2;
+        justify-self: center;
+      }
+      .timeline-icon svg { width: 26px; height: 26px; }
+      .timeline-label {
+        grid-column: 3;
+        width: auto;
+        text-align: left;
+        padding-top: 0;
+        border-top: 0;
+        margin-top: 0;
+        font-size: .68rem;
+        letter-spacing: .16em;
+        line-height: 1.4;
+        padding-left: .4rem;
+      }
+    }
+
     .reveal { opacity:0; transform:translateY(18px); transition:opacity .8s,transform .8s; }
     .reveal.visible { opacity:1; transform:none; }
     .form-message { min-height:1.6em; margin-top:1rem; font-size:.86rem; }
     .pending { font-size:.67rem; letter-spacing:.13em; text-transform:uppercase; opacity:.7; }
     #qr-slot img { width:100%; height:100%; object-fit:contain; background:#fff; border-radius:4px; }
+
     @media(max-width:640px) {
       .section { padding-block:5rem; }
       .count-grid { gap:.25rem; }
@@ -112,6 +263,7 @@
      </div>
      <div id="nav-panel" class="nav-panel pb-3" hidden="">
       <a data-template-id="nav-ceremony" class="canva-link" href="#ceremonia" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">CEREMONIA</a>
+      <a data-template-id="nav-timeline" class="canva-link" href="#itinerario" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">ITINERARIO</a>
       <a data-template-id="nav-rsvp" class="canva-link" href="#rsvp" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">CONFIRMACIÓN</a>
       <a data-template-id="nav-gallery" class="canva-link" href="#galeria" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA</a>
       <a data-template-id="nav-end" class="canva-link" href="#cierre" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">CIERRE</a>
@@ -183,6 +335,123 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
       <p data-template-id="reception-place" id="t-receptionPlace" class="canva-text copy mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Centro de Eventos Vanité, Paseo Carmelitas.</p>
       <p data-template-id="reception-copy" id="t-receptionCopy" class="canva-text copy mt-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Después de nuestro sí, nos encantará encontrarnos para compartir una noche inolvidable.</p>
       <a data-template-id="reception-map-label" href="https://maps.app.goo.gl/eppQpEGQKhWD2z5W7?g_st=aw" target="_blank" rel="noopener noreferrer" class="canva-link editorial-link light-link mt-9" style="background: transparent; color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">CÓMO LLEGAR</a>
+     </div>
+    </section>
+
+    <!-- ============ ITINERARIO ============ -->
+    <section id="itinerario" data-template-id="timeline-section" class="canva-section section" style="background: rgb(248, 248, 246);">
+     <div class="inner reveal">
+      <div class="text-center" style="margin-bottom:1rem;">
+        <p data-template-id="timeline-kicker" id="t-timelineKicker" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">EL DÍA PASO A PASO</p>
+        <h2 data-template-id="timeline-title" id="t-timelineTitle" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px; margin-top:1rem;">Itinerario.</h2>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-time" id="t-tl1Time" data-template-id="tl1-time">17:00 H</div>
+          <div class="timeline-icon">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 58V28L32 12L52 28V58H12Z" stroke-linejoin="round"/>
+              <path d="M32 12V4"/>
+              <path d="M28 4H36"/>
+              <path d="M26 58V44H38V58"/>
+              <path d="M20 32H44"/>
+              <path d="M8 58H56"/>
+            </svg>
+          </div>
+          <div class="timeline-label" id="t-tl1Label" data-template-id="tl1-label">CEREMONIA</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time" id="t-tl2Time" data-template-id="tl2-time">19:30 H</div>
+          <div class="timeline-icon">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="40" r="12"/>
+              <circle cx="32" cy="40" r="8"/>
+              <path d="M24 22L32 10L40 22"/>
+              <path d="M26 22H38"/>
+            </svg>
+          </div>
+          <div class="timeline-label" id="t-tl2Label" data-template-id="tl2-label">SÍ, QUIERO</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time" id="t-tl3Time" data-template-id="tl3-time">20:00 H</div>
+          <div class="timeline-icon">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="20" width="52" height="32" rx="3"/>
+              <circle cx="32" cy="36" r="9"/>
+              <circle cx="32" cy="36" r="4"/>
+              <rect x="24" y="14" width="16" height="6" rx="1"/>
+              <circle cx="48" cy="26" r="1.5" fill="#111"/>
+            </svg>
+          </div>
+          <div class="timeline-label" id="t-tl3Label" data-template-id="tl3-label">FOTOS</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time" id="t-tl4Time" data-template-id="tl4-time">21:00 H</div>
+          <div class="timeline-icon">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 44C12 32 20 28 32 28C44 28 52 32 52 44H12Z" stroke-linejoin="round"/>
+              <path d="M32 28V22"/>
+              <path d="M32 22C30 20 29 17 30 15"/>
+              <path d="M34 22C36 20 37 17 36 15"/>
+              <path d="M22 22C22 18 24 16 26 15"/>
+              <path d="M42 22C42 18 40 16 38 15"/>
+              <line x1="8" y1="48" x2="56" y2="48"/>
+            </svg>
+          </div>
+          <div class="timeline-label" id="t-tl4Label" data-template-id="tl4-label">COMIDA</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time" id="t-tl5Time" data-template-id="tl5-time">21:30 H</div>
+          <div class="timeline-icon">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 14H24V24C24 28 22 30 19 30C16 30 14 28 14 24V14Z"/>
+              <path d="M19 30V42"/>
+              <path d="M13 42H25"/>
+              <path d="M40 14H50V24C50 28 48 30 45 30C42 30 40 28 40 24V14Z"/>
+              <path d="M45 30V42"/>
+              <path d="M39 42H51"/>
+              <path d="M24 18L40 18" stroke-dasharray="2 3"/>
+            </svg>
+          </div>
+          <div class="timeline-label" id="t-tl5Label" data-template-id="tl5-label">BRINDIS</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time" id="t-tl6Time" data-template-id="tl6-time">22:00 H</div>
+          <div class="timeline-icon">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 50V38H54V50C54 52 52 54 50 54H14C12 54 10 52 10 50Z" stroke-linejoin="round"/>
+              <path d="M10 38C10 34 14 32 20 32H44C50 32 54 34 54 38"/>
+              <circle cx="22" cy="44" r="2"/>
+              <circle cx="32" cy="46" r="2"/>
+              <circle cx="42" cy="44" r="2"/>
+              <path d="M32 32V26"/>
+              <path d="M32 26C30 24 30 22 32 20C34 22 34 24 32 26Z" fill="#111"/>
+            </svg>
+          </div>
+          <div class="timeline-label" id="t-tl6Label" data-template-id="tl6-label">TARTA</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time" id="t-tl7Time" data-template-id="tl7-time">22:30 H</div>
+          <div class="timeline-icon">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="48" r="5" fill="#111"/>
+              <circle cx="44" cy="42" r="5" fill="#111"/>
+              <path d="M25 48V22L49 16V42"/>
+              <path d="M25 28L49 22"/>
+            </svg>
+          </div>
+          <div class="timeline-label" id="t-tl7Label" data-template-id="tl7-label">BAILE Y FIESTA</div>
+        </div>
+      </div>
+
+      <p data-template-id="timeline-footer" id="t-timelineFooter" class="canva-text eyebrow text-center mt-16" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GRACIAS POR VENIR A CELEBRAR CON NOSOTROS</p>
      </div>
     </section>
 
@@ -351,7 +620,6 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
     const db = getDatabase(app);
     const $ = id => document.getElementById(id);
 
-    // Textos editables - ID del elemento → campo en Firebase
     const TEXT_FIELDS = {
       't-openingDate': 'openingDate',
       't-countdownKicker': 'countdownKicker',
@@ -376,6 +644,16 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
       't-receptionTime': 'receptionTime',
       't-receptionPlace': 'receptionPlace',
       't-receptionCopy': 'receptionCopy',
+      't-timelineKicker': 'timelineKicker',
+      't-timelineTitle': 'timelineTitle',
+      't-tl1Time': 'tl1Time', 't-tl1Label': 'tl1Label',
+      't-tl2Time': 'tl2Time', 't-tl2Label': 'tl2Label',
+      't-tl3Time': 'tl3Time', 't-tl3Label': 'tl3Label',
+      't-tl4Time': 'tl4Time', 't-tl4Label': 'tl4Label',
+      't-tl5Time': 'tl5Time', 't-tl5Label': 'tl5Label',
+      't-tl6Time': 'tl6Time', 't-tl6Label': 'tl6Label',
+      't-tl7Time': 'tl7Time', 't-tl7Label': 'tl7Label',
+      't-timelineFooter': 'timelineFooter',
       't-dressKicker': 'dressKicker',
       't-dressTitle': 'dressTitle',
       't-dressCopy': 'dressCopy',
@@ -442,12 +720,10 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
     onValue(ref(db, 'invitacion'), snapshot => {
       const d = snapshot.val() || {};
 
-      // Música
       if (d.musicUrl) {
         setMusic(d.musicUrl, d.musicTitle || DEFAULT_MUSIC.title, d.musicArtist || DEFAULT_MUSIC.artist);
       }
 
-      // Todos los textos editables
       for (const [elId, key] of Object.entries(TEXT_FIELDS)) {
         const el = document.getElementById(elId);
         if (el && d[key] !== undefined && d[key] !== null && d[key] !== '') {
@@ -455,21 +731,18 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
         }
       }
 
-      // Nombres (con manejo especial del &)
       if (d.names) {
         const namesEl = $('names-display');
         if (namesEl) namesEl.innerHTML = d.names.replace('&', '<span aria-hidden="true">&amp;</span>');
       }
       if (d.tagline && $('tagline-display')) $('tagline-display').textContent = d.tagline;
 
-      // Fotos
       if (d.coverPhoto) $('cover-photo').src = d.coverPhoto;
       if (d.storyPhoto) $('story-photo').src = d.storyPhoto;
       if (d.churchPhoto) $('church-photo').src = d.churchPhoto;
       ['g1','g2','g3','g4','g5'].forEach(k => { if (d[k] && $(k)) $(k).src = d[k]; });
       if (d.closingPhoto) $('closing-photo').src = d.closingPhoto;
 
-      // QR editable
       const qrSlot = $('qr-slot');
       if (qrSlot) {
         if (d.qrImage) {
@@ -480,7 +753,6 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
         }
       }
 
-      // Botón compartir fotos
       const shareBtn = $('share-photos');
       const pendingLabel = $('photos-pending');
       if (shareBtn) {
