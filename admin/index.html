@@ -876,6 +876,33 @@
         </div>
 
         <div class="text-section">
+          <h3><span class="badge-num">6.5</span> Itinerario</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="timelineKicker" type="text"></div>
+            <div><label>Título</label><input data-text="timelineTitle" type="text"></div>
+          </div>
+          <div class="text-grid" style="margin-top:1rem;">
+            <div><label>Hora 1 — Ceremonia</label><input data-text="tl1Time" type="text"></div>
+            <div><label>Etiqueta 1</label><input data-text="tl1Label" type="text"></div>
+            <div><label>Hora 2 — Sí, quiero</label><input data-text="tl2Time" type="text"></div>
+            <div><label>Etiqueta 2</label><input data-text="tl2Label" type="text"></div>
+            <div><label>Hora 3 — Fotos</label><input data-text="tl3Time" type="text"></div>
+            <div><label>Etiqueta 3</label><input data-text="tl3Label" type="text"></div>
+            <div><label>Hora 4 — Comida</label><input data-text="tl4Time" type="text"></div>
+            <div><label>Etiqueta 4</label><input data-text="tl4Label" type="text"></div>
+            <div><label>Hora 5 — Brindis</label><input data-text="tl5Time" type="text"></div>
+            <div><label>Etiqueta 5</label><input data-text="tl5Label" type="text"></div>
+            <div><label>Hora 6 — Tarta</label><input data-text="tl6Time" type="text"></div>
+            <div><label>Etiqueta 6</label><input data-text="tl6Label" type="text"></div>
+            <div><label>Hora 7 — Baile</label><input data-text="tl7Time" type="text"></div>
+            <div><label>Etiqueta 7</label><input data-text="tl7Label" type="text"></div>
+          </div>
+          <div class="text-grid" style="margin-top:1rem;">
+            <div style="grid-column:1/-1;"><label>Mensaje final</label><input data-text="timelineFooter" type="text"></div>
+          </div>
+        </div>
+
+        <div class="text-section">
           <h3><span class="badge-num">7</span> Dress code</h3>
           <div class="text-grid">
             <div><label>Kicker</label><input data-text="dressKicker" type="text"></div>
@@ -1293,7 +1320,6 @@ function cargarDatos() {
   onValue(ref(db, 'invitacion'), snap => {
     const d = snap.val() || {};
 
-    // Todos los textos
     document.querySelectorAll('[data-text]').forEach(el => {
       const key = el.dataset.text;
       if (d[key] !== undefined && d[key] !== null) {
@@ -1301,7 +1327,6 @@ function cargarDatos() {
       }
     });
 
-    // Música
     $('in-music-title').value = d.musicTitle || '';
     $('in-music-artist').value = d.musicArtist || '';
     $('current-music-url').textContent = d.musicUrl || '(ninguna)';
@@ -1314,11 +1339,9 @@ function cargarDatos() {
       $('music-preview-box').style.display = 'none';
     }
 
-    // QR link
     $('in-photos-url').value = d.photosUrl || '';
     $('current-photos-url').textContent = d.photosUrl || '(ninguna)';
 
-    // Fotos
     ['coverPhoto','storyPhoto','churchPhoto','g1','g2','g3','g4','g5','closingPhoto','qrImage'].forEach(k => {
       const prev = $('prev-' + k);
       if (prev) prev.src = d[k] || '';
