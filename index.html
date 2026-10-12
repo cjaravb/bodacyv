@@ -48,9 +48,42 @@
     .field { width:100%; padding:.85rem 0; border:0; border-bottom:1px solid #999; border-radius:0; background:transparent; color:inherit; outline:none; }
     .field:focus { border-bottom:2px solid #111; }
     label { display:block; margin-top:1.5rem; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; }
-    .bank { border:1px solid #777; padding:clamp(1.5rem,4vw,3rem); }
-    .bank-row { display:flex; flex-wrap:wrap; justify-content:space-between; gap:.4rem 1rem; padding:1rem 0; border-bottom:1px solid #999; }
-    .bank-row:last-child { border:0; }
+
+    /* ============ BANCO ============ */
+    .bank { border:1px solid #777; padding:clamp(1.2rem,4vw,3rem); }
+    .bank-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: .35rem 1.5rem;
+      padding: .85rem 0;
+      border-bottom: 1px solid #999;
+      font-size: clamp(.78rem, 1.05vw, .92rem);
+      line-height: 1.5;
+    }
+    .bank-row:last-child { border: 0; }
+    .bank-row .label {
+      font-size: clamp(.56rem, .72vw, .66rem);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      opacity: .55;
+      flex-shrink: 0;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+    }
+    .bank-row .value {
+      font-size: clamp(.78rem, 1.05vw, .92rem);
+      text-align: right;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-left: auto;
+      word-break: break-word;
+    }
+
     .gallery { display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(.7rem,2vw,1.5rem); align-items:start; }
     .gallery figure:nth-child(1) { grid-column:1/8; }
     .gallery figure:nth-child(2) { grid-column:9/13; margin-top:5rem; }
@@ -60,7 +93,7 @@
     .gallery .photo-frame { aspect-ratio:4/5; }
     .gallery figure:nth-child(3) .photo-frame { aspect-ratio:3/2; }
 
-    /* ============ SEPARADOR: LÍNEA · PUNTOS · CORAZÓN ============ */
+    /* ============ SEPARADOR ============ */
     .deco-separator {
       display: flex;
       justify-content: center;
@@ -224,13 +257,13 @@
       justify-content: center;
       gap: .35rem;
       margin-left: .7rem;
-      padding: .4rem .8rem;
+      padding: .38rem .75rem;
       background: transparent;
       color: currentColor;
       border: 1px solid currentColor;
       border-radius: 100px;
       font-family: 'Inter', sans-serif;
-      font-size: .6rem;
+      font-size: .58rem;
       font-weight: 500;
       letter-spacing: .14em;
       text-transform: uppercase;
@@ -251,12 +284,10 @@
       background: #f8f8f6;
       color: #111;
     }
-    .copy-btn:active {
-      transform: scale(.96);
-    }
+    .copy-btn:active { transform: scale(.96); }
     .copy-btn svg {
-      width: 12px;
-      height: 12px;
+      width: 11px;
+      height: 11px;
       stroke: currentColor;
       fill: none;
       stroke-width: 1.6;
@@ -271,42 +302,59 @@
       opacity: 1;
     }
 
-    /* ============ RESPONSIVE DEL BOTÓN COPIAR ============ */
+    /* ============ RESPONSIVE BANCO + BOTÓN ============ */
     @media(max-width:640px) {
-      /* La fila se mantiene en flex, con wrap, y el botón queda al lado del valor */
       .bank-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: .5rem;
-      }
-      .bank-row > .value {
         display: flex;
+        flex-direction: row;
         align-items: center;
-        justify-content: flex-start;
-        gap: .5rem;
-        width: 100%;
-        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: .6rem;
+        padding: .75rem 0;
       }
-      .copy-btn {
-        margin-left: 0;
-        padding: .45rem .75rem;
+      .bank-row .label {
         font-size: .58rem;
-        letter-spacing: .12em;
-        min-height: 32px;
-        opacity: 1;
+        opacity: .6;
+        flex-shrink: 0;
       }
-      .copy-btn svg {
-        width: 12px;
-        height: 12px;
+      .bank-row .value {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: .5rem;
+        text-align: right;
+        margin-left: 0;
+        font-size: .8rem;
+        word-break: break-word;
+      }
+      .bank-row .value .copy-btn {
+        margin-left: .4rem;
+        padding: .38rem .65rem;
+        font-size: .54rem;
+        opacity: 1;
+        flex-shrink: 0;
+      }
+      .bank-row .value .copy-btn svg {
+        width: 11px;
+        height: 11px;
       }
     }
 
+    /* En pantallas muy chicas, permitir que el contenido baje si no entra */
     @media(max-width:380px) {
-      /* En pantallas muy chicas, el botón pasa a la línea de abajo pero SIEMPRE visible */
-      .bank-row > .value {
-        flex-wrap: wrap;
+      .bank-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .35rem;
       }
-      .copy-btn {
+      .bank-row .value {
+        justify-content: flex-start;
+        text-align: left;
+        margin-left: 0;
+      }
+      .bank-row .value .copy-btn {
         margin-left: 0;
       }
     }
@@ -439,7 +487,6 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
      </div>
     </section>
 
-    <!-- ============ SEPARADOR ============ -->
     <div class="deco-separator" aria-hidden="true">
       <svg viewBox="0 0 600 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
         <line x1="10" y1="20" x2="220" y2="20" stroke="#111" stroke-width="1.2" stroke-linecap="round"/>
@@ -459,7 +506,6 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
       </svg>
     </div>
 
-    <!-- ============ ITINERARIO ============ -->
     <section id="itinerario" data-template-id="timeline-section" class="canva-section section" style="background: rgb(248, 248, 246);">
      <div class="inner reveal">
       <div class="text-center" style="margin-bottom:1rem;">
@@ -604,13 +650,13 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
       </div>
       <div data-template-id="bank-card" class="canva-card bank reveal self-center" style="background: rgb(17, 17, 17);">
        <p data-template-id="bank-heading" id="t-bankHeading" class="canva-text eyebrow mb-7" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">DATOS BANCARIOS</p>
-       <div class="bank-row"><span data-template-id="bank-holder-label" id="t-bankHolderLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Titular</span><span data-template-id="bank-holder" id="t-bankHolder" class="canva-text break-all" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">JARA SALDIVAR CINTHIA NOEMI</span></div>
-       <div class="bank-row"><span data-template-id="bank-name-label" id="t-bankNameLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Banco</span><span data-template-id="bank-name" id="t-bankName" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Basa</span></div>
-       <div class="bank-row"><span data-template-id="bank-document-label" id="t-bankDocumentLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">N.º Documento</span><span data-template-id="bank-document" id="t-bankDocument" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">4560498</span></div>
+       <div class="bank-row"><span class="label" data-template-id="bank-holder-label" id="t-bankHolderLabel" style="color: rgb(248, 248, 246);">Titular</span><span class="value" data-template-id="bank-holder" id="t-bankHolder" style="color: rgb(248, 248, 246);">JARA SALDIVAR CINTHIA NOEMI</span></div>
+       <div class="bank-row"><span class="label" data-template-id="bank-name-label" id="t-bankNameLabel" style="color: rgb(248, 248, 246);">Banco</span><span class="value" data-template-id="bank-name" id="t-bankName" style="color: rgb(248, 248, 246);">Basa</span></div>
+       <div class="bank-row"><span class="label" data-template-id="bank-document-label" id="t-bankDocumentLabel" style="color: rgb(248, 248, 246);">N.º Documento</span><span class="value" data-template-id="bank-document" id="t-bankDocument" style="color: rgb(248, 248, 246);">4560498</span></div>
        <div class="bank-row">
-         <span data-template-id="bank-account-label" id="t-bankAccountLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">N.º Cuenta</span>
-         <span class="value" style="display:flex; align-items:center;">
-           <span data-template-id="bank-account" id="t-bankAccount" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">155116331</span>
+         <span class="label" data-template-id="bank-account-label" id="t-bankAccountLabel" style="color: rgb(248, 248, 246);">N.º Cuenta</span>
+         <span class="value" data-template-id="bank-account" id="t-bankAccount" style="color: rgb(248, 248, 246);">
+           155116331
            <button class="copy-btn" data-copy="t-bankAccount" type="button" aria-label="Copiar número de cuenta">
              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
              Copiar
@@ -618,18 +664,14 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
          </span>
        </div>
        <div class="bank-row">
-         <span data-template-id="bank-alias-label" id="t-bankAliasLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Alias</span>
-         <span class="value" style="display:flex; align-items:center;">
-           <span data-template-id="bank-alias" id="t-bankAlias" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">4560498</span>
+         <span class="label" data-template-id="bank-alias-label" id="t-bankAliasLabel" style="color: rgb(248, 248, 246);">Alias</span>
+         <span class="value" data-template-id="bank-alias" id="t-bankAlias" style="color: rgb(248, 248, 246);">
+           4560498
            <button class="copy-btn" data-copy="t-bankAlias" type="button" aria-label="Copiar alias">
              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
              Copiar
            </button>
          </span>
-       </div>
-       <div class="bank-row">
-         <span data-template-id="bank-alias-type-label" id="t-bankAliasTypeLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Tipo de Alias</span>
-         <span data-template-id="bank-alias-type" id="t-bankAliasType" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">CI</span>
        </div>
       </div>
      </div>
@@ -753,11 +795,7 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
       appId: "1:940398343769:web:5f12f45489c78071466348"
     };
 
-    const DEFAULT_MUSIC = {
-      url: '',
-      title: 'Say You Won\'t Let Go',
-      artist: 'James Arthur'
-    };
+    const DEFAULT_MUSIC = { url: '', title: 'Say You Won\'t Let Go', artist: 'James Arthur' };
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
@@ -819,8 +857,6 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
       't-bankAccount': 'bankAccount',
       't-bankAliasLabel': 'bankAliasLabel',
       't-bankAlias': 'bankAlias',
-      't-bankAliasTypeLabel': 'bankAliasTypeLabel',
-      't-bankAliasType': 'bankAliasType',
       't-rsvpKicker': 'rsvpKicker',
       't-rsvpTitle': 'rsvpTitle',
       't-rsvpCopy': 'rsvpCopy',
@@ -864,14 +900,19 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
     onValue(ref(db, 'invitacion'), snapshot => {
       const d = snapshot.val() || {};
 
-      if (d.musicUrl) {
-        setMusic(d.musicUrl, d.musicTitle || DEFAULT_MUSIC.title, d.musicArtist || DEFAULT_MUSIC.artist);
-      }
+      if (d.musicUrl) setMusic(d.musicUrl, d.musicTitle || DEFAULT_MUSIC.title, d.musicArtist || DEFAULT_MUSIC.artist);
 
       for (const [elId, key] of Object.entries(TEXT_FIELDS)) {
         const el = document.getElementById(elId);
         if (el && d[key] !== undefined && d[key] !== null && d[key] !== '') {
-          el.textContent = d[key];
+          // Preservar el botón Copiar dentro de los campos de banco
+          if (elId === 't-bankAccount' || elId === 't-bankAlias') {
+            const copyBtn = el.querySelector('.copy-btn');
+            el.textContent = d[key];
+            if (copyBtn) el.appendChild(copyBtn);
+          } else {
+            el.textContent = d[key];
+          }
         }
       }
 
@@ -967,7 +1008,6 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
       const hours = Math.floor(total / 3600) % 24;
       const minutes = Math.floor(total / 60) % 60;
       const seconds = total % 60;
-
       $('days').textContent = String(days);
       $('hours').textContent = String(hours).padStart(2,'0');
       $('minutes').textContent = String(minutes).padStart(2,'0');
@@ -1017,17 +1057,14 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
       } catch { msg.textContent = 'Error al enviar. Intentá de nuevo.'; }
     });
 
-    // ============ COPIAR AL PORTAPAPELES ============
     document.querySelectorAll('.copy-btn').forEach(btn => {
       btn.addEventListener('click', async (e) => {
         e.preventDefault();
         const targetId = btn.dataset.copy;
         const target = document.getElementById(targetId);
         if (!target) return;
-
-        const text = target.textContent.trim();
+        const text = target.childNodes[0].textContent.trim();
         const originalHTML = btn.innerHTML;
-
         try {
           if (navigator.clipboard && window.isSecureContext) {
             await navigator.clipboard.writeText(text);
@@ -1041,7 +1078,6 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
             document.execCommand('copy');
             document.body.removeChild(ta);
           }
-
           btn.classList.add('copied');
           btn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> ¡Copiado!';
           setTimeout(() => {
