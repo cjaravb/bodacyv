@@ -32,6 +32,21 @@
     -webkit-font-smoothing:antialiased;
   }
 
+  /* ============ OCULTAR INPUT FILE NATIVO ============ */
+  input[type="file"] {
+    position:absolute !important;
+    width:1px !important;
+    height:1px !important;
+    padding:0 !important;
+    margin:-1px !important;
+    overflow:hidden !important;
+    clip:rect(0,0,0,0) !important;
+    white-space:nowrap !important;
+    border:0 !important;
+    opacity:0 !important;
+    pointer-events:none !important;
+  }
+
   /* ============ LOGIN ============ */
   .login-wrap {
     min-height:100vh;
@@ -96,13 +111,6 @@
   input:focus, textarea:focus, select:focus {
     border-color:#555;
     background:#222;
-  }
-  input[type="file"] {
-    width:100%;
-    padding:.6rem;
-    cursor:pointer;
-    color:var(--muted);
-    font-size:.82rem;
   }
 
   .btn {
@@ -239,7 +247,6 @@
     margin-bottom:1.5rem;
   }
 
-  /* Secciones de texto agrupadas */
   .text-section {
     background:var(--panel-2);
     border:1px solid var(--border);
@@ -279,29 +286,32 @@
   .text-grid textarea { resize:vertical; min-height:80px; font-family:inherit; }
 
   /* ============ PHOTO ITEMS ============ */
-  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:1rem; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:1.2rem; }
 
   .photo-item {
     background:var(--panel-2);
     border:1px solid var(--border);
-    border-radius:12px;
-    padding:1rem;
+    border-radius:14px;
+    padding:1.2rem;
     display:flex;
     flex-direction:column;
-    transition:border-color .2s;
+    transition:border-color .2s, transform .2s;
   }
   .photo-item:hover { border-color:var(--border-hi); }
-  .photo-item label {
+  .photo-item > label {
     margin-top:0;
-    margin-bottom:.6rem;
+    margin-bottom:.7rem;
     font-size:.66rem;
     color:#b0b0b0;
+    display:flex;
+    align-items:center;
+    gap:.4rem;
   }
   .photo-preview {
     width:100%;
     height:170px;
     object-fit:cover;
-    border-radius:8px;
+    border-radius:10px;
     margin-top:.7rem;
     background:#080808;
     filter:grayscale(1);
@@ -313,23 +323,96 @@
 
   /* ============ DROP ZONE ============ */
   .dropzone {
-    margin-top:.6rem;
-    padding:.9rem;
+    position:relative;
+    margin-top:.2rem;
+    padding:1.4rem 1rem;
     border:1.5px dashed var(--border-hi);
-    border-radius:8px;
+    border-radius:12px;
     text-align:center;
-    font-size:.72rem;
+    font-size:.75rem;
     color:var(--muted);
     cursor:pointer;
-    transition:all .2s;
-    background:rgba(255,255,255,.01);
+    transition:all .25s ease;
+    background:rgba(255,255,255,.015);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:.4rem;
+    min-height:110px;
+    user-select:none;
+  }
+  .dropzone svg {
+    width:28px; height:28px;
+    stroke:var(--muted);
+    transition:stroke .25s, transform .25s;
+    fill:none;
+    stroke-width:1.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
   }
   .dropzone:hover, .dropzone.dragover {
     border-color:#666;
-    background:rgba(255,255,255,.04);
+    background:rgba(255,255,255,.05);
     color:var(--text);
+    transform:translateY(-1px);
   }
-  .dropzone input[type="file"] { display:none; }
+  .dropzone:hover svg, .dropzone.dragover svg {
+    stroke:#ccc;
+    transform:translateY(-2px);
+  }
+  .dropzone.dragover {
+    border-color:var(--ok);
+    background:rgba(74,222,128,.06);
+  }
+  .dropzone.dragover svg { stroke:var(--ok); }
+  .dropzone .drop-text { font-weight:500; letter-spacing:.03em; }
+  .dropzone .drop-sub { font-size:.65rem; color:#555; }
+
+  /* ============ URL MANUAL ============ */
+  .url-manual {
+    margin-top:.8rem;
+    padding-top:.8rem;
+    border-top:1px dashed var(--border);
+  }
+  .url-manual > label {
+    margin-top:0;
+    font-size:.6rem;
+    color:#666;
+    margin-bottom:.4rem;
+    letter-spacing:.12em;
+  }
+  .url-manual .url-row {
+    display:flex;
+    gap:.4rem;
+    align-items:stretch;
+  }
+  .url-manual input {
+    flex:1;
+    padding:.55rem .7rem;
+    font-size:.75rem;
+    border-radius:8px;
+    background:#161616;
+    border-color:#252525;
+  }
+  .url-manual input:focus { border-color:#444; }
+  .url-manual .url-apply {
+    padding:.55rem .8rem;
+    background:var(--panel-3);
+    color:var(--text);
+    border:1px solid var(--border);
+    border-radius:8px;
+    font-size:.65rem;
+    font-weight:600;
+    letter-spacing:.05em;
+    cursor:pointer;
+    transition:all .2s;
+    white-space:nowrap;
+  }
+  .url-manual .url-apply:hover {
+    background:#2e2e2e;
+    border-color:var(--border-hi);
+  }
 
   /* ============ STATS ============ */
   .stats-grid {
@@ -431,7 +514,8 @@
   .tab-content { display:none; }
   .tab-content.active { display:block; animation:fadeIn .3s ease; }
 
-  @media (max-width:640px) {
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:768px) {
     .admin-container { padding:1rem; }
     .card { padding:1.25rem; }
     .admin-header .user span { display:none; }
@@ -439,6 +523,21 @@
     .stats-grid { grid-template-columns:1fr 1fr; }
     .chart-box { height:280px; }
     .text-grid { grid-template-columns:1fr; }
+    .grid { grid-template-columns:1fr; }
+    .photo-preview { height:200px; }
+  }
+
+  @media (max-width:480px) {
+    .login-card { padding:1.5rem; }
+    .card { padding:1rem; }
+    .stats-grid { grid-template-columns:1fr; }
+    .tab { padding:.6rem 1rem; font-size:.72rem; }
+    .btn { font-size:.7rem; padding:.75rem 1.2rem; }
+    .text-section { padding:1rem; }
+    .grid { gap:.8rem; }
+    .photo-item { padding:.9rem; }
+    .photo-preview { height:170px; }
+    .dropzone { min-height:90px; padding:1rem .8rem; }
   }
 </style>
 </head>
@@ -498,70 +597,177 @@
 
       <div class="card">
         <h2>Fotografías</h2>
-        <p class="desc">Arrastrá las fotos o tocá para subirlas. Se alojan en ImgBB.</p>
+        <p class="desc">Arrastrá las fotos o tocá para subirlas. Se alojan en ImgBB. Si falla, podés pegar una URL manualmente debajo de cada foto.</p>
         <div class="grid">
           <div class="photo-item">
             <label>Portada</label>
-            <div class="dropzone" data-drop="coverPhoto">Arrastrá o tocá para subir</div>
-            <input type="file" accept="image/*" data-photo="coverPhoto">
+            <div class="dropzone" data-drop="coverPhoto">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="coverPhoto" style="display:none">
             <img id="prev-coverPhoto" class="photo-preview">
             <div class="photo-actions"><button class="btn danger xs" data-delete-photo="coverPhoto">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="coverPhoto" placeholder="https://...">
+                <button class="url-apply" data-url-apply="coverPhoto">Aplicar</button>
+              </div>
+            </div>
           </div>
+
           <div class="photo-item">
             <label>Historia</label>
-            <div class="dropzone" data-drop="storyPhoto">Arrastrá o tocá para subir</div>
-            <input type="file" accept="image/*" data-photo="storyPhoto">
+            <div class="dropzone" data-drop="storyPhoto">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="storyPhoto" style="display:none">
             <img id="prev-storyPhoto" class="photo-preview">
             <div class="photo-actions"><button class="btn danger xs" data-delete-photo="storyPhoto">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="storyPhoto" placeholder="https://...">
+                <button class="url-apply" data-url-apply="storyPhoto">Aplicar</button>
+              </div>
+            </div>
           </div>
+
           <div class="photo-item">
             <label>Iglesia</label>
-            <div class="dropzone" data-drop="churchPhoto">Arrastrá o tocá para subir</div>
-            <input type="file" accept="image/*" data-photo="churchPhoto">
+            <div class="dropzone" data-drop="churchPhoto">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="churchPhoto" style="display:none">
             <img id="prev-churchPhoto" class="photo-preview">
             <div class="photo-actions"><button class="btn danger xs" data-delete-photo="churchPhoto">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="churchPhoto" placeholder="https://...">
+                <button class="url-apply" data-url-apply="churchPhoto">Aplicar</button>
+              </div>
+            </div>
           </div>
+
           <div class="photo-item">
             <label>Galería 1</label>
-            <div class="dropzone" data-drop="g1">Arrastrá o tocá para subir</div>
-            <input type="file" accept="image/*" data-photo="g1">
+            <div class="dropzone" data-drop="g1">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="g1" style="display:none">
             <img id="prev-g1" class="photo-preview">
             <div class="photo-actions"><button class="btn danger xs" data-delete-photo="g1">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="g1" placeholder="https://...">
+                <button class="url-apply" data-url-apply="g1">Aplicar</button>
+              </div>
+            </div>
           </div>
+
           <div class="photo-item">
             <label>Galería 2</label>
-            <div class="dropzone" data-drop="g2">Arrastrá o tocá para subir</div>
-            <input type="file" accept="image/*" data-photo="g2">
+            <div class="dropzone" data-drop="g2">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="g2" style="display:none">
             <img id="prev-g2" class="photo-preview">
             <div class="photo-actions"><button class="btn danger xs" data-delete-photo="g2">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="g2" placeholder="https://...">
+                <button class="url-apply" data-url-apply="g2">Aplicar</button>
+              </div>
+            </div>
           </div>
+
           <div class="photo-item">
             <label>Galería 3</label>
-            <div class="dropzone" data-drop="g3">Arrastrá o tocá para subir</div>
-            <input type="file" accept="image/*" data-photo="g3">
+            <div class="dropzone" data-drop="g3">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="g3" style="display:none">
             <img id="prev-g3" class="photo-preview">
             <div class="photo-actions"><button class="btn danger xs" data-delete-photo="g3">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="g3" placeholder="https://...">
+                <button class="url-apply" data-url-apply="g3">Aplicar</button>
+              </div>
+            </div>
           </div>
+
           <div class="photo-item">
             <label>Galería 4</label>
-            <div class="dropzone" data-drop="g4">Arrastrá o tocá para subir</div>
-            <input type="file" accept="image/*" data-photo="g4">
+            <div class="dropzone" data-drop="g4">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="g4" style="display:none">
             <img id="prev-g4" class="photo-preview">
             <div class="photo-actions"><button class="btn danger xs" data-delete-photo="g4">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="g4" placeholder="https://...">
+                <button class="url-apply" data-url-apply="g4">Aplicar</button>
+              </div>
+            </div>
           </div>
+
           <div class="photo-item">
             <label>Galería 5</label>
-            <div class="dropzone" data-drop="g5">Arrastrá o tocá para subir</div>
-            <input type="file" accept="image/*" data-photo="g5">
+            <div class="dropzone" data-drop="g5">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="g5" style="display:none">
             <img id="prev-g5" class="photo-preview">
             <div class="photo-actions"><button class="btn danger xs" data-delete-photo="g5">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="g5" placeholder="https://...">
+                <button class="url-apply" data-url-apply="g5">Aplicar</button>
+              </div>
+            </div>
           </div>
+
           <div class="photo-item">
             <label>Cierre</label>
-            <div class="dropzone" data-drop="closingPhoto">Arrastrá o tocá para subir</div>
-            <input type="file" accept="image/*" data-photo="closingPhoto">
+            <div class="dropzone" data-drop="closingPhoto">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="closingPhoto" style="display:none">
             <img id="prev-closingPhoto" class="photo-preview">
             <div class="photo-actions"><button class="btn danger xs" data-delete-photo="closingPhoto">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="closingPhoto" placeholder="https://...">
+                <button class="url-apply" data-url-apply="closingPhoto">Aplicar</button>
+              </div>
+            </div>
           </div>
         </div>
         <div id="fotos-msg" class="msg"></div>
@@ -573,10 +779,21 @@
         <div class="grid">
           <div class="photo-item">
             <label>Imagen del QR</label>
-            <div class="dropzone" data-drop="qrImage">Arrastrá o tocá para subir</div>
-            <input type="file" accept="image/*" data-photo="qrImage">
+            <div class="dropzone" data-drop="qrImage">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="qrImage" style="display:none">
             <img id="prev-qrImage" class="photo-preview no-filter">
             <div class="photo-actions"><button class="btn danger xs" data-delete-photo="qrImage">🗑 Borrar QR</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="qrImage" placeholder="https://...">
+                <button class="url-apply" data-url-apply="qrImage">Aplicar</button>
+              </div>
+            </div>
           </div>
           <div class="photo-item" style="grid-column: span 2;">
             <label>Link para compartir fotos</label>
@@ -598,7 +815,6 @@
         <h2>Editor de textos</h2>
         <p class="desc">Todo lo que se ve en la web. Se guarda automáticamente al tocar "Guardar".</p>
 
-        <!-- Portada -->
         <div class="text-section">
           <h3><span class="badge-num">1</span> Portada</h3>
           <div class="text-grid">
@@ -608,7 +824,6 @@
           </div>
         </div>
 
-        <!-- Cuenta regresiva -->
         <div class="text-section">
           <h3><span class="badge-num">2</span> Cuenta regresiva</h3>
           <div class="text-grid">
@@ -620,7 +835,6 @@
           </div>
         </div>
 
-        <!-- Versículo -->
         <div class="text-section">
           <h3><span class="badge-num">3</span> Mensaje bíblico</h3>
           <div class="text-grid">
@@ -631,7 +845,6 @@
           </div>
         </div>
 
-        <!-- Invitación -->
         <div class="text-section">
           <h3><span class="badge-num">4</span> Invitación</h3>
           <div class="text-grid">
@@ -640,7 +853,6 @@
           </div>
         </div>
 
-        <!-- Ceremonia religiosa -->
         <div class="text-section">
           <h3><span class="badge-num">5</span> Ceremonia religiosa</h3>
           <div class="text-grid">
@@ -652,7 +864,6 @@
           </div>
         </div>
 
-        <!-- Recepción -->
         <div class="text-section">
           <h3><span class="badge-num">6</span> Recepción</h3>
           <div class="text-grid">
@@ -664,7 +875,6 @@
           </div>
         </div>
 
-        <!-- Dress code -->
         <div class="text-section">
           <h3><span class="badge-num">7</span> Dress code</h3>
           <div class="text-grid">
@@ -675,7 +885,6 @@
           </div>
         </div>
 
-        <!-- Solo adultos -->
         <div class="text-section">
           <h3><span class="badge-num">8</span> Solo adultos</h3>
           <div class="text-grid">
@@ -685,7 +894,6 @@
           </div>
         </div>
 
-        <!-- Luna de miel -->
         <div class="text-section">
           <h3><span class="badge-num">9</span> Luna de miel</h3>
           <div class="text-grid">
@@ -708,7 +916,6 @@
           </div>
         </div>
 
-        <!-- RSVP -->
         <div class="text-section">
           <h3><span class="badge-num">10</span> RSVP</h3>
           <div class="text-grid">
@@ -722,7 +929,6 @@
           </div>
         </div>
 
-        <!-- Canciones -->
         <div class="text-section">
           <h3><span class="badge-num">11</span> Banda sonora</h3>
           <div class="text-grid">
@@ -736,7 +942,6 @@
           </div>
         </div>
 
-        <!-- Galería -->
         <div class="text-section">
           <h3><span class="badge-num">12</span> Galería</h3>
           <div class="text-grid">
@@ -751,7 +956,6 @@
           </div>
         </div>
 
-        <!-- Fotos invitados -->
         <div class="text-section">
           <h3><span class="badge-num">13</span> Fotos de invitados</h3>
           <div class="text-grid">
@@ -762,7 +966,6 @@
           </div>
         </div>
 
-        <!-- Cierre -->
         <div class="text-section">
           <h3><span class="badge-num">14</span> Cierre</h3>
           <div class="text-grid">
@@ -1039,6 +1242,29 @@ document.querySelectorAll('input[data-photo]').forEach(input => {
       showMsg(msgId, `✅ ${key} actualizado.`, 'ok');
       const prev = $('prev-' + key);
       if (prev) prev.src = imageUrl;
+    } catch (err) {
+      showMsg(msgId, '❌ Error: ' + err.message + '. Podés pegar una URL manualmente.', 'err');
+    }
+  });
+});
+
+// ============ URL MANUAL PARA FOTOS ============
+document.querySelectorAll('[data-url-apply]').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const key = btn.dataset.urlApply;
+    const input = document.querySelector(`[data-url-input="${key}"]`);
+    if (!input) return;
+    const url = input.value.trim();
+    if (!url) { showMsg('fotos-msg', 'Pegá una URL primero.', 'err'); return; }
+    if (!url.startsWith('http')) { showMsg('fotos-msg', 'La URL debe empezar con http.', 'err'); return; }
+
+    const msgId = key === 'qrImage' ? 'qr-msg' : 'fotos-msg';
+    try {
+      await update(ref(db, 'invitacion'), { [key]: url });
+      showMsg(msgId, `✅ ${key} actualizado desde URL.`, 'ok');
+      const prev = $('prev-' + key);
+      if (prev) prev.src = url;
+      input.value = '';
     } catch (err) {
       showMsg(msgId, '❌ Error: ' + err.message, 'err');
     }
