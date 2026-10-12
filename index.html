@@ -71,12 +71,7 @@
       width: 100%;
       background: var(--paper);
     }
-    .deco-separator svg {
-      display: block;
-      width: 100%;
-      height: auto;
-      overflow: visible;
-    }
+    .deco-separator svg { display: block; width: 100%; height: auto; overflow: visible; }
     @media(max-width:640px) {
       .deco-separator { max-width: 80%; padding: .8rem 0 1.4rem; }
     }
@@ -90,14 +85,7 @@
       margin-top: 3rem;
       padding-bottom: 2rem;
     }
-    .timeline-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
+    .timeline-item { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; z-index: 1; }
     .timeline-time {
       font-family: 'Inter', sans-serif;
       font-weight: 500;
@@ -119,13 +107,7 @@
       position: relative;
       z-index: 2;
     }
-    .timeline-icon svg {
-      width: 38px;
-      height: 38px;
-      stroke: var(--ink);
-      stroke-width: 1.4;
-      fill: none;
-    }
+    .timeline-icon svg { width: 38px; height: 38px; stroke: var(--ink); stroke-width: 1.4; fill: none; }
     .timeline-label {
       font-family: 'Inter', sans-serif;
       font-weight: 500;
@@ -223,7 +205,7 @@
       }
     }
 
-    /* ============ RECOMENDACIONES (mismo estilo que el resto) ============ */
+    /* ============ RECOMENDACIONES ============ */
     .recommendations p {
       font-family: 'Fraunces', serif;
       font-weight: 300;
@@ -235,30 +217,14 @@
       margin: 0 auto 1.2rem;
     }
 
-    .reveal { opacity:0; transform:translateY(18px); transition:opacity .8s,transform .8s; }
-    .reveal.visible { opacity:1; transform:none; }
-    .form-message { min-height:1.6em; margin-top:1rem; font-size:.86rem; }
-    .pending { font-size:.67rem; letter-spacing:.13em; text-transform:uppercase; opacity:.7; }
-    #qr-slot img { width:100%; height:100%; object-fit:contain; background:#fff; border-radius:4px; }
-
-    @media(max-width:640px) {
-      .section { padding-block:5rem; }
-      .count-grid { gap:.25rem; }
-      .count-grid .eyebrow { font-size:.52rem; letter-spacing:.08em; }
-      .gallery figure:nth-child(n) { grid-column:1/13; margin-top:0; }
-      .gallery figure:nth-child(even) { grid-column:3/13; }
-      .gallery figure:nth-child(odd) { grid-column:1/11; }
-      .bank-row { display:block; }
-      .music-dock { font-size:.72rem; }
-    }
     /* ============ BOTÓN COPIAR ============ */
     .copy-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: .4rem;
-      margin-left: .8rem;
-      padding: .35rem .75rem;
+      gap: .35rem;
+      margin-left: .7rem;
+      padding: .4rem .8rem;
       background: transparent;
       color: currentColor;
       border: 1px solid currentColor;
@@ -269,10 +235,12 @@
       letter-spacing: .14em;
       text-transform: uppercase;
       cursor: pointer;
-      transition: all .25s ease;
-      opacity: .7;
+      transition: background .25s ease, color .25s ease, border-color .25s ease;
+      opacity: .85;
       vertical-align: middle;
       white-space: nowrap;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
     }
     .copy-btn:hover {
       opacity: 1;
@@ -282,6 +250,9 @@
     .section-dark .copy-btn:hover {
       background: #f8f8f6;
       color: #111;
+    }
+    .copy-btn:active {
+      transform: scale(.96);
     }
     .copy-btn svg {
       width: 12px;
@@ -299,22 +270,61 @@
       color: #0a0a0a;
       opacity: 1;
     }
+
+    /* ============ RESPONSIVE DEL BOTÓN COPIAR ============ */
     @media(max-width:640px) {
-      .copy-btn {
-        display: inline-flex;
-        margin-left: 0;
-        margin-top: .5rem;
-      }
+      /* La fila se mantiene en flex, con wrap, y el botón queda al lado del valor */
       .bank-row {
         flex-direction: column;
         align-items: flex-start;
+        gap: .5rem;
       }
-      .bank-row .value {
+      .bank-row > .value {
         display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: .3rem;
+        align-items: center;
+        justify-content: flex-start;
+        gap: .5rem;
+        width: 100%;
+        flex-wrap: nowrap;
       }
+      .copy-btn {
+        margin-left: 0;
+        padding: .45rem .75rem;
+        font-size: .58rem;
+        letter-spacing: .12em;
+        min-height: 32px;
+        opacity: 1;
+      }
+      .copy-btn svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    @media(max-width:380px) {
+      /* En pantallas muy chicas, el botón pasa a la línea de abajo pero SIEMPRE visible */
+      .bank-row > .value {
+        flex-wrap: wrap;
+      }
+      .copy-btn {
+        margin-left: 0;
+      }
+    }
+
+    .reveal { opacity:0; transform:translateY(18px); transition:opacity .8s,transform .8s; }
+    .reveal.visible { opacity:1; transform:none; }
+    .form-message { min-height:1.6em; margin-top:1rem; font-size:.86rem; }
+    .pending { font-size:.67rem; letter-spacing:.13em; text-transform:uppercase; opacity:.7; }
+    #qr-slot img { width:100%; height:100%; object-fit:contain; background:#fff; border-radius:4px; }
+
+    @media(max-width:640px) {
+      .section { padding-block:5rem; }
+      .count-grid { gap:.25rem; }
+      .count-grid .eyebrow { font-size:.52rem; letter-spacing:.08em; }
+      .gallery figure:nth-child(n) { grid-column:1/13; margin-top:0; }
+      .gallery figure:nth-child(even) { grid-column:3/13; }
+      .gallery figure:nth-child(odd) { grid-column:1/11; }
+      .music-dock { font-size:.72rem; }
     }
     @media(prefers-reduced-motion:reduce) {
       html { scroll-behavior:auto; }
@@ -367,7 +377,7 @@
      <div class="inner reveal">
       <p data-template-id="countdown-kicker" id="t-countdownKicker" class="canva-text eyebrow mb-10" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">EL TIEMPO HASTA NUESTRO SÍ</p>
       <div id="count-grid" class="count-grid" role="timer" aria-label="Tiempo restante hasta la boda">
-       <div><div id="days" class="count-number">000</div><span data-template-id="days-label" id="t-daysLabel" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">DÍAS</span></div>
+       <div><div id="days" class="count-number">0</div><span data-template-id="days-label" id="t-daysLabel" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">DÍAS</span></div>
        <div><div id="hours" class="count-number">00</div><span data-template-id="hours-label" id="t-hoursLabel" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">HORAS</span></div>
        <div><div id="minutes" class="count-number">00</div><span data-template-id="minutes-label" id="t-minutesLabel" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">MINUTOS</span></div>
        <div><div id="seconds" class="count-number">00</div><span data-template-id="seconds-label" id="t-secondsLabel" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">SEGUNDOS</span></div>
@@ -429,7 +439,7 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
      </div>
     </section>
 
-    <!-- ============ SEPARADOR: LÍNEA · PUNTOS · CORAZÓN ============ -->
+    <!-- ============ SEPARADOR ============ -->
     <div class="deco-separator" aria-hidden="true">
       <svg viewBox="0 0 600 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
         <line x1="10" y1="20" x2="220" y2="20" stroke="#111" stroke-width="1.2" stroke-linecap="round"/>
@@ -576,13 +586,11 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
      </div>
     </section>
 
-    <!-- ============ RECOMENDACIONES (mismo estilo que el resto) ============ -->
     <section data-template-id="adults-section" class="canva-section section recommendations" style="background: rgb(248, 248, 246);">
      <div class="narrow reveal text-center">
-      <p data-template-id="adults-kicker" id="t-adultsKicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;"></p>
+      <p data-template-id="adults-kicker" id="t-adultsKicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">UNA NOTA CON CARIÑO</p>
       <h2 data-template-id="adults-title" id="t-adultsTitle" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px; margin-bottom:1.5rem;">Recomendaciones.</h2>
       <p id="t-adultsCopy" style="color: rgb(17, 17, 17);">Para que todos podamos celebrar y disfrutar la noche con total libertad, hemos preparado una recepción exclusivamente para adultos.</p>
-<br>
       <p id="t-adultsCopy2" style="color: rgb(17, 17, 17);">Agradecemos tu puntualidad, para que no te pierdas ningún momento especial.</p>
      </div>
     </section>
@@ -599,7 +607,16 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
        <div class="bank-row"><span data-template-id="bank-holder-label" id="t-bankHolderLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Titular</span><span data-template-id="bank-holder" id="t-bankHolder" class="canva-text break-all" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">JARA SALDIVAR CINTHIA NOEMI</span></div>
        <div class="bank-row"><span data-template-id="bank-name-label" id="t-bankNameLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Banco</span><span data-template-id="bank-name" id="t-bankName" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Basa</span></div>
        <div class="bank-row"><span data-template-id="bank-document-label" id="t-bankDocumentLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">N.º Documento</span><span data-template-id="bank-document" id="t-bankDocument" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">4560498</span></div>
-       <div class="bank-row"><span data-template-id="bank-account-label" id="t-bankAccountLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">N.º Cuenta</span><span data-template-id="bank-account" id="t-bankAccount" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">155116331</span></div>
+       <div class="bank-row">
+         <span data-template-id="bank-account-label" id="t-bankAccountLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">N.º Cuenta</span>
+         <span class="value" style="display:flex; align-items:center;">
+           <span data-template-id="bank-account" id="t-bankAccount" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">155116331</span>
+           <button class="copy-btn" data-copy="t-bankAccount" type="button" aria-label="Copiar número de cuenta">
+             <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+             Copiar
+           </button>
+         </span>
+       </div>
        <div class="bank-row">
          <span data-template-id="bank-alias-label" id="t-bankAliasLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Alias</span>
          <span class="value" style="display:flex; align-items:center;">
@@ -672,7 +689,7 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
        <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-02" id="g2" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=GALERIA+02" alt="GALERÍA 02"></div><figcaption id="t-galleryCap2" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 02</figcaption></figure>
        <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-03" id="g3" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/c8c8c8/555555.png?text=GALERIA+03" alt="GALERÍA 03"></div><figcaption id="t-galleryCap3" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 03</figcaption></figure>
        <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-04" id="g4" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/c8c8c8/555555.png?text=GALERIA+04" alt="GALERÍA 04"></div><figcaption id="t-galleryCap4" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 04</figcaption></figure>
-       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-05" id="g5" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=GALERIA+05" alt="GALERÍA 05"></div><figcaption id="t-galleryCap5" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 05</figcaption></figcaption></figure>
+       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-05" id="g5" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=GALERIA+05" alt="GALERÍA 05"></div><figcaption id="t-galleryCap5" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 05</figcaption></figure>
       </div>
      </div>
     </section>
@@ -946,10 +963,15 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
         return;
       }
       const total = Math.floor(remaining / 1000);
-      $('days').textContent = String(Math.floor(total / 86400)).padStart(3,'0');
-      $('hours').textContent = String(Math.floor(total / 3600) % 24).padStart(2,'0');
-      $('minutes').textContent = String(Math.floor(total / 60) % 60).padStart(2,'0');
-      $('seconds').textContent = String(total % 60).padStart(2,'0');
+      const days = Math.floor(total / 86400);
+      const hours = Math.floor(total / 3600) % 24;
+      const minutes = Math.floor(total / 60) % 60;
+      const seconds = total % 60;
+
+      $('days').textContent = String(days);
+      $('hours').textContent = String(hours).padStart(2,'0');
+      $('minutes').textContent = String(minutes).padStart(2,'0');
+      $('seconds').textContent = String(seconds).padStart(2,'0');
     }
     updateCountdown();
     setInterval(updateCountdown, 1000);
@@ -994,6 +1016,7 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
         form.reset();
       } catch { msg.textContent = 'Error al enviar. Intentá de nuevo.'; }
     });
+
     // ============ COPIAR AL PORTAPAPELES ============
     document.querySelectorAll('.copy-btn').forEach(btn => {
       btn.addEventListener('click', async (e) => {
@@ -1006,11 +1029,9 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
         const originalHTML = btn.innerHTML;
 
         try {
-          // Intento moderno
           if (navigator.clipboard && window.isSecureContext) {
             await navigator.clipboard.writeText(text);
           } else {
-            // Fallback para navegadores viejos o sin HTTPS
             const ta = document.createElement('textarea');
             ta.value = text;
             ta.style.position = 'fixed';
@@ -1021,7 +1042,6 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
             document.body.removeChild(ta);
           }
 
-          // Feedback visual
           btn.classList.add('copied');
           btn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> ¡Copiado!';
           setTimeout(() => {
