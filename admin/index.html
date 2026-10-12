@@ -1,944 +1,1581 @@
-<!doctype html>
-<html lang="es"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#111111">
-  <title>Cinthia &amp; Victor · 22.11.2026</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&amp;family=Libre+Franklin:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <style>
-    :root { --ink:#111; --paper:#f8f8f6; --line:#b8b8b8; }
-    html { scroll-behavior:smooth; }
-    body { margin:0; width:100%; color:var(--ink); background:var(--paper); font-family:'Libre Franklin',sans-serif; }
-    h1,h2,h3,.serif { font-family:'Fraunces',serif; font-weight:300; }
-    .dark { background:#111; color:#f8f8f6; }
-    .section { padding:clamp(5rem,12vw,10rem) clamp(1.3rem,6vw,6rem); }
-    .inner { max-width:1200px; margin-inline:auto; }
-    .narrow { max-width:710px; margin-inline:auto; }
-    .eyebrow { font-size:.69rem; letter-spacing:.27em; text-transform:uppercase; }
-    .display { font-size:clamp(2rem,5.5vw,4.5rem); line-height:.98; letter-spacing:-.045em; }
-    .section-title { font-size:clamp(2.7rem,6vw,6rem); line-height:1.02; letter-spacing:-.045em; }
-    .copy { font-size:clamp(1rem,1.5vw,1.16rem); line-height:1.85; }
-    .rule { border-top:1px solid currentColor; opacity:.35; }
-    .editorial-link,.editorial-button {
-      display:inline-flex; align-items:center; justify-content:center; min-height:49px;
-      padding:.85rem 1.45rem; border:1px solid currentColor; background:transparent;
-      color:inherit; font-size:.7rem; font-weight:600; letter-spacing:.16em;
-      text-transform:uppercase; text-decoration:none; cursor:pointer;
-      transition:background .25s,color .25s,transform .25s;
-    }
-    .editorial-link:hover,.editorial-button:hover:not(:disabled) { background:currentColor; transform:translateY(-2px); }
-    .light-link:hover { background:#111; color:#fff; }
-    .dark-link:hover { background:#f8f8f6; color:#111; }
-    .editorial-button:disabled { opacity:.5; cursor:not-allowed; }
-    :focus-visible { outline:2px solid currentColor; outline-offset:5px; }
-    .photo-frame { position:relative; overflow:hidden; background:#d3d3d3; }
-    .photo-frame img { display:block; width:100%; height:100%; object-fit:cover; filter:grayscale(1); }
-    .photo-frame::after { content:""; position:absolute; inset:10px; border:1px solid rgba(255,255,255,.42); pointer-events:none; }
-    .cover { min-height:calc(100 * min(var(--vh, 1vh), 1vh)); display:flex; flex-direction:column; justify-content:space-between; }
-    .cover-photo { height:clamp(290px,49vw,610px); }
-    .cover.is-closed { display:none; }
-    .site-content[hidden] { display:none; }
-    .site-header { position:sticky; top:0; z-index:20; background:#f8f8f6; border-bottom:1px solid #dedede; }
-    .nav-panel[hidden] { display:none; }
-    .nav-panel a { display:block; padding:.8rem 0; border-bottom:1px solid #ddd; text-decoration:none; }
-    .music-dock { position:fixed; z-index:30; right:1rem; bottom:1rem; background:#111; color:#fff; border:1px solid #888; padding:.7rem .9rem; max-width:min(300px,calc(100% - 2rem)); box-shadow:0 8px 28px #0003; display:flex; align-items:center; gap:.7rem; }
-    .music-dock button { background:none; border:1px solid #888; color:#fff; padding:.4rem .65rem; cursor:pointer; display:flex; align-items:center; justify-content:center; width:2.4rem; height:2.4rem; border-radius:50%; }
-    .count-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(.5rem,3vw,2rem); }
-    .count-number { font-family:'Fraunces',serif; font-size:clamp(2.5rem,8vw,7.5rem); line-height:1; }
-    .field { width:100%; padding:.85rem 0; border:0; border-bottom:1px solid #999; border-radius:0; background:transparent; color:inherit; outline:none; }
-    .field:focus { border-bottom:2px solid #111; }
-    label { display:block; margin-top:1.5rem; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; }
-    .bank { border:1px solid #777; padding:clamp(1.5rem,4vw,3rem); }
-    .bank-row { display:flex; flex-wrap:wrap; justify-content:space-between; gap:.4rem 1rem; padding:1rem 0; border-bottom:1px solid #999; }
-    .bank-row:last-child { border:0; }
-    .gallery { display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(.7rem,2vw,1.5rem); align-items:start; }
-    .gallery figure:nth-child(1) { grid-column:1/8; }
-    .gallery figure:nth-child(2) { grid-column:9/13; margin-top:5rem; }
-    .gallery figure:nth-child(3) { grid-column:3/11; }
-    .gallery figure:nth-child(4) { grid-column:1/6; }
-    .gallery figure:nth-child(5) { grid-column:7/13; margin-top:5rem; }
-    .gallery .photo-frame { aspect-ratio:4/5; }
-    .gallery figure:nth-child(3) .photo-frame { aspect-ratio:3/2; }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · Cinthia & Victor</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --bg:#0a0a0a;
+    --panel:#141414;
+    --panel-2:#1c1c1c;
+    --panel-3:#232323;
+    --border:#2a2a2a;
+    --border-hi:#3a3a3a;
+    --text:#f5f5f5;
+    --muted:#8a8a8a;
+    --ok:#4ade80;
+    --err:#f87171;
+    --warn:#facc15;
+    --accent:#f5f5f5;
+  }
+  body {
+    font-family:'Inter',-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
 
-    /* ============ SEPARADOR DECORATIVO ELEGANTE ============ */
-    .deco-separator {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: clamp(1rem, 2.5vw, 2rem) 1rem clamp(1.5rem, 3vw, 2.5rem);
-      margin: 0 auto;
-      max-width: 620px;
-      width: 100%;
-      background: var(--paper);
-    }
-    .deco-separator svg {
-      display: block;
-      width: 100%;
-      height: auto;
-      overflow: visible;
-    }
-    @media(max-width:640px) {
-      .deco-separator { max-width: 82%; padding: .8rem 0 1.4rem; }
-    }
+  /* ============ OCULTAR INPUT FILE NATIVO ============ */
+  input[type="file"] {
+    position:absolute !important;
+    width:1px !important;
+    height:1px !important;
+    padding:0 !important;
+    margin:-1px !important;
+    overflow:hidden !important;
+    clip:rect(0,0,0,0) !important;
+    white-space:nowrap !important;
+    border:0 !important;
+    opacity:0 !important;
+    pointer-events:none !important;
+  }
 
-    /* ============ ITINERARIO - HORIZONTAL EN PC ============ */
-    .timeline {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: .5rem;
-      position: relative;
-      margin-top: 3rem;
-      padding-bottom: 2rem;
-    }
-    .timeline-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-    .timeline-time {
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
-      font-size: .72rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--ink);
-      margin-bottom: 1rem;
-      white-space: nowrap;
-    }
-    .timeline-icon {
-      width: 42px;
-      height: 42px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--paper);
-      margin-bottom: 0;
-      position: relative;
-      z-index: 2;
-    }
-    .timeline-icon svg {
-      width: 38px;
-      height: 38px;
-      stroke: var(--ink);
-      stroke-width: 1.4;
-      fill: none;
-    }
-    .timeline-label {
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
-      font-size: .62rem;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--ink);
-      padding-top: .9rem;
-      margin-top: 1rem;
-      border-top: 0;
-      width: 100%;
-      line-height: 1.3;
-    }
+  /* ============ LOGIN ============ */
+  .login-wrap {
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:2rem;
+    background:radial-gradient(circle at 30% 20%, #1a1a1a 0%, #050505 70%);
+  }
+  .login-card {
+    background:linear-gradient(180deg, #181818 0%, #121212 100%);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:3rem;
+    max-width:420px;
+    width:100%;
+    box-shadow:0 40px 100px rgba(0,0,0,.6);
+  }
+  .login-card .brand {
+    font-family:'Fraunces',serif;
+    font-size:2.2rem;
+    letter-spacing:-.02em;
+    margin-bottom:.4rem;
+  }
+  .login-card .brand-sub {
+    font-size:.72rem;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:2.5rem;
+  }
+  .login-card h2 {
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:1.4rem;
+    margin-bottom:1.5rem;
+  }
 
-    /* Línea horizontal que une los íconos */
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 7%;
-      right: 7%;
-      top: calc(1rem + 1.2rem + 21px);
-      height: 1px;
-      background: rgba(17,17,17,.3);
-      z-index: 0;
-    }
+  /* ============ FORM ============ */
+  label {
+    display:block;
+    font-size:.66rem;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:.5rem;
+    margin-top:1.2rem;
+    font-weight:500;
+  }
+  input[type="text"], input[type="email"], input[type="password"], input[type="url"], textarea, select {
+    width:100%;
+    padding:.85rem 1rem;
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    color:var(--text);
+    font:inherit;
+    font-size:.9rem;
+    outline:none;
+    transition:border-color .2s, background .2s;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color:#555;
+    background:#222;
+  }
 
-    /* Tablet: 4 columnas */
-    @media(max-width:1000px) {
-      .timeline { grid-template-columns: repeat(4, 1fr); gap: 2rem 1rem; }
-      .timeline::before { display: none; }
-    }
+  .btn {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:.5rem;
+    padding:.85rem 1.5rem;
+    background:var(--accent);
+    color:#0a0a0a;
+    border:none;
+    border-radius:10px;
+    font:inherit;
+    font-size:.75rem;
+    font-weight:600;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:transform .2s, box-shadow .2s, background .2s;
+    margin-top:1.2rem;
+    width:100%;
+  }
+  .btn:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 10px 24px rgba(255,255,255,.1); }
+  .btn:disabled { opacity:.4; cursor:not-allowed; }
+  .btn.ghost { background:transparent; color:var(--text); border:1px solid var(--border); }
+  .btn.ghost:hover:not(:disabled) { background:var(--panel-2); border-color:var(--border-hi); }
+  .btn.danger { background:#b91c1c; color:#fff; }
+  .btn.danger:hover:not(:disabled) { background:#dc2626; }
+  .btn.small { padding:.55rem 1rem; font-size:.68rem; width:auto; margin-top:0; }
+  .btn.xs { padding:.35rem .7rem; font-size:.62rem; width:auto; margin-top:0; letter-spacing:.06em; }
 
-    /* ============ MÓVIL: VERTICAL (HORA | ICONO | TEXTO) ============ */
-    @media(max-width:640px) {
-      .timeline {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        position: relative;
-        margin-top: 2rem;
-        padding-left: 0;
-        padding-bottom: 0;
-        max-width: 360px;
-        margin-inline: auto;
-      }
-      .timeline::before {
-        display: block;
-        content: "";
-        position: absolute;
-        left: 50%;
-        top: 20px;
-        bottom: 20px;
-        width: 1px;
-        height: auto;
-        right: auto;
-        background: rgba(17,17,17,.25);
-        transform: translateX(-50%);
-      }
-      .timeline-item {
-        display: grid;
-        grid-template-columns: 1fr 42px 1fr;
-        align-items: center;
-        gap: .8rem;
-        padding: 1.2rem 0;
-        text-align: left;
-        position: relative;
-      }
-      .timeline-time {
-        grid-column: 1;
-        text-align: right;
-        margin-bottom: 0;
-        font-size: .75rem;
-        padding-right: .4rem;
-        white-space: nowrap;
-      }
-      .timeline-icon {
-        grid-column: 2;
-        width: 42px;
-        height: 42px;
-        margin-bottom: 0;
-        background: var(--paper);
-        border: 1px solid rgba(17,17,17,.25);
-        border-radius: 50%;
-        padding: 6px;
-        position: relative;
-        z-index: 2;
-        justify-self: center;
-      }
-      .timeline-icon svg { width: 26px; height: 26px; }
-      .timeline-label {
-        grid-column: 3;
-        width: auto;
-        text-align: left;
-        padding-top: 0;
-        border-top: 0;
-        margin-top: 0;
-        font-size: .68rem;
-        letter-spacing: .16em;
-        line-height: 1.4;
-        padding-left: .4rem;
-      }
-    }
+  .link {
+    display:inline-block;
+    margin-top:1.2rem;
+    color:var(--muted);
+    font-size:.78rem;
+    text-decoration:underline;
+    cursor:pointer;
+    background:none;
+    border:none;
+    font-family:inherit;
+  }
+  .link:hover { color:var(--text); }
 
-    /* Recomendaciones */
-    .recommendations p {
-      font-family: 'Times New Roman', Times, Georgia, serif;
-      font-style: italic;
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      line-height: 1.7;
-      max-width: 620px;
-      margin: 0 auto 1.5rem;
-    }
+  .msg {
+    padding:.85rem 1rem;
+    border-radius:10px;
+    margin-top:1rem;
+    font-size:.85rem;
+    display:none;
+  }
+  .msg.show { display:block; animation:fadeIn .3s ease; }
+  .msg.ok { background:rgba(74,222,128,.1); color:var(--ok); border:1px solid rgba(74,222,128,.25); }
+  .msg.err { background:rgba(248,113,113,.1); color:var(--err); border:1px solid rgba(248,113,113,.25); }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
 
-    .reveal { opacity:0; transform:translateY(18px); transition:opacity .8s,transform .8s; }
-    .reveal.visible { opacity:1; transform:none; }
-    .form-message { min-height:1.6em; margin-top:1rem; font-size:.86rem; }
-    .pending { font-size:.67rem; letter-spacing:.13em; text-transform:uppercase; opacity:.7; }
-    #qr-slot img { width:100%; height:100%; object-fit:contain; background:#fff; border-radius:4px; }
+  /* ============ LAYOUT ============ */
+  .admin-container { max-width:1280px; margin:0 auto; padding:2rem; }
+  .admin-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1.5rem 0;
+    margin-bottom:1.5rem;
+    border-bottom:1px solid var(--border);
+    gap:1rem;
+    flex-wrap:wrap;
+  }
+  .admin-header .brand {
+    font-family:'Fraunces',serif;
+    font-size:1.6rem;
+    letter-spacing:-.02em;
+  }
+  .admin-header .user {
+    display:flex;
+    align-items:center;
+    gap:1rem;
+    font-size:.85rem;
+    color:var(--muted);
+  }
+  .avatar {
+    width:38px; height:38px;
+    border-radius:50%;
+    background:linear-gradient(135deg, #444, #666);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:600; color:#fff; font-size:.85rem;
+  }
 
-    @media(max-width:640px) {
-      .section { padding-block:5rem; }
-      .count-grid { gap:.25rem; }
-      .count-grid .eyebrow { font-size:.52rem; letter-spacing:.08em; }
-      .gallery figure:nth-child(n) { grid-column:1/13; margin-top:0; }
-      .gallery figure:nth-child(even) { grid-column:3/13; }
-      .gallery figure:nth-child(odd) { grid-column:1/11; }
-      .bank-row { display:block; }
-      .music-dock { font-size:.72rem; }
-    }
-    @media(prefers-reduced-motion:reduce) {
-      html { scroll-behavior:auto; }
-      *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
-      .reveal { opacity:1; transform:none; }
-    }
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
-  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
- </head>
- <body data-template-id="__page-root" class="w-full" style="background: rgb(248, 248, 246);">
+  /* ============ TABS ============ */
+  .tabs {
+    display:flex;
+    gap:.4rem;
+    margin-bottom:2rem;
+    overflow-x:auto;
+    padding-bottom:.5rem;
+    scrollbar-width:thin;
+  }
+  .tabs::-webkit-scrollbar { height:6px; }
+  .tabs::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+  .tab {
+    padding:.7rem 1.2rem;
+    background:var(--panel);
+    color:var(--muted);
+    border:1px solid var(--border);
+    border-radius:100px;
+    cursor:pointer;
+    font:inherit;
+    font-size:.78rem;
+    font-weight:500;
+    letter-spacing:.05em;
+    white-space:nowrap;
+    transition:all .2s;
+  }
+  .tab:hover { color:var(--text); border-color:var(--border-hi); }
+  .tab.active { background:var(--text); color:#0a0a0a; border-color:var(--text); }
 
-  <header id="apertura" data-template-id="opening-section" class="canva-header cover dark section" style="background: rgb(17, 17, 17);">
-   <div class="inner w-full flex justify-between items-center gap-4">
-    <span data-template-id="opening-kicker" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;"></span>
-    <span data-template-id="opening-date" id="t-openingDate" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">22.11.2026</span>
-   </div>
-   <div class="inner w-full grid md:grid-cols-2 gap-9 md:gap-14 items-center py-12">
-    <div class="photo-frame cover-photo order-2 md:order-1">
-     <img data-template-id="cover-photo" id="cover-photo" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=FOTO+PORTADA" alt="FOTO PORTADA">
+  /* ============ CARDS ============ */
+  .card {
+    background:linear-gradient(180deg, #171717 0%, #121212 100%);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:2rem;
+    margin-bottom:1.5rem;
+  }
+  .card h2 {
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:1.35rem;
+    margin-bottom:.4rem;
+  }
+  .card .desc {
+    color:var(--muted);
+    font-size:.85rem;
+    margin-bottom:1.5rem;
+  }
+
+  .text-section {
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:1.5rem;
+    margin-bottom:1rem;
+  }
+  .text-section h3 {
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:1rem;
+    color:#d0d0d0;
+    margin-bottom:1rem;
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+  }
+  .text-section h3 .badge-num {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:24px; height:24px;
+    border-radius:50%;
+    background:var(--panel-3);
+    color:var(--muted);
+    font-size:.7rem;
+    font-family:'Inter',sans-serif;
+  }
+  .text-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1rem;
+  }
+  .text-grid.full { grid-template-columns:1fr; }
+  .text-grid label { margin-top:0; }
+  .text-grid input, .text-grid textarea { font-size:.85rem; padding:.7rem .9rem; }
+  .text-grid textarea { resize:vertical; min-height:80px; font-family:inherit; }
+
+  /* ============ PHOTO ITEMS ============ */
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:1.2rem; }
+
+  .photo-item {
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:1.2rem;
+    display:flex;
+    flex-direction:column;
+    transition:border-color .2s, transform .2s;
+  }
+  .photo-item:hover { border-color:var(--border-hi); }
+  .photo-item > label {
+    margin-top:0;
+    margin-bottom:.7rem;
+    font-size:.66rem;
+    color:#b0b0b0;
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+  }
+  .photo-preview {
+    width:100%;
+    height:170px;
+    object-fit:cover;
+    border-radius:10px;
+    margin-top:.7rem;
+    background:#080808;
+    filter:grayscale(1);
+    display:block;
+    border:1px solid var(--border);
+  }
+  .photo-preview.no-filter { filter:none; }
+  .photo-actions { display:flex; gap:.4rem; margin-top:.7rem; }
+
+  /* ============ DROP ZONE ============ */
+  .dropzone {
+    position:relative;
+    margin-top:.2rem;
+    padding:1.4rem 1rem;
+    border:1.5px dashed var(--border-hi);
+    border-radius:12px;
+    text-align:center;
+    font-size:.75rem;
+    color:var(--muted);
+    cursor:pointer;
+    transition:all .25s ease;
+    background:rgba(255,255,255,.015);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:.4rem;
+    min-height:110px;
+    user-select:none;
+  }
+  .dropzone svg {
+    width:28px; height:28px;
+    stroke:var(--muted);
+    transition:stroke .25s, transform .25s;
+    fill:none;
+    stroke-width:1.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .dropzone:hover, .dropzone.dragover {
+    border-color:#666;
+    background:rgba(255,255,255,.05);
+    color:var(--text);
+    transform:translateY(-1px);
+  }
+  .dropzone:hover svg, .dropzone.dragover svg {
+    stroke:#ccc;
+    transform:translateY(-2px);
+  }
+  .dropzone.dragover {
+    border-color:var(--ok);
+    background:rgba(74,222,128,.06);
+  }
+  .dropzone.dragover svg { stroke:var(--ok); }
+  .dropzone .drop-text { font-weight:500; letter-spacing:.03em; }
+  .dropzone .drop-sub { font-size:.65rem; color:#555; }
+
+  /* ============ URL MANUAL ============ */
+  .url-manual {
+    margin-top:.8rem;
+    padding-top:.8rem;
+    border-top:1px dashed var(--border);
+  }
+  .url-manual > label {
+    margin-top:0;
+    font-size:.6rem;
+    color:#666;
+    margin-bottom:.4rem;
+    letter-spacing:.12em;
+  }
+  .url-manual .url-row {
+    display:flex;
+    gap:.4rem;
+    align-items:stretch;
+  }
+  .url-manual input {
+    flex:1;
+    padding:.55rem .7rem;
+    font-size:.75rem;
+    border-radius:8px;
+    background:#161616;
+    border-color:#252525;
+  }
+  .url-manual input:focus { border-color:#444; }
+  .url-manual .url-apply {
+    padding:.55rem .8rem;
+    background:var(--panel-3);
+    color:var(--text);
+    border:1px solid var(--border);
+    border-radius:8px;
+    font-size:.65rem;
+    font-weight:600;
+    letter-spacing:.05em;
+    cursor:pointer;
+    transition:all .2s;
+    white-space:nowrap;
+  }
+  .url-manual .url-apply:hover {
+    background:#2e2e2e;
+    border-color:var(--border-hi);
+  }
+
+  /* ============ STATS ============ */
+  .stats-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    gap:1rem;
+    margin-bottom:1.5rem;
+  }
+  .stat-box {
+    background:linear-gradient(180deg, #1c1c1c 0%, #171717 100%);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:1.3rem;
+  }
+  .stat-box .stat-label {
+    font-size:.66rem;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:.5rem;
+  }
+  .stat-box .stat-value {
+    font-family:'Fraunces',serif;
+    font-size:2rem;
+    line-height:1;
+  }
+  .stat-box .stat-value.yes { color:var(--ok); }
+  .stat-box .stat-value.no { color:var(--err); }
+
+  /* ============ CHARTS ============ */
+  .charts-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+    gap:1.5rem;
+    margin-bottom:1.5rem;
+  }
+  .chart-box {
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:1.5rem;
+    height:320px;
+    position:relative;
+  }
+  .chart-box h3 {
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:1rem;
+    margin-bottom:1rem;
+  }
+  .chart-box .chart-container { position:relative; height:calc(100% - 2rem); }
+
+  /* ============ ENTRIES ============ */
+  .entry {
+    padding:1rem 1.2rem;
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    margin-bottom:.7rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:1rem;
+    flex-wrap:wrap;
+    transition:border-color .2s;
+  }
+  .entry:hover { border-color:var(--border-hi); }
+  .entry .entry-main { flex:1; min-width:0; }
+  .entry .entry-name { font-weight:600; font-size:.92rem; }
+  .entry .entry-detail { color:var(--muted); font-size:.8rem; margin-top:.2rem; }
+  .entry .entry-date { color:#666; font-size:.72rem; white-space:nowrap; }
+  .entry .entry-actions { display:flex; gap:.4rem; }
+  .entry .badge {
+    display:inline-block;
+    padding:.25rem .7rem;
+    border-radius:100px;
+    font-size:.7rem;
+    font-weight:500;
+    letter-spacing:.03em;
+  }
+  .badge.yes { background:rgba(74,222,128,.15); color:var(--ok); }
+  .badge.no { background:rgba(248,113,113,.15); color:var(--err); }
+
+  .empty { color:var(--muted); font-size:.85rem; text-align:center; padding:2rem 0; }
+  .export-bar { display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; margin-bottom:1.5rem; }
+
+  .music-preview {
+    margin-top:1.5rem;
+    padding:1rem;
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    gap:1rem;
+  }
+  .music-preview audio { flex:1; height:36px; }
+
+  .tab-content { display:none; }
+  .tab-content.active { display:block; animation:fadeIn .3s ease; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:768px) {
+    .admin-container { padding:1rem; }
+    .card { padding:1.25rem; }
+    .admin-header .user span { display:none; }
+    .login-card { padding:2rem; }
+    .stats-grid { grid-template-columns:1fr 1fr; }
+    .chart-box { height:280px; }
+    .text-grid { grid-template-columns:1fr; }
+    .grid { grid-template-columns:1fr; }
+    .photo-preview { height:200px; }
+  }
+
+  @media (max-width:480px) {
+    .login-card { padding:1.5rem; }
+    .card { padding:1rem; }
+    .stats-grid { grid-template-columns:1fr; }
+    .tab { padding:.6rem 1rem; font-size:.72rem; }
+    .btn { font-size:.7rem; padding:.75rem 1.2rem; }
+    .text-section { padding:1rem; }
+    .grid { gap:.8rem; }
+    .photo-item { padding:.9rem; }
+    .photo-preview { height:170px; }
+    .dropzone { min-height:90px; padding:1rem .8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<div id="login-view" class="login-wrap">
+  <div class="login-card">
+    <div class="brand">C & V</div>
+    <div class="brand-sub">Panel de administración</div>
+    <h2 id="login-title">Iniciar sesión</h2>
+
+    <label>Email</label>
+    <input id="login-email" type="email" placeholder="cjaravb@gmail.com">
+    <label>Contraseña</label>
+    <input id="login-password" type="password" placeholder="••••••••">
+    <button id="login-btn" class="btn">INGRESAR</button>
+    <button id="show-signup-btn" class="link" type="button">¿No tenés cuenta? Crear una</button>
+
+    <div id="signup-block" style="display:none;">
+      <label>Email autorizado</label>
+      <input id="signup-email" type="email" placeholder="cjaravb@gmail.com">
+      <label>Contraseña nueva</label>
+      <input id="signup-password" type="password" placeholder="Mínimo 6 caracteres">
+      <button id="signup-btn" class="btn">CREAR CUENTA</button>
+      <button id="show-login-btn" class="link" type="button">← Volver a iniciar sesión</button>
     </div>
-    <div class="order-1 md:order-2">
-     <h1 data-template-id="opening-names" id="names-display" class="canva-text display" style="color: rgb(248, 248, 246); font-weight: 300;">Cinthia <span aria-hidden="true">&amp;</span> Victor</h1>
-     <p data-template-id="opening-tagline" id="tagline-display" class="canva-text copy mt-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Nuestra historia favorita está por comenzar</p>
-     <button id="open-button" data-template-id="open-button" type="button" class="canva-button editorial-button dark-link mt-10" style="background: transparent; color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">ABRIR INVITACIÓN</button>
-    </div>
-   </div>
-   <div class="inner w-full rule"></div>
-  </header>
 
-  <div id="site-content" hidden="">
-   <header class="site-header px-5 md:px-12 py-3">
-    <nav class="inner" aria-label="Navegación de la invitación">
-     <div class="flex items-center justify-between gap-4">
-      <a href="#inicio" data-template-id="nav-brand" class="canva-link serif no-underline text-inherit" style="color: rgb(17, 17, 17);">Cinthia &amp; Victor</a>
-      <button id="menu-toggle" data-template-id="menu-button" type="button" class="canva-button eyebrow py-2" aria-expanded="false" aria-controls="nav-panel" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">MENÚ</button>
-     </div>
-     <div id="nav-panel" class="nav-panel pb-3" hidden="">
-      <a data-template-id="nav-ceremony" class="canva-link" href="#ceremonia" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">CEREMONIA</a>
-      <a data-template-id="nav-timeline" class="canva-link" href="#itinerario" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">ITINERARIO</a>
-      <a data-template-id="nav-rsvp" class="canva-link" href="#rsvp" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">CONFIRMACIÓN</a>
-      <a data-template-id="nav-gallery" class="canva-link" href="#galeria" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA</a>
-      <a data-template-id="nav-end" class="canva-link" href="#cierre" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">CIERRE</a>
-     </div>
-    </nav>
-   </header>
-
-   <main id="inicio">
-    <section data-template-id="countdown-section" class="canva-section section" style="background: rgb(248, 248, 246);">
-     <div class="inner reveal">
-      <p data-template-id="countdown-kicker" id="t-countdownKicker" class="canva-text eyebrow mb-10" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">EL TIEMPO HASTA NUESTRO SÍ</p>
-      <div id="count-grid" class="count-grid" role="timer" aria-label="Tiempo restante hasta la boda">
-       <div><div id="days" class="count-number">000</div><span data-template-id="days-label" id="t-daysLabel" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">DÍAS</span></div>
-       <div><div id="hours" class="count-number">00</div><span data-template-id="hours-label" id="t-hoursLabel" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">HORAS</span></div>
-       <div><div id="minutes" class="count-number">00</div><span data-template-id="minutes-label" id="t-minutesLabel" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">MINUTOS</span></div>
-       <div><div id="seconds" class="count-number">00</div><span data-template-id="seconds-label" id="t-secondsLabel" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">SEGUNDOS</span></div>
-      </div>
-      <p id="count-celebration" data-template-id="count-celebration" class="canva-text serif section-title mt-8 hidden" aria-live="polite" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Hoy comienza nuestro para siempre.</p>
-      <div class="rule mt-16"></div>
-     </div>
-    </section>
-
-    <section data-template-id="scripture-section" class="canva-section section dark" style="background: rgb(17, 17, 17);">
-     <div class="narrow reveal text-center">
-      <p data-template-id="scripture-kicker" id="t-scriptureKicker" class="canva-text eyebrow mb-12" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">EL AMOR QUE NOS GUÍA</p>
-      <h2 data-template-id="scripture-quote" id="t-scriptureQuote" class="canva-text section-title" style="color: rgb(248, 248, 246); font-weight: 300; font-style: normal; font-size: 24px;">"El amor es paciente, es bondadoso".</h2>
-      <p data-template-id="scripture-reference" id="t-scriptureReference" class="canva-text eyebrow mt-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">1 Corintios 13:4</p>
-      <div class="rule my-14"></div>
-      <p data-template-id="blessing-text" id="t-blessingText" class="canva-text copy" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Con gratitud por la bendición de Dios, queremos compartir con ustedes el comienzo de esta nueva etapa.</p>
-     </div>
-    </section>
-
-    <section data-template-id="invitation-section" class="canva-section section" style="background: rgb(248, 248, 246);">
-     <div class="inner grid md:grid-cols-2 gap-12 md:gap-24 items-center">
-      <div class="reveal">
-       <p data-template-id="invitation-kicker" id="t-invitationKicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;"></p>
-       <h2 data-template-id="invitation-title" id="t-invitationTitle" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px;">Un día para recordar.</h2>
-       <p data-template-id="invitation-body" id="t-invitationBody" class="canva-text copy mt-10 whitespace-pre-line" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Hoy queremos celebrar el comienzo de nuestro para siempre, rodeados de las personas que forman parte de nuestra historia.
-Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
-      </div>
-      <div class="photo-frame reveal" style="aspect-ratio:4/5">
-       <img data-template-id="story-photo" id="story-photo" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=FOTO+HISTORIA" alt="FOTO HISTORIA">
-      </div>
-     </div>
-    </section>
-
-    <section id="ceremonia" data-template-id="ceremony-section" class="canva-section section dark" style="background: rgb(17, 17, 17);">
-     <div class="inner grid md:grid-cols-2 gap-12 md:gap-20 items-center">
-      <div class="photo-frame reveal" style="aspect-ratio:4/5">
-       <img data-template-id="church-photo" id="church-photo" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=FOTO+IGLESIA" alt="FOTO IGLESIA">
-      </div>
-      <div class="reveal">
-       <p data-template-id="ceremony-kicker" id="t-ceremonyKicker" class="canva-text eyebrow mb-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">01 / CEREMONIA RELIGIOSA</p>
-       <h2 data-template-id="ceremony-title" id="t-ceremonyTitle" class="canva-text section-title" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 24px;">Nuestro sí.</h2>
-       <div class="rule my-9"></div>
-       <p data-template-id="ceremony-day" id="t-ceremonyDay" class="canva-text copy" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Domingo 22 de noviembre</p>
-       <p data-template-id="ceremony-time" id="t-ceremonyTime" class="canva-text serif mt-4" style="font-size: 16px; color: rgb(248, 248, 246); font-weight: 400; font-style: normal;">17:00 h.</p>
-       <p data-template-id="ceremony-place" id="t-ceremonyPlace" class="canva-text copy mt-5" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Parroquia Sagrado Corazón de Jesús - Vicaría Castrense, Asunción.</p>
-       <a id="church-map" data-template-id="church-map-label" href="https://maps.app.goo.gl/u8C23Hu3rsHyibMK8?g_st=aw" target="_blank" rel="noopener noreferrer" class="canva-link editorial-link dark-link mt-9" style="background: transparent; color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">COMO LLEGAR</a>
-      </div>
-     </div>
-    </section>
-
-    <section data-template-id="reception-section" class="canva-section section" style="background: rgb(248, 248, 246);">
-     <div class="narrow reveal">
-      <p data-template-id="reception-kicker" id="t-receptionKicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">02 / CEREMONIA CIVIL Y RECEPCIÓN</p>
-      <h2 data-template-id="reception-title" id="t-receptionTitle" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px;">Y después...</h2>
-      <p data-template-id="reception-time" id="t-receptionTime" class="canva-text serif mt-10" style="font-size: 16px; color: rgb(17, 17, 17); font-weight: 400; font-style: normal;">18:00 h.</p>
-      <p data-template-id="reception-place" id="t-receptionPlace" class="canva-text copy mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Centro de Eventos Vanité, Paseo Carmelitas.</p>
-      <p data-template-id="reception-copy" id="t-receptionCopy" class="canva-text copy mt-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Después de nuestro sí, nos encantará encontrarnos para compartir una noche inolvidable.</p>
-      <a data-template-id="reception-map-label" href="https://maps.app.goo.gl/eppQpEGQKhWD2z5W7?g_st=aw" target="_blank" rel="noopener noreferrer" class="canva-link editorial-link light-link mt-9" style="background: transparent; color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">CÓMO LLEGAR</a>
-     </div>
-    </section>
-
-    <!-- ============ SEPARADOR DECORATIVO ELEGANTE ============ -->
-    <div class="deco-separator" aria-hidden="true">
-      <svg viewBox="0 0 600 130" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-        <g fill="none" stroke="#111" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
-
-          <!-- Línea ondulada continua que atraviesa todo -->
-          <path d="M 10 90
-                   Q 80 78, 150 88
-                   Q 200 96, 250 86
-                   Q 280 80, 300 82"/>
-
-          <!-- Anillo trasero (más grande, más alto) -->
-          <ellipse cx="290" cy="65" rx="34" ry="46" transform="rotate(-25 290 65)"/>
-          <ellipse cx="290" cy="65" rx="25" ry="37" transform="rotate(-25 290 65)"/>
-
-          <!-- Anillo delantero (más chico, más bajo) -->
-          <ellipse cx="338" cy="78" rx="34" ry="46" transform="rotate(-25 338 78)"/>
-          <ellipse cx="338" cy="78" rx="25" ry="37" transform="rotate(-25 338 78)"/>
-
-          <!-- Línea que sale hacia el corazón -->
-          <path d="M 380 88
-                   Q 420 96, 450 88
-                   Q 460 86, 468 88"/>
-
-          <!-- Corazón fino one-line -->
-          <path d="M 470 88
-                   C 468 80, 476 72, 483 78
-                   C 487 74, 494 72, 499 78
-                   C 508 86, 506 96, 483 110
-                   C 470 100, 466 94, 470 88 Z"/>
-
-          <!-- Línea que sale hacia la derecha -->
-          <path d="M 508 88
-                   Q 540 96, 570 88
-                   Q 585 84, 590 92"/>
-        </g>
-      </svg>
-    </div>
-
-    <!-- ============ ITINERARIO ============ -->
-    <section id="itinerario" data-template-id="timeline-section" class="canva-section section" style="background: rgb(248, 248, 246);">
-     <div class="inner reveal">
-      <div class="text-center" style="margin-bottom:1rem;">
-        <p data-template-id="timeline-kicker" id="t-timelineKicker" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">EL DÍA PASO A PASO</p>
-        <h2 data-template-id="timeline-title" id="t-timelineTitle" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px; margin-top:1rem;">Itinerario.</h2>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-time" id="t-tl1Time" data-template-id="tl1-time">17:00 H</div>
-          <div class="timeline-icon">
-            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 58V28L32 12L52 28V58H12Z" stroke-linejoin="round"/>
-              <path d="M32 12V4"/>
-              <path d="M28 4H36"/>
-              <path d="M26 58V44H38V58"/>
-              <path d="M20 32H44"/>
-              <path d="M8 58H56"/>
-            </svg>
-          </div>
-          <div class="timeline-label" id="t-tl1Label" data-template-id="tl1-label">CEREMONIA</div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-time" id="t-tl2Time" data-template-id="tl2-time">19:30 H</div>
-          <div class="timeline-icon">
-            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="32" cy="40" r="12"/>
-              <circle cx="32" cy="40" r="8"/>
-              <path d="M24 22L32 10L40 22"/>
-              <path d="M26 22H38"/>
-            </svg>
-          </div>
-          <div class="timeline-label" id="t-tl2Label" data-template-id="tl2-label">SÍ, QUIERO</div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-time" id="t-tl3Time" data-template-id="tl3-time">20:00 H</div>
-          <div class="timeline-icon">
-            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <rect x="6" y="20" width="52" height="32" rx="3"/>
-              <circle cx="32" cy="36" r="9"/>
-              <circle cx="32" cy="36" r="4"/>
-              <rect x="24" y="14" width="16" height="6" rx="1"/>
-              <circle cx="48" cy="26" r="1.5" fill="#111"/>
-            </svg>
-          </div>
-          <div class="timeline-label" id="t-tl3Label" data-template-id="tl3-label">FOTOS</div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-time" id="t-tl4Time" data-template-id="tl4-time">21:00 H</div>
-          <div class="timeline-icon">
-            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 44C12 32 20 28 32 28C44 28 52 32 52 44H12Z" stroke-linejoin="round"/>
-              <path d="M32 28V22"/>
-              <path d="M32 22C30 20 29 17 30 15"/>
-              <path d="M34 22C36 20 37 17 36 15"/>
-              <path d="M22 22C22 18 24 16 26 15"/>
-              <path d="M42 22C42 18 40 16 38 15"/>
-              <line x1="8" y1="48" x2="56" y2="48"/>
-            </svg>
-          </div>
-          <div class="timeline-label" id="t-tl4Label" data-template-id="tl4-label">COMIDA</div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-time" id="t-tl5Time" data-template-id="tl5-time">21:30 H</div>
-          <div class="timeline-icon">
-            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14 14H24V24C24 28 22 30 19 30C16 30 14 28 14 24V14Z"/>
-              <path d="M19 30V42"/>
-              <path d="M13 42H25"/>
-              <path d="M40 14H50V24C50 28 48 30 45 30C42 30 40 28 40 24V14Z"/>
-              <path d="M45 30V42"/>
-              <path d="M39 42H51"/>
-              <path d="M24 18L40 18" stroke-dasharray="2 3"/>
-            </svg>
-          </div>
-          <div class="timeline-label" id="t-tl5Label" data-template-id="tl5-label">BRINDIS</div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-time" id="t-tl6Time" data-template-id="tl6-time">22:00 H</div>
-          <div class="timeline-icon">
-            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 50V38H54V50C54 52 52 54 50 54H14C12 54 10 52 10 50Z" stroke-linejoin="round"/>
-              <path d="M10 38C10 34 14 32 20 32H44C50 32 54 34 54 38"/>
-              <circle cx="22" cy="44" r="2"/>
-              <circle cx="32" cy="46" r="2"/>
-              <circle cx="42" cy="44" r="2"/>
-              <path d="M32 32V26"/>
-              <path d="M32 26C30 24 30 22 32 20C34 22 34 24 32 26Z" fill="#111"/>
-            </svg>
-          </div>
-          <div class="timeline-label" id="t-tl6Label" data-template-id="tl6-label">TARTA</div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-time" id="t-tl7Time" data-template-id="tl7-time">22:30 H</div>
-          <div class="timeline-icon">
-            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="20" cy="48" r="5" fill="#111"/>
-              <circle cx="44" cy="42" r="5" fill="#111"/>
-              <path d="M25 48V22L49 16V42"/>
-              <path d="M25 28L49 22"/>
-            </svg>
-          </div>
-          <div class="timeline-label" id="t-tl7Label" data-template-id="tl7-label">BAILE Y FIESTA</div>
-        </div>
-      </div>
-
-      <p data-template-id="timeline-footer" id="t-timelineFooter" class="canva-text eyebrow text-center mt-16" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GRACIAS POR VENIR A CELEBRAR CON NOSOTROS</p>
-     </div>
-    </section>
-
-    <section data-template-id="dress-section" class="canva-section section dark" style="background: rgb(17, 17, 17);">
-     <div class="inner reveal border-y border-white/40 py-14 md:py-24">
-      <p data-template-id="dress-kicker" id="t-dressKicker" class="canva-text eyebrow mb-9" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">UNA NOCHE EN NEGRO</p>
-      <h2 data-template-id="dress-title" id="t-dressTitle" class="canva-text section-title max-w-4xl" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 24px;">THE BLACK DRESS CODE.</h2>
-      <p data-template-id="dress-copy" id="t-dressCopy" class="canva-text copy mt-9 max-w-xl" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Una noche especial merece un look inolvidable. Te invitamos a acompañarnos con vestimenta formal, completamente negra. Una celebración donde la elegancia será parte de cada detalle.</p>
-      <p data-template-id="dress-highlight" id="t-dressHighlight" class="canva-text eyebrow mt-9" style="color: rgb(248, 248, 246); font-weight: 700; font-style: normal; font-size: 16px;">FORMAL · TOTAL BLACK</p>
-      <a data-template-id="dress-link" href="https://pin.it/2F9btGXp9" target="_blank" rel="noopener noreferrer" class="canva-link editorial-link dark-link mt-11" style="background: transparent; color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">VER INSPIRACIÓN</a>
-     </div>
-    </section>
-
-    <!-- ============ RECOMENDACIONES ============ -->
-    <section data-template-id="adults-section" class="canva-section section recommendations" style="background: rgb(248, 248, 246);">
-     <div class="narrow reveal text-center">
-      <p data-template-id="adults-kicker" id="t-adultsKicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">UNA NOTA CON CARIÑO</p>
-      <h2 data-template-id="adults-title" id="t-adultsTitle" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px; margin-bottom:1.5rem;">Recomendaciones.</h2>
-      <p id="t-adultsCopy" style="color: rgb(17, 17, 17); font-weight: 400; font-style: italic;">Para que todos podamos celebrar y disfrutar la noche con total libertad, hemos preparado una recepción exclusivamente para adultos.</p>
-      <p id="t-adultsCopy2" style="color: rgb(17, 17, 17); font-weight: 400; font-style: italic;">Agradecemos tu puntualidad, para que no te pierdas ningún momento especial.</p>
-     </div>
-    </section>
-
-    <section data-template-id="honeymoon-section" class="canva-section section dark" style="background: rgb(17, 17, 17);">
-     <div class="inner grid lg:grid-cols-2 gap-14 lg:gap-24">
-      <div class="reveal">
-       <p data-template-id="honeymoon-kicker" id="t-honeymoonKicker" class="canva-text eyebrow mb-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">DESPUÉS DEL SÍ</p>
-       <h2 data-template-id="honeymoon-title" id="t-honeymoonTitle" class="canva-text section-title" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 24px;">NUESTRA PRÓXIMA AVENTURA.</h2>
-       <p data-template-id="honeymoon-copy" id="t-honeymoonCopy" class="canva-text copy mt-9" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Nuestra próxima aventura comienza después del sí, quiero. Si deseás formar parte de este nuevo capítulo, podés ayudarnos a sumar kilómetros, descubrir nuevos lugares y crear recuerdos que nos acompañarán toda la vida.</p>
-      </div>
-      <div data-template-id="bank-card" class="canva-card bank reveal self-center" style="background: rgb(17, 17, 17);">
-       <p data-template-id="bank-heading" id="t-bankHeading" class="canva-text eyebrow mb-7" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">DATOS BANCARIOS</p>
-       <div class="bank-row"><span data-template-id="bank-holder-label" id="t-bankHolderLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Titular</span><span data-template-id="bank-holder" id="t-bankHolder" class="canva-text break-all" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">JARA SALDIVAR CINTHIA NOEMI</span></div>
-       <div class="bank-row"><span data-template-id="bank-name-label" id="t-bankNameLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Banco</span><span data-template-id="bank-name" id="t-bankName" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Basa</span></div>
-       <div class="bank-row"><span data-template-id="bank-document-label" id="t-bankDocumentLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">N.º Documento</span><span data-template-id="bank-document" id="t-bankDocument" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">4560498</span></div>
-       <div class="bank-row"><span data-template-id="bank-account-label" id="t-bankAccountLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">N.º Cuenta</span><span data-template-id="bank-account" id="t-bankAccount" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">155116331</span></div>
-       <div class="bank-row"><span data-template-id="bank-alias-label" id="t-bankAliasLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Alias</span><span data-template-id="bank-alias" id="t-bankAlias" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">4560498</span></div>
-       <div class="bank-row"><span data-template-id="bank-alias-type-label" id="t-bankAliasTypeLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Tipo de Alias</span><span data-template-id="bank-alias-type" id="t-bankAliasType" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">CI</span></div>
-      </div>
-     </div>
-    </section>
-
-    <section id="rsvp" data-template-id="rsvp-section" class="canva-section section" style="background: rgb(248, 248, 246);">
-     <div class="narrow reveal">
-      <p data-template-id="rsvp-kicker" id="t-rsvpKicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">TU RESPUESTA</p>
-      <h2 data-template-id="rsvp-title" id="t-rsvpTitle" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px;">¿NOS ACOMPAÑÁS?</h2>
-      <p data-template-id="rsvp-copy" id="t-rsvpCopy" class="canva-text copy mt-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Tu presencia hará que este día sea todavía más especial. Te pedimos que confirmes tu asistencia.</p>
-      <form id="rsvp-form" class="mt-10" novalidate="">
-       <label data-template-id="rsvp-name-label" id="t-rsvpNameLabel" class="canva-text" for="rsvp-name" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Nombre</label>
-       <input id="rsvp-name" class="field" name="nombre" autocomplete="given-name" required="" maxlength="80">
-       <label data-template-id="rsvp-last-label" id="t-rsvpLastLabel" class="canva-text" for="rsvp-last" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Apellido</label>
-       <input id="rsvp-last" class="field" name="apellido" autocomplete="family-name" required="" maxlength="80">
-       <label data-template-id="rsvp-attendance-label" id="t-rsvpAttendanceLabel" class="canva-text" for="rsvp-attendance" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Confirmación de asistencia</label>
-       <select id="rsvp-attendance" class="field" name="asistencia" required="">
-        <option value="">Seleccioná una opción</option>
-        <option value="Sí, asistiré">Sí, asistiré</option>
-        <option value="No podré asistir">No podré asistir</option>
-       </select>
-       <button data-template-id="rsvp-submit" id="t-rsvpSubmit" class="canva-button editorial-button light-link mt-9" type="submit" style="background: transparent; color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">CONFIRMAR ASISTENCIA</button>
-       <p id="rsvp-message" class="form-message" role="status" aria-live="polite"></p>
-      </form>
-     </div>
-    </section>
-
-    <section data-template-id="songs-section" class="canva-section section dark" style="background: rgb(17, 17, 17);">
-     <div class="narrow reveal">
-      <p data-template-id="songs-kicker" id="t-songsKicker" class="canva-text eyebrow mb-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">LA BANDA SONORA</p>
-      <h2 data-template-id="songs-title" id="t-songsTitle" class="canva-text section-title" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 24px;">Música para la fiesta.</h2>
-      <p data-template-id="songs-copy" id="t-songsCopy" class="canva-text copy mt-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Hay canciones que nos recuerdan momentos y personas. ¿Cuál no puede faltar en nuestra celebración?</p>
-      <form id="song-form" class="mt-10" novalidate="">
-       <label data-template-id="song-name-label" id="t-songNameLabel" class="canva-text" for="song-name" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Nombre del invitado</label>
-       <input id="song-name" class="field" name="nombre" autocomplete="name" required="" maxlength="100">
-       <label data-template-id="song-title-label" id="t-songTitleLabel" class="canva-text" for="song-title" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Canción</label>
-       <input id="song-title" class="field" name="cancion" required="" maxlength="150">
-       <label data-template-id="song-artist-label" id="t-songArtistLabel" class="canva-text" for="song-artist" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Artista</label>
-       <input id="song-artist" class="field" name="artista" required="" maxlength="150">
-       <button data-template-id="song-submit" id="t-songSubmit" class="canva-button editorial-button dark-link mt-9" type="submit" style="background: transparent; color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">ENVIAR CANCIÓN</button>
-       <p id="song-message" class="form-message" role="status" aria-live="polite"></p>
-      </form>
-     </div>
-    </section>
-
-    <section id="galeria" data-template-id="gallery-section" class="canva-section section" style="background: rgb(248, 248, 246);">
-     <div class="inner">
-      <div class="reveal flex flex-wrap justify-between items-end gap-6 mb-14">
-       <div>
-        <p data-template-id="gallery-kicker" id="t-galleryKicker" class="canva-text eyebrow mb-6" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">FRAGMENTOS DE NUESTRA HISTORIA</p>
-        <h2 data-template-id="gallery-title" id="t-galleryTitle" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px;">Nosotros.</h2>
-       </div>
-       <span data-template-id="gallery-count" id="t-galleryCount" class="canva-text eyebrow" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">01 — 05</span>
-      </div>
-      <div class="gallery">
-       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-01" id="g1" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/c8c8c8/555555.png?text=GALERIA+01" alt="GALERÍA 01"></div><figcaption id="t-galleryCap1" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 01</figcaption></figure>
-       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-02" id="g2" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=GALERIA+02" alt="GALERÍA 02"></div><figcaption id="t-galleryCap2" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 02</figcaption></figure>
-       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-03" id="g3" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/c8c8c8/555555.png?text=GALERIA+03" alt="GALERÍA 03"></div><figcaption id="t-galleryCap3" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 03</figcaption></figure>
-       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-04" id="g4" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/c8c8c8/555555.png?text=GALERIA+04" alt="GALERÍA 04"></div><figcaption id="t-galleryCap4" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 04</figcaption></figure>
-       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-05" id="g5" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=GALERIA+05" alt="GALERÍA 05"></div><figcaption id="t-galleryCap5" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 05</figcaption></figure>
-      </div>
-     </div>
-    </section>
-
-    <section data-template-id="guest-photos-section" class="canva-section section dark" style="background: rgb(17, 17, 17);">
-     <div class="inner grid md:grid-cols-[1fr_auto] gap-16 items-center">
-      <div class="reveal max-w-2xl">
-       <p data-template-id="guest-photos-kicker" id="t-guestPhotosKicker" class="canva-text eyebrow mb-8" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">A TRAVÉS DE TUS OJOS</p>
-       <h2 data-template-id="guest-photos-title" id="t-guestPhotosTitle" class="canva-text section-title" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 24px;">LOS RECUERDOS QUE CONSTRUIMOS JUNTOS.</h2>
-       <p data-template-id="guest-photos-copy" id="t-guestPhotosCopy" class="canva-text copy mt-9" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Queremos recordar nuestra boda también a través de tus ojos. Compartí las fotos y videos que captures durante la celebración. Cada sonrisa, abrazo y momento espontáneo será parte de nuestra historia.</p>
-       <button id="share-photos" data-template-id="share-photos-button" class="canva-button editorial-button dark-link mt-9" type="button" disabled="" style="background: transparent; color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">COMPARTIR MIS FOTOS</button>
-       <p id="photos-pending" data-template-id="photos-pending-label" class="canva-text pending mt-4" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;"></p>
-      </div>
-      <div id="qr-slot" data-template-id="qr-placeholder" class="canva-panel border border-white/60 w-48 h-48 flex items-center justify-center p-5 text-center" style="background: rgb(17, 17, 17);">
-       <span id="qr-placeholder-text" data-template-id="qr-pending-label" class="canva-text pending" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">CÓDIGO QR PENDIENTE</span>
-      </div>
-     </div>
-    </section>
-   </main>
-
-   <footer id="cierre" data-template-id="closing-section" class="canva-footer section" style="background: rgb(248, 248, 246);">
-    <div class="inner">
-     <div class="photo-frame reveal" style="height:clamp(320px,55vw,700px)">
-      <img data-template-id="closing-photo" id="closing-photo" class="canva-image" loading="lazy" src="https://placehold.co/1400x800/d3d3d3/555555.png?text=FOTO+CIERRE" alt="FOTO CIERRE">
-     </div>
-     <div class="narrow text-center reveal pt-20">
-      <p data-template-id="closing-message" id="t-closingMessage" class="canva-text serif section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Gracias por ser parte de nuestra historia. El mejor capítulo está por comenzar.</p>
-      <p data-template-id="closing-signature" id="t-closingSignature" class="canva-text copy mt-12" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">Con amor, Cinthia &amp; Victor ♡</p>
-      <p data-template-id="closing-date" id="t-closingDate" class="canva-text eyebrow mt-7" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">22.11.2026</p>
-     </div>
-    </div>
-   </footer>
-
-   <aside id="music-dock" class="music-dock" aria-label="Música de la invitación" style="display:none;">
-    <div class="flex items-center gap-3">
-     <button id="music-toggle" type="button" aria-label="Reproducir música" aria-pressed="false">
-       <svg id="icon-play" viewBox="0 0 24 24" style="width:1rem;height:1rem;fill:#fff;"><path d="M8 5v14l11-7z"/></svg>
-       <svg id="icon-pause" viewBox="0 0 24 24" style="width:1rem;height:1rem;fill:#fff;display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-     </button>
-     <div>
-      <p data-template-id="music-title" id="music-title" class="canva-text" style="font-size: 16px; color: rgb(255, 255, 255); font-weight: 400; font-style: normal;">Nuestra canción</p>
-      <p data-template-id="music-artist" id="music-artist" class="canva-text opacity-70" style="font-size: 16px; color: rgb(255, 255, 255); font-weight: 400; font-style: normal;">—</p>
-      <p id="music-status" class="text-xs mt-1" role="status" aria-live="polite">Pulsá Play para escuchar</p>
-     </div>
-    </div>
-    <audio id="bg-audio" loop="" preload="auto"></audio>
-   </aside>
+    <div id="login-msg" class="msg"></div>
   </div>
+</div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
-    import { getDatabase, ref, onValue, push } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-database.js";
+<!-- ============ PANEL ============ -->
+<div id="admin-view" style="display:none;">
+  <div class="admin-container">
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyBXl5uzDa89nfjDHPUwGYfmOVZOLH6OaRI",
-      authDomain: "bodacyv22112026.firebaseapp.com",
-      databaseURL: "https://bodacyv22112026-default-rtdb.firebaseio.com",
-      projectId: "bodacyv22112026",
-      storageBucket: "bodacyv22112026.firebasestorage.app",
-      messagingSenderId: "940398343769",
-      appId: "1:940398343769:web:5f12f45489c78071466348"
-    };
+    <div class="admin-header">
+      <div class="brand">C & V · Admin</div>
+      <div class="user">
+        <div class="avatar" id="avatar">C</div>
+        <span id="user-email">cjaravb@gmail.com</span>
+        <button id="logout-btn" class="btn danger small">Salir</button>
+      </div>
+    </div>
 
-    const DEFAULT_MUSIC = {
-      url: '',
-      title: 'Say You Won\'t Let Go',
-      artist: 'James Arthur'
-    };
+    <div class="tabs">
+      <button class="tab active" data-tab="fotos">📷 Fotos</button>
+      <button class="tab" data-tab="textos">📝 Textos</button>
+      <button class="tab" data-tab="musica">🎵 Música</button>
+      <button class="tab" data-tab="rsvp">💌 RSVP</button>
+      <button class="tab" data-tab="canciones">🎶 Canciones</button>
+      <button class="tab" data-tab="stats">📊 Estadísticas</button>
+    </div>
 
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const $ = id => document.getElementById(id);
+    <!-- ============ TAB FOTOS ============ -->
+    <div id="tab-fotos" class="tab-content active">
 
-    const TEXT_FIELDS = {
-      't-openingDate': 'openingDate',
-      't-countdownKicker': 'countdownKicker',
-      't-daysLabel': 'daysLabel',
-      't-hoursLabel': 'hoursLabel',
-      't-minutesLabel': 'minutesLabel',
-      't-secondsLabel': 'secondsLabel',
-      't-scriptureKicker': 'scriptureKicker',
-      't-scriptureQuote': 'scriptureQuote',
-      't-scriptureReference': 'scriptureReference',
-      't-blessingText': 'blessingText',
-      't-invitationKicker': 'invitationKicker',
-      't-invitationTitle': 'invitationTitle',
-      't-invitationBody': 'invitationBody',
-      't-ceremonyKicker': 'ceremonyKicker',
-      't-ceremonyTitle': 'ceremonyTitle',
-      't-ceremonyDay': 'ceremonyDay',
-      't-ceremonyTime': 'ceremonyTime',
-      't-ceremonyPlace': 'ceremonyPlace',
-      't-receptionKicker': 'receptionKicker',
-      't-receptionTitle': 'receptionTitle',
-      't-receptionTime': 'receptionTime',
-      't-receptionPlace': 'receptionPlace',
-      't-receptionCopy': 'receptionCopy',
-      't-timelineKicker': 'timelineKicker',
-      't-timelineTitle': 'timelineTitle',
-      't-tl1Time': 'tl1Time', 't-tl1Label': 'tl1Label',
-      't-tl2Time': 'tl2Time', 't-tl2Label': 'tl2Label',
-      't-tl3Time': 'tl3Time', 't-tl3Label': 'tl3Label',
-      't-tl4Time': 'tl4Time', 't-tl4Label': 'tl4Label',
-      't-tl5Time': 'tl5Time', 't-tl5Label': 'tl5Label',
-      't-tl6Time': 'tl6Time', 't-tl6Label': 'tl6Label',
-      't-tl7Time': 'tl7Time', 't-tl7Label': 'tl7Label',
-      't-timelineFooter': 'timelineFooter',
-      't-dressKicker': 'dressKicker',
-      't-dressTitle': 'dressTitle',
-      't-dressCopy': 'dressCopy',
-      't-dressHighlight': 'dressHighlight',
-      't-adultsKicker': 'adultsKicker',
-      't-adultsTitle': 'adultsTitle',
-      't-adultsCopy': 'adultsCopy',
-      't-adultsCopy2': 'adultsCopy2',
-      't-honeymoonKicker': 'honeymoonKicker',
-      't-honeymoonTitle': 'honeymoonTitle',
-      't-honeymoonCopy': 'honeymoonCopy',
-      't-bankHeading': 'bankHeading',
-      't-bankHolderLabel': 'bankHolderLabel',
-      't-bankHolder': 'bankHolder',
-      't-bankNameLabel': 'bankNameLabel',
-      't-bankName': 'bankName',
-      't-bankDocumentLabel': 'bankDocumentLabel',
-      't-bankDocument': 'bankDocument',
-      't-bankAccountLabel': 'bankAccountLabel',
-      't-bankAccount': 'bankAccount',
-      't-bankAliasLabel': 'bankAliasLabel',
-      't-bankAlias': 'bankAlias',
-      't-bankAliasTypeLabel': 'bankAliasTypeLabel',
-      't-bankAliasType': 'bankAliasType',
-      't-rsvpKicker': 'rsvpKicker',
-      't-rsvpTitle': 'rsvpTitle',
-      't-rsvpCopy': 'rsvpCopy',
-      't-rsvpNameLabel': 'rsvpNameLabel',
-      't-rsvpLastLabel': 'rsvpLastLabel',
-      't-rsvpAttendanceLabel': 'rsvpAttendanceLabel',
-      't-rsvpSubmit': 'rsvpSubmit',
-      't-songsKicker': 'songsKicker',
-      't-songsTitle': 'songsTitle',
-      't-songsCopy': 'songsCopy',
-      't-songNameLabel': 'songNameLabel',
-      't-songTitleLabel': 'songTitleLabel',
-      't-songArtistLabel': 'songArtistLabel',
-      't-songSubmit': 'songSubmit',
-      't-galleryKicker': 'galleryKicker',
-      't-galleryTitle': 'galleryTitle',
-      't-galleryCount': 'galleryCount',
-      't-galleryCap1': 'galleryCap1',
-      't-galleryCap2': 'galleryCap2',
-      't-galleryCap3': 'galleryCap3',
-      't-galleryCap4': 'galleryCap4',
-      't-galleryCap5': 'galleryCap5',
-      't-guestPhotosKicker': 'guestPhotosKicker',
-      't-guestPhotosTitle': 'guestPhotosTitle',
-      't-guestPhotosCopy': 'guestPhotosCopy',
-      't-closingMessage': 'closingMessage',
-      't-closingSignature': 'closingSignature',
-      't-closingDate': 'closingDate',
-      'qr-placeholder-text': 'qrPlaceholderText'
-    };
+      <div class="card">
+        <h2>Fotografías</h2>
+        <p class="desc">Arrastrá las fotos o tocá para subirlas. Se alojan en ImgBB. Si falla, podés pegar una URL manualmente debajo de cada foto.</p>
+        <div class="grid">
+          <div class="photo-item">
+            <label>Portada</label>
+            <div class="dropzone" data-drop="coverPhoto">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="coverPhoto" style="display:none">
+            <img id="prev-coverPhoto" class="photo-preview">
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="coverPhoto">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="coverPhoto" placeholder="https://...">
+                <button class="url-apply" data-url-apply="coverPhoto">Aplicar</button>
+              </div>
+            </div>
+          </div>
 
-    function setMusic(url, title, artist) {
-      const audio = $('bg-audio');
-      if (!audio || !url) return;
-      if (audio.src !== url) { audio.src = url; audio.load(); }
-      if (title) $('music-title').textContent = title;
-      if (artist) $('music-artist').textContent = artist;
-      $('music-dock').style.display = 'flex';
+          <div class="photo-item">
+            <label>Historia</label>
+            <div class="dropzone" data-drop="storyPhoto">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="storyPhoto" style="display:none">
+            <img id="prev-storyPhoto" class="photo-preview">
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="storyPhoto">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="storyPhoto" placeholder="https://...">
+                <button class="url-apply" data-url-apply="storyPhoto">Aplicar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="photo-item">
+            <label>Iglesia</label>
+            <div class="dropzone" data-drop="churchPhoto">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="churchPhoto" style="display:none">
+            <img id="prev-churchPhoto" class="photo-preview">
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="churchPhoto">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="churchPhoto" placeholder="https://...">
+                <button class="url-apply" data-url-apply="churchPhoto">Aplicar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="photo-item">
+            <label>Galería 1</label>
+            <div class="dropzone" data-drop="g1">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="g1" style="display:none">
+            <img id="prev-g1" class="photo-preview">
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="g1">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="g1" placeholder="https://...">
+                <button class="url-apply" data-url-apply="g1">Aplicar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="photo-item">
+            <label>Galería 2</label>
+            <div class="dropzone" data-drop="g2">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="g2" style="display:none">
+            <img id="prev-g2" class="photo-preview">
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="g2">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="g2" placeholder="https://...">
+                <button class="url-apply" data-url-apply="g2">Aplicar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="photo-item">
+            <label>Galería 3</label>
+            <div class="dropzone" data-drop="g3">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="g3" style="display:none">
+            <img id="prev-g3" class="photo-preview">
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="g3">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="g3" placeholder="https://...">
+                <button class="url-apply" data-url-apply="g3">Aplicar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="photo-item">
+            <label>Galería 4</label>
+            <div class="dropzone" data-drop="g4">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="g4" style="display:none">
+            <img id="prev-g4" class="photo-preview">
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="g4">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="g4" placeholder="https://...">
+                <button class="url-apply" data-url-apply="g4">Aplicar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="photo-item">
+            <label>Galería 5</label>
+            <div class="dropzone" data-drop="g5">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="g5" style="display:none">
+            <img id="prev-g5" class="photo-preview">
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="g5">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="g5" placeholder="https://...">
+                <button class="url-apply" data-url-apply="g5">Aplicar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="photo-item">
+            <label>Cierre</label>
+            <div class="dropzone" data-drop="closingPhoto">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="closingPhoto" style="display:none">
+            <img id="prev-closingPhoto" class="photo-preview">
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="closingPhoto">🗑 Borrar</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="closingPhoto" placeholder="https://...">
+                <button class="url-apply" data-url-apply="closingPhoto">Aplicar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="fotos-msg" class="msg"></div>
+      </div>
+
+      <div class="card">
+        <h2>QR de compartir fotos</h2>
+        <p class="desc">Subí la imagen del código QR (Dots Memories u otro servicio) y pegá el link.</p>
+        <div class="grid">
+          <div class="photo-item">
+            <label>Imagen del QR</label>
+            <div class="dropzone" data-drop="qrImage">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="drop-text">Arrastrá o tocá para subir</span>
+              <span class="drop-sub">JPG, PNG · máx 10MB</span>
+            </div>
+            <input type="file" accept="image/*" data-photo="qrImage" style="display:none">
+            <img id="prev-qrImage" class="photo-preview no-filter">
+            <div class="photo-actions"><button class="btn danger xs" data-delete-photo="qrImage">🗑 Borrar QR</button></div>
+            <div class="url-manual">
+              <label>O pegá una URL</label>
+              <div class="url-row">
+                <input type="url" data-url-input="qrImage" placeholder="https://...">
+                <button class="url-apply" data-url-apply="qrImage">Aplicar</button>
+              </div>
+            </div>
+          </div>
+          <div class="photo-item" style="grid-column: span 2;">
+            <label>Link para compartir fotos</label>
+            <input id="in-photos-url" type="url" placeholder="https://dotsmemories.com/...">
+            <button id="save-photos-url-btn" class="btn">GUARDAR LINK</button>
+            <button id="clear-photos-url-btn" class="btn danger">🗑 QUITAR LINK</button>
+            <p style="margin-top:.8rem;font-size:.75rem;color:var(--muted);">
+              URL actual: <span id="current-photos-url" style="word-break:break-all;color:#ccc;">(ninguna)</span>
+            </p>
+          </div>
+        </div>
+        <div id="qr-msg" class="msg"></div>
+      </div>
+    </div>
+
+    <!-- ============ TAB TEXTOS ============ -->
+    <div id="tab-textos" class="tab-content">
+      <div class="card">
+        <h2>Editor de textos</h2>
+        <p class="desc">Todo lo que se ve en la web. Se guarda automáticamente al tocar "Guardar".</p>
+
+        <div class="text-section">
+          <h3><span class="badge-num">1</span> Portada</h3>
+          <div class="text-grid">
+            <div><label>Nombres</label><input data-text="names" type="text"></div>
+            <div><label>Fecha</label><input data-text="openingDate" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Frase de portada</label><input data-text="tagline" type="text"></div>
+          </div>
+        </div>
+
+        <div class="text-section">
+          <h3><span class="badge-num">2</span> Cuenta regresiva</h3>
+          <div class="text-grid">
+            <div class="full" style="grid-column:1/-1;"><label>Título</label><input data-text="countdownKicker" type="text"></div>
+            <div><label>Etiqueta días</label><input data-text="daysLabel" type="text"></div>
+            <div><label>Etiqueta horas</label><input data-text="hoursLabel" type="text"></div>
+            <div><label>Etiqueta minutos</label><input data-text="minutesLabel" type="text"></div>
+            <div><label>Etiqueta segundos</label><input data-text="secondsLabel" type="text"></div>
+          </div>
+        </div>
+
+        <div class="text-section">
+          <h3><span class="badge-num">3</span> Mensaje bíblico</h3>
+          <div class="text-grid">
+            <div class="full" style="grid-column:1/-1;"><label>Kicker</label><input data-text="scriptureKicker" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Cita</label><input data-text="scriptureQuote" type="text"></div>
+            <div><label>Referencia</label><input data-text="scriptureReference" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Mensaje adicional</label><textarea data-text="blessingText"></textarea></div>
+          </div>
+        </div>
+
+        <div class="text-section">
+          <h3><span class="badge-num">4</span> Invitación</h3>
+          <div class="text-grid">
+            <div class="full" style="grid-column:1/-1;"><label>Título</label><input data-text="invitationTitle" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Cuerpo del mensaje</label><textarea data-text="invitationBody"></textarea></div>
+          </div>
+        </div>
+
+        <div class="text-section">
+          <h3><span class="badge-num">5</span> Ceremonia religiosa</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="ceremonyKicker" type="text"></div>
+            <div><label>Título</label><input data-text="ceremonyTitle" type="text"></div>
+            <div><label>Día</label><input data-text="ceremonyDay" type="text"></div>
+            <div><label>Hora</label><input data-text="ceremonyTime" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Lugar</label><input data-text="ceremonyPlace" type="text"></div>
+          </div>
+        </div>
+
+        <div class="text-section">
+          <h3><span class="badge-num">6</span> Recepción</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="receptionKicker" type="text"></div>
+            <div><label>Título</label><input data-text="receptionTitle" type="text"></div>
+            <div><label>Hora</label><input data-text="receptionTime" type="text"></div>
+            <div><label>Lugar</label><input data-text="receptionPlace" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Texto adicional</label><textarea data-text="receptionCopy"></textarea></div>
+          </div>
+        </div>
+
+        <div class="text-section">
+          <h3><span class="badge-num">6.5</span> Itinerario</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="timelineKicker" type="text"></div>
+            <div><label>Título</label><input data-text="timelineTitle" type="text"></div>
+          </div>
+          <div class="text-grid" style="margin-top:1rem;">
+            <div><label>Hora 1 — Ceremonia</label><input data-text="tl1Time" type="text"></div>
+            <div><label>Etiqueta 1</label><input data-text="tl1Label" type="text"></div>
+            <div><label>Hora 2 — Sí, quiero</label><input data-text="tl2Time" type="text"></div>
+            <div><label>Etiqueta 2</label><input data-text="tl2Label" type="text"></div>
+            <div><label>Hora 3 — Fotos</label><input data-text="tl3Time" type="text"></div>
+            <div><label>Etiqueta 3</label><input data-text="tl3Label" type="text"></div>
+            <div><label>Hora 4 — Comida</label><input data-text="tl4Time" type="text"></div>
+            <div><label>Etiqueta 4</label><input data-text="tl4Label" type="text"></div>
+            <div><label>Hora 5 — Brindis</label><input data-text="tl5Time" type="text"></div>
+            <div><label>Etiqueta 5</label><input data-text="tl5Label" type="text"></div>
+            <div><label>Hora 6 — Tarta</label><input data-text="tl6Time" type="text"></div>
+            <div><label>Etiqueta 6</label><input data-text="tl6Label" type="text"></div>
+            <div><label>Hora 7 — Baile</label><input data-text="tl7Time" type="text"></div>
+            <div><label>Etiqueta 7</label><input data-text="tl7Label" type="text"></div>
+          </div>
+          <div class="text-grid" style="margin-top:1rem;">
+            <div style="grid-column:1/-1;"><label>Mensaje final</label><input data-text="timelineFooter" type="text"></div>
+          </div>
+        </div>
+
+        <div class="text-section">
+          <h3><span class="badge-num">7</span> Dress code</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="dressKicker" type="text"></div>
+            <div><label>Título</label><input data-text="dressTitle" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Descripción</label><textarea data-text="dressCopy"></textarea></div>
+            <div class="full" style="grid-column:1/-1;"><label>Highlight</label><input data-text="dressHighlight" type="text"></div>
+          </div>
+        </div>
+
+        <div class="text-section">
+          <h3><span class="badge-num">8</span> Recomendaciones</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="adultsKicker" type="text"></div>
+            <div><label>Título</label><input data-text="adultsTitle" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Mensaje 1</label><textarea data-text="adultsCopy"></textarea></div>
+            <div class="full" style="grid-column:1/-1;"><label>Mensaje 2</label><textarea data-text="adultsCopy2"></textarea></div>
+          </div>
+        </div>
+
+        <div class="text-section">
+          <h3><span class="badge-num">9</span> Luna de miel</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="honeymoonKicker" type="text"></div>
+            <div><label>Título</label><input data-text="honeymoonTitle" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Descripción</label><textarea data-text="honeymoonCopy"></textarea></div>
+            <div class="full" style="grid-column:1/-1;"><label>Encabezado tarjeta</label><input data-text="bankHeading" type="text"></div>
+            <div><label>Etiqueta titular</label><input data-text="bankHolderLabel" type="text"></div>
+            <div><label>Titular</label><input data-text="bankHolder" type="text"></div>
+            <div><label>Etiqueta banco</label><input data-text="bankNameLabel" type="text"></div>
+            <div><label>Banco</label><input data-text="bankName" type="text"></div>
+            <div><label>Etiqueta documento</label><input data-text="bankDocumentLabel" type="text"></div>
+            <div><label>Documento</label><input data-text="bankDocument" type="text"></div>
+            <div><label>Etiqueta cuenta</label><input data-text="bankAccountLabel" type="text"></div>
+            <div><label>Cuenta</label><input data-text="bankAccount" type="text"></div>
+            <div><label>Etiqueta alias</label><input data-text="bankAliasLabel" type="text"></div>
+            <div><label>Alias</label><input data-text="bankAlias" type="text"></div>
+            <div><label>Etiqueta tipo alias</label><input data-text="bankAliasTypeLabel" type="text"></div>
+            <div><label>Tipo alias</label><input data-text="bankAliasType" type="text"></div>
+          </div>
+        </div>
+
+        <div class="text-section">
+          <h3><span class="badge-num">10</span> RSVP</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="rsvpKicker" type="text"></div>
+            <div><label>Título</label><input data-text="rsvpTitle" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Descripción</label><textarea data-text="rsvpCopy"></textarea></div>
+            <div><label>Etiqueta "Nombre"</label><input data-text="rsvpNameLabel" type="text"></div>
+            <div><label>Etiqueta "Apellido"</label><input data-text="rsvpLastLabel" type="text"></div>
+            <div><label>Etiqueta "Asistencia"</label><input data-text="rsvpAttendanceLabel" type="text"></div>
+            <div><label>Texto del botón</label><input data-text="rsvpSubmit" type="text"></div>
+          </div>
+        </div>
+
+        <div class="text-section">
+          <h3><span class="badge-num">11</span> Banda sonora</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="songsKicker" type="text"></div>
+            <div><label>Título</label><input data-text="songsTitle" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Descripción</label><textarea data-text="songsCopy"></textarea></div>
+            <div><label>Etiqueta "Nombre"</label><input data-text="songNameLabel" type="text"></div>
+            <div><label>Etiqueta "Canción"</label><input data-text="songTitleLabel" type="text"></div>
+            <div><label>Etiqueta "Artista"</label><input data-text="songArtistLabel" type="text"></div>
+            <div><label>Texto del botón</label><input data-text="songSubmit" type="text"></div>
+          </div>
+        </div>
+
+        <div class="text-section">
+          <h3><span class="badge-num">12</span> Galería</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="galleryKicker" type="text"></div>
+            <div><label>Título</label><input data-text="galleryTitle" type="text"></div>
+            <div><label>Contador</label><input data-text="galleryCount" type="text"></div>
+            <div><label>Caption 1</label><input data-text="galleryCap1" type="text"></div>
+            <div><label>Caption 2</label><input data-text="galleryCap2" type="text"></div>
+            <div><label>Caption 3</label><input data-text="galleryCap3" type="text"></div>
+            <div><label>Caption 4</label><input data-text="galleryCap4" type="text"></div>
+            <div><label>Caption 5</label><input data-text="galleryCap5" type="text"></div>
+          </div>
+        </div>
+
+        <div class="text-section">
+          <h3><span class="badge-num">13</span> Fotos de invitados</h3>
+          <div class="text-grid">
+            <div><label>Kicker</label><input data-text="guestPhotosKicker" type="text"></div>
+            <div><label>Título</label><input data-text="guestPhotosTitle" type="text"></div>
+            <div class="full" style="grid-column:1/-1;"><label>Descripción</label><textarea data-text="guestPhotosCopy"></textarea></div>
+            <div class="full" style="grid-column:1/-1;"><label>Texto del QR placeholder</label><input data-text="qrPlaceholderText" type="text"></div>
+          </div>
+        </div>
+
+        <div class="text-section">
+          <h3><span class="badge-num">14</span> Cierre</h3>
+          <div class="text-grid">
+            <div class="full" style="grid-column:1/-1;"><label>Mensaje final</label><textarea data-text="closingMessage"></textarea></div>
+            <div><label>Firma</label><input data-text="closingSignature" type="text"></div>
+            <div><label>Fecha</label><input data-text="closingDate" type="text"></div>
+          </div>
+        </div>
+
+        <button id="save-all-texts-btn" class="btn" style="margin-top:1.5rem;">GUARDAR TODOS LOS TEXTOS</button>
+        <div id="texts-msg" class="msg"></div>
+      </div>
+    </div>
+
+    <!-- ============ TAB MÚSICA ============ -->
+    <div id="tab-musica" class="tab-content">
+      <div class="card">
+        <h2>Música de fondo</h2>
+        <p class="desc">Pegá una URL directa (HTTPS). Se reproduce cuando los invitados tocan "Abrir invitación".</p>
+
+        <label>Título de la canción</label>
+        <input id="in-music-title" type="text" placeholder="Say You Won't Let Go">
+        <label>Artista</label>
+        <input id="in-music-artist" type="text" placeholder="James Arthur">
+        <label>URL directa</label>
+        <input id="in-music-url" type="url" placeholder="https://...">
+        <button id="save-music-url-btn" class="btn">GUARDAR MÚSICA</button>
+        <button id="clear-music-btn" class="btn danger">🗑 QUITAR MÚSICA</button>
+
+        <p style="margin-top:1rem;font-size:.8rem;color:var(--muted);">
+          URL actual: <span id="current-music-url" style="word-break:break-all;color:#ccc;">(ninguna)</span>
+        </p>
+
+        <div class="music-preview" id="music-preview-box" style="display:none;">
+          <span style="font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;">Vista previa:</span>
+          <audio id="music-preview-audio" controls preload="none"></audio>
+        </div>
+
+        <div id="music-msg" class="msg"></div>
+      </div>
+    </div>
+
+    <!-- ============ TAB RSVP ============ -->
+    <div id="tab-rsvp" class="tab-content">
+      <div class="card">
+        <h2>Confirmaciones de asistencia</h2>
+        <p class="desc">Respuestas recibidas en tiempo real.</p>
+
+        <div class="stats-grid">
+          <div class="stat-box"><div class="stat-label">Total respuestas</div><div class="stat-value" id="stat-total">0</div></div>
+          <div class="stat-box"><div class="stat-label">Confirmados</div><div class="stat-value yes" id="stat-yes">0</div></div>
+          <div class="stat-box"><div class="stat-label">No asisten</div><div class="stat-value no" id="stat-no">0</div></div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-box"><h3>Asistencia</h3><div class="chart-container"><canvas id="chart-attendance"></canvas></div></div>
+          <div class="chart-box"><h3>Respuestas por día</h3><div class="chart-container"><canvas id="chart-daily"></canvas></div></div>
+        </div>
+
+        <div class="export-bar">
+          <button id="export-rsvp-btn" class="btn small">📥 DESCARGAR EXCEL</button>
+          <button id="clear-rsvp-btn" class="btn danger small">🗑 BORRAR TODAS</button>
+        </div>
+        <div id="rsvp-list">Cargando...</div>
+      </div>
+    </div>
+
+    <!-- ============ TAB CANCIONES ============ -->
+    <div id="tab-canciones" class="tab-content">
+      <div class="card">
+        <h2>Canciones sugeridas</h2>
+        <p class="desc">Lista de canciones que los invitados quieren escuchar.</p>
+
+        <div class="stats-grid">
+          <div class="stat-box"><div class="stat-label">Total canciones</div><div class="stat-value" id="stat-songs">0</div></div>
+          <div class="stat-box"><div class="stat-label">Artistas únicos</div><div class="stat-value" id="stat-artists">0</div></div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-box"><h3>Top 5 artistas</h3><div class="chart-container"><canvas id="chart-artists"></canvas></div></div>
+        </div>
+
+        <div class="export-bar">
+          <button id="export-songs-btn" class="btn small">📥 DESCARGAR EXCEL</button>
+          <button id="clear-songs-btn" class="btn danger small">🗑 BORRAR TODAS</button>
+        </div>
+        <div id="canciones-list">Cargando...</div>
+      </div>
+    </div>
+
+    <!-- ============ TAB STATS ============ -->
+    <div id="tab-stats" class="tab-content">
+      <div class="card">
+        <h2>Resumen general</h2>
+        <p class="desc">Todo lo que está pasando con tu invitación.</p>
+
+        <div class="stats-grid">
+          <div class="stat-box"><div class="stat-label">Total invitados</div><div class="stat-value" id="stat-total2">0</div></div>
+          <div class="stat-box"><div class="stat-label">Confirmados</div><div class="stat-value yes" id="stat-yes2">0</div></div>
+          <div class="stat-box"><div class="stat-label">No asisten</div><div class="stat-value no" id="stat-no2">0</div></div>
+          <div class="stat-box"><div class="stat-label">Canciones pedidas</div><div class="stat-value" id="stat-songs2">0</div></div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-box" style="height:360px;">
+            <h3>Distribución general</h3>
+            <div class="chart-container"><canvas id="chart-general"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut }
+  from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+import { getDatabase, ref, onValue, update, remove, set }
+  from "https://www.gstatic.com/firebasejs/13.0.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBXl5uzDa89nfjDHPUwGYfmOVZOLH6OaRI",
+  authDomain: "bodacyv22112026.firebaseapp.com",
+  databaseURL: "https://bodacyv22112026-default-rtdb.firebaseio.com",
+  projectId: "bodacyv22112026",
+  storageBucket: "bodacyv22112026.firebasestorage.app",
+  messagingSenderId: "940398343769",
+  appId: "1:940398343769:web:5f12f45489c78071466348"
+};
+
+const IMGBB_API_KEY = '588023b3a033560bf5cf1d272cf3a4ae';
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+const ALLOWED_EMAIL = 'cjaravb@gmail.com';
+const $ = id => document.getElementById(id);
+
+let rsvpData = {};
+let songsData = {};
+let charts = {};
+
+// ============ UTILIDADES ============
+function showMsg(id, text, type = 'ok') {
+  const el = $(id);
+  el.textContent = text;
+  el.className = 'msg show ' + type;
+  if (type === 'ok') setTimeout(() => { el.classList.remove('show'); }, 3500);
+}
+
+async function uploadToImgBB(file) {
+  const formData = new FormData();
+  formData.append('image', file);
+  const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+    method: 'POST',
+    body: formData
+  });
+  const result = await response.json();
+  if (!result.success) throw new Error(result.error?.message || 'Error al subir a ImgBB');
+  return result.data.display_url || result.data.url;
+}
+
+// ============ LOGIN / SIGNUP ============
+$('show-signup-btn').addEventListener('click', () => {
+  $('login-title').textContent = 'Crear cuenta';
+  $('login-email').style.display = 'none';
+  $('login-password').style.display = 'none';
+  $('login-btn').style.display = 'none';
+  $('show-signup-btn').style.display = 'none';
+  $('signup-block').style.display = 'block';
+});
+$('show-login-btn').addEventListener('click', () => {
+  $('login-title').textContent = 'Iniciar sesión';
+  $('login-email').style.display = 'block';
+  $('login-password').style.display = 'block';
+  $('login-btn').style.display = 'block';
+  $('show-signup-btn').style.display = 'inline-block';
+  $('signup-block').style.display = 'none';
+});
+
+$('login-btn').addEventListener('click', async () => {
+  const email = $('login-email').value.trim();
+  const password = $('login-password').value;
+  $('login-msg').classList.remove('show');
+  if (email !== ALLOWED_EMAIL) { showMsg('login-msg', 'Solo la cuenta autorizada puede ingresar.', 'err'); return; }
+  try { await signInWithEmailAndPassword(auth, email, password); }
+  catch { showMsg('login-msg', 'Credenciales incorrectas o cuenta no creada.', 'err'); }
+});
+
+$('signup-btn').addEventListener('click', async () => {
+  const email = $('signup-email').value.trim();
+  const password = $('signup-password').value;
+  if (email !== ALLOWED_EMAIL) { showMsg('login-msg', `Solo se puede crear la cuenta ${ALLOWED_EMAIL}.`, 'err'); return; }
+  if (password.length < 6) { showMsg('login-msg', 'La contraseña debe tener al menos 6 caracteres.', 'err'); return; }
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    showMsg('login-msg', '¡Cuenta creada! Ya podés entrar.', 'ok');
+  } catch (err) {
+    if (err.code === 'auth/email-already-in-use') showMsg('login-msg', 'La cuenta ya existe.', 'err');
+    else showMsg('login-msg', 'Error: ' + err.message, 'err');
+  }
+});
+
+$('logout-btn').addEventListener('click', () => signOut(auth));
+
+onAuthStateChanged(auth, user => {
+  if (user && user.email === ALLOWED_EMAIL) {
+    $('login-view').style.display = 'none';
+    $('admin-view').style.display = 'block';
+    $('user-email').textContent = user.email;
+    $('avatar').textContent = user.email[0].toUpperCase();
+    cargarDatos();
+  } else {
+    $('login-view').style.display = 'flex';
+    $('admin-view').style.display = 'none';
+  }
+});
+
+// ============ TABS ============
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    $(`tab-${tab.dataset.tab}`).classList.add('active');
+    setTimeout(() => { Object.values(charts).forEach(c => c && c.resize()); }, 50);
+  });
+});
+
+// ============ DROPZONE ============
+document.querySelectorAll('.dropzone').forEach(dz => {
+  const key = dz.dataset.drop;
+  const input = document.querySelector(`input[data-photo="${key}"]`);
+  if (!input) return;
+
+  dz.addEventListener('click', () => input.click());
+
+  dz.addEventListener('dragover', e => {
+    e.preventDefault();
+    dz.classList.add('dragover');
+  });
+  dz.addEventListener('dragleave', () => dz.classList.remove('dragover'));
+  dz.addEventListener('drop', e => {
+    e.preventDefault();
+    dz.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      const dt = new DataTransfer();
+      dt.items.add(file);
+      input.files = dt.files;
+      input.dispatchEvent(new Event('change', { bubbles: true }));
     }
+  });
+});
 
-    onValue(ref(db, 'invitacion'), snapshot => {
-      const d = snapshot.val() || {};
-
-      if (d.musicUrl) {
-        setMusic(d.musicUrl, d.musicTitle || DEFAULT_MUSIC.title, d.musicArtist || DEFAULT_MUSIC.artist);
-      }
-
-      for (const [elId, key] of Object.entries(TEXT_FIELDS)) {
-        const el = document.getElementById(elId);
-        if (el && d[key] !== undefined && d[key] !== null && d[key] !== '') {
-          el.textContent = d[key];
-        }
-      }
-
-      if (d.names) {
-        const namesEl = $('names-display');
-        if (namesEl) namesEl.innerHTML = d.names.replace('&', '<span aria-hidden="true">&amp;</span>');
-      }
-      if (d.tagline && $('tagline-display')) $('tagline-display').textContent = d.tagline;
-
-      if (d.coverPhoto) $('cover-photo').src = d.coverPhoto;
-      if (d.storyPhoto) $('story-photo').src = d.storyPhoto;
-      if (d.churchPhoto) $('church-photo').src = d.churchPhoto;
-      ['g1','g2','g3','g4','g5'].forEach(k => { if (d[k] && $(k)) $(k).src = d[k]; });
-      if (d.closingPhoto) $('closing-photo').src = d.closingPhoto;
-
-      const qrSlot = $('qr-slot');
-      if (qrSlot) {
-        if (d.qrImage) {
-          qrSlot.innerHTML = `<img src="${d.qrImage}" alt="QR para compartir fotos">`;
-        } else {
-          const txt = d.qrPlaceholderText || 'CÓDIGO QR PENDIENTE';
-          qrSlot.innerHTML = `<span class="canva-text pending" style="color:#f8f8f6;font-size:16px;">${txt}</span>`;
-        }
-      }
-
-      const shareBtn = $('share-photos');
-      const pendingLabel = $('photos-pending');
-      if (shareBtn) {
-        if (d.photosUrl) {
-          shareBtn.disabled = false;
-          shareBtn.onclick = () => window.open(d.photosUrl, '_blank', 'noopener,noreferrer');
-          if (pendingLabel) pendingLabel.textContent = '';
-        } else {
-          shareBtn.disabled = true;
-          shareBtn.onclick = null;
-          if (pendingLabel) pendingLabel.textContent = d.photosPendingText || 'Enlace pendiente de configuración';
-        }
-      }
-    });
-
-    $('open-button').addEventListener('click', () => {
-      $('site-content').hidden = false;
-      $('apertura').classList.add('is-closed');
-      requestAnimationFrame(() => $('inicio').scrollIntoView({behavior:'smooth'}));
-      const audio = $('bg-audio');
-      if (audio.src) {
-        audio.volume = 0.4;
-        audio.play().then(() => {
-          $('icon-play').style.display = 'none';
-          $('icon-pause').style.display = 'block';
-          $('music-status').textContent = 'Reproduciendo';
-        }).catch(() => { $('music-status').textContent = 'Pulsá play'; });
-      }
-    });
-
-    $('music-toggle').addEventListener('click', () => {
-      const audio = $('bg-audio');
-      if (audio.paused) {
-        audio.play();
-        $('icon-play').style.display = 'none';
-        $('icon-pause').style.display = 'block';
-        $('music-status').textContent = 'Reproduciendo';
-      } else {
-        audio.pause();
-        $('icon-play').style.display = 'block';
-        $('icon-pause').style.display = 'none';
-        $('music-status').textContent = 'En pausa';
-      }
-    });
-
-    $('menu-toggle').addEventListener('click', () => {
-      const opening = $('nav-panel').hidden;
-      $('nav-panel').hidden = !opening;
-      $('menu-toggle').setAttribute('aria-expanded', String(opening));
-    });
-    $('nav-panel').addEventListener('click', event => {
-      if (event.target.closest('a')) {
-        $('nav-panel').hidden = true;
-        $('menu-toggle').setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    const eventTime = Date.parse('2026-11-22T17:00:00-03:00');
-    function updateCountdown() {
-      const remaining = Math.max(0, eventTime - Date.now());
-      if (!remaining) {
-        $('count-grid').hidden = true;
-        $('count-celebration').classList.remove('hidden');
-        return;
-      }
-      const total = Math.floor(remaining / 1000);
-      $('days').textContent = String(Math.floor(total / 86400)).padStart(3,'0');
-      $('hours').textContent = String(Math.floor(total / 3600) % 24).padStart(2,'0');
-      $('minutes').textContent = String(Math.floor(total / 60) % 60).padStart(2,'0');
-      $('seconds').textContent = String(total % 60).padStart(2,'0');
+// ============ SUBIR FOTO ============
+document.querySelectorAll('input[data-photo]').forEach(input => {
+  input.addEventListener('change', async e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 10 * 1024 * 1024) {
+      showMsg('fotos-msg', '❌ La imagen es muy grande. Máximo 10MB.', 'err');
+      return;
     }
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    const key = e.target.dataset.photo;
+    const msgId = key === 'qrImage' ? 'qr-msg' : 'fotos-msg';
+    showMsg(msgId, `Subiendo ${key} a ImgBB...`, 'ok');
 
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-      }), {threshold:.08});
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    try {
+      const imageUrl = await uploadToImgBB(file);
+      await update(ref(db, 'invitacion'), { [key]: imageUrl });
+      showMsg(msgId, `✅ ${key} actualizado.`, 'ok');
+      const prev = $('prev-' + key);
+      if (prev) prev.src = imageUrl;
+    } catch (err) {
+      showMsg(msgId, '❌ Error: ' + err.message + '. Podés pegar una URL manualmente.', 'err');
+    }
+  });
+});
+
+// ============ URL MANUAL PARA FOTOS ============
+document.querySelectorAll('[data-url-apply]').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const key = btn.dataset.urlApply;
+    const input = document.querySelector(`[data-url-input="${key}"]`);
+    if (!input) return;
+    const url = input.value.trim();
+    if (!url) { showMsg('fotos-msg', 'Pegá una URL primero.', 'err'); return; }
+    if (!url.startsWith('http')) { showMsg('fotos-msg', 'La URL debe empezar con http.', 'err'); return; }
+
+    const msgId = key === 'qrImage' ? 'qr-msg' : 'fotos-msg';
+    try {
+      await update(ref(db, 'invitacion'), { [key]: url });
+      showMsg(msgId, `✅ ${key} actualizado desde URL.`, 'ok');
+      const prev = $('prev-' + key);
+      if (prev) prev.src = url;
+      input.value = '';
+    } catch (err) {
+      showMsg(msgId, '❌ Error: ' + err.message, 'err');
+    }
+  });
+});
+
+// ============ BORRAR FOTO ============
+document.querySelectorAll('button[data-delete-photo]').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const key = btn.dataset.deletePhoto;
+    if (!confirm(`¿Borrar la foto de "${key}"?`)) return;
+    const msgId = key === 'qrImage' ? 'qr-msg' : 'fotos-msg';
+    try {
+      await remove(ref(db, 'invitacion/' + key));
+      const prev = $('prev-' + key);
+      if (prev) prev.src = '';
+      showMsg(msgId, `🗑 ${key} borrado.`, 'ok');
+    } catch (err) {
+      showMsg(msgId, '❌ Error al borrar: ' + err.message, 'err');
+    }
+  });
+});
+
+// ============ CARGAR DATOS ============
+function cargarDatos() {
+  onValue(ref(db, 'invitacion'), snap => {
+    const d = snap.val() || {};
+
+    document.querySelectorAll('[data-text]').forEach(el => {
+      const key = el.dataset.text;
+      if (d[key] !== undefined && d[key] !== null) {
+        el.value = d[key];
+      }
+    });
+
+    $('in-music-title').value = d.musicTitle || '';
+    $('in-music-artist').value = d.musicArtist || '';
+    $('current-music-url').textContent = d.musicUrl || '(ninguna)';
+    $('in-music-url').value = d.musicUrl || '';
+    if (d.musicUrl) {
+      $('music-preview-box').style.display = 'flex';
+      const previewAudio = $('music-preview-audio');
+      if (previewAudio.src !== d.musicUrl) previewAudio.src = d.musicUrl;
     } else {
-      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+      $('music-preview-box').style.display = 'none';
     }
 
-    $('rsvp-form').addEventListener('submit', async e => {
-      e.preventDefault();
-      const form = e.currentTarget;
-      const msg = $('rsvp-message');
-      const nombre = $('rsvp-name').value.trim();
-      const apellido = $('rsvp-last').value.trim();
-      const asistencia = $('rsvp-attendance').value;
-      if (!nombre || !apellido || !asistencia) { msg.textContent = 'Completá todos los campos.'; return; }
-      msg.textContent = 'Enviando...';
-      try {
-        await push(ref(db, 'rsvp'), { nombre, apellido, asistencia, timestamp: new Date().toISOString() });
-        msg.textContent = '¡Tu respuesta quedó registrada. Gracias!';
-        form.reset();
-      } catch { msg.textContent = 'Error al enviar. Intentá de nuevo.'; }
-    });
+    $('in-photos-url').value = d.photosUrl || '';
+    $('current-photos-url').textContent = d.photosUrl || '(ninguna)';
 
-    $('song-form').addEventListener('submit', async e => {
-      e.preventDefault();
-      const form = e.currentTarget;
-      const msg = $('song-message');
-      const nombre = $('song-name').value.trim();
-      const cancion = $('song-title').value.trim();
-      const artista = $('song-artist').value.trim();
-      if (!nombre || !cancion || !artista) { msg.textContent = 'Completá todos los campos.'; return; }
-      msg.textContent = 'Enviando...';
-      try {
-        await push(ref(db, 'canciones'), { nombre, cancion, artista, timestamp: new Date().toISOString() });
-        msg.textContent = '¡Tu canción quedó registrada. Gracias!';
-        form.reset();
-      } catch { msg.textContent = 'Error al enviar. Intentá de nuevo.'; }
+    ['coverPhoto','storyPhoto','churchPhoto','g1','g2','g3','g4','g5','closingPhoto','qrImage'].forEach(k => {
+      const prev = $('prev-' + k);
+      if (prev) prev.src = d[k] || '';
     });
-  </script>
- </body>
+  });
+
+  onValue(ref(db, 'rsvp'), snap => { rsvpData = snap.val() || {}; renderRSVP(); });
+  onValue(ref(db, 'canciones'), snap => { songsData = snap.val() || {}; renderSongs(); });
+}
+
+// ============ GUARDAR TODOS LOS TEXTOS ============
+$('save-all-texts-btn').addEventListener('click', async () => {
+  const payload = {};
+  document.querySelectorAll('[data-text]').forEach(el => {
+    payload[el.dataset.text] = el.value.trim();
+  });
+  try {
+    await update(ref(db, 'invitacion'), payload);
+    showMsg('texts-msg', '✅ Todos los textos guardados.', 'ok');
+  } catch (err) {
+    showMsg('texts-msg', '❌ Error: ' + err.message, 'err');
+  }
+});
+
+// ============ GUARDAR LINK FOTOS ============
+$('save-photos-url-btn').addEventListener('click', async () => {
+  const url = $('in-photos-url').value.trim();
+  if (!url.startsWith('http')) { showMsg('qr-msg', 'Pegá una URL válida.', 'err'); return; }
+  try {
+    await update(ref(db, 'invitacion'), { photosUrl: url });
+    showMsg('qr-msg', '✅ Link guardado.', 'ok');
+  } catch (err) { showMsg('qr-msg', '❌ Error: ' + err.message, 'err'); }
+});
+
+$('clear-photos-url-btn').addEventListener('click', async () => {
+  if (!confirm('¿Quitar el link de fotos?')) return;
+  try {
+    await remove(ref(db, 'invitacion/photosUrl'));
+    showMsg('qr-msg', '🗑 Link quitado.', 'ok');
+  } catch (err) { showMsg('qr-msg', '❌ Error: ' + err.message, 'err'); }
+});
+
+// ============ MÚSICA ============
+$('save-music-url-btn').addEventListener('click', async () => {
+  const url = $('in-music-url').value.trim();
+  if (!url.startsWith('http')) { showMsg('music-msg', 'Pegá una URL válida.', 'err'); return; }
+  try {
+    await update(ref(db, 'invitacion'), {
+      musicUrl: url,
+      musicTitle: $('in-music-title').value.trim() || 'Nuestra canción',
+      musicArtist: $('in-music-artist').value.trim() || ''
+    });
+    showMsg('music-msg', '✅ Música guardada.', 'ok');
+  } catch (err) { showMsg('music-msg', '❌ Error: ' + err.message, 'err'); }
+});
+
+$('clear-music-btn').addEventListener('click', async () => {
+  if (!confirm('¿Quitar la música actual?')) return;
+  try {
+    await remove(ref(db, 'invitacion/musicUrl'));
+    await remove(ref(db, 'invitacion/musicTitle'));
+    await remove(ref(db, 'invitacion/musicArtist'));
+    showMsg('music-msg', '🗑 Música quitada.', 'ok');
+  } catch (err) { showMsg('music-msg', '❌ Error: ' + err.message, 'err'); }
+});
+
+// ============ BORRAR TODAS ============
+$('clear-rsvp-btn').addEventListener('click', async () => {
+  if (!confirm('⚠️ ¿Borrar TODAS las confirmaciones?')) return;
+  if (!confirm('¿Estás seguro? No se puede deshacer.')) return;
+  try { await set(ref(db, 'rsvp'), null); } catch (err) { alert('Error: ' + err.message); }
+});
+
+$('clear-songs-btn').addEventListener('click', async () => {
+  if (!confirm('⚠️ ¿Borrar TODAS las canciones?')) return;
+  if (!confirm('¿Estás seguro? No se puede deshacer.')) return;
+  try { await set(ref(db, 'canciones'), null); } catch (err) { alert('Error: ' + err.message); }
+});
+
+// ============ RENDER RSVP ============
+function renderRSVP() {
+  const entries = Object.entries(rsvpData).sort((a,b) => new Date(b[1].timestamp) - new Date(a[1].timestamp));
+  const total = entries.length;
+  const yes = entries.filter(([,r]) => (r.asistencia || '').includes('Sí')).length;
+  const no = entries.filter(([,r]) => (r.asistencia || '').includes('No')).length;
+
+  $('stat-total').textContent = total;
+  $('stat-yes').textContent = yes;
+  $('stat-no').textContent = no;
+  if ($('stat-total2')) $('stat-total2').textContent = total;
+  if ($('stat-yes2')) $('stat-yes2').textContent = yes;
+  if ($('stat-no2')) $('stat-no2').textContent = no;
+
+  if (!entries.length) {
+    $('rsvp-list').innerHTML = '<p class="empty">Sin respuestas todavía.</p>';
+  } else {
+    $('rsvp-list').innerHTML = entries.map(([id, r]) => `
+      <div class="entry">
+        <div class="entry-main">
+          <div class="entry-name">${r.nombre || ''} ${r.apellido || ''}</div>
+          <div class="entry-detail"><span class="badge ${(r.asistencia || '').includes('Sí') ? 'yes' : 'no'}">${r.asistencia || ''}</span></div>
+        </div>
+        <div class="entry-date">${r.timestamp ? new Date(r.timestamp).toLocaleString('es-PY') : ''}</div>
+        <div class="entry-actions"><button class="btn danger xs" data-delete-rsvp="${id}">🗑</button></div>
+      </div>
+    `).join('');
+    document.querySelectorAll('[data-delete-rsvp]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('¿Borrar esta respuesta?')) return;
+        try { await remove(ref(db, 'rsvp/' + btn.dataset.deleteRsvp)); } catch (err) { alert('Error: ' + err.message); }
+      });
+    });
+  }
+
+  if (charts.attendance) charts.attendance.destroy();
+  const ctxA = $('chart-attendance');
+  if (ctxA) {
+    charts.attendance = new Chart(ctxA, {
+      type: 'doughnut',
+      data: { labels: ['Confirmados', 'No asisten'], datasets: [{ data: [yes, no], backgroundColor: ['#4ade80', '#f87171'], borderColor: '#1c1c1c', borderWidth: 3 }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#f5f5f5', font: { family: 'Inter', size: 12 } } } }, cutout: '65%' }
+    });
+  }
+
+  if (charts.daily) charts.daily.destroy();
+  const ctxD = $('chart-daily');
+  if (ctxD) {
+    const byDay = {};
+    entries.forEach(([, r]) => {
+      if (!r.timestamp) return;
+      const day = new Date(r.timestamp).toISOString().split('T')[0];
+      byDay[day] = (byDay[day] || 0) + 1;
+    });
+    const days = Object.keys(byDay).sort();
+    const counts = days.map(d => byDay[d]);
+    charts.daily = new Chart(ctxD, {
+      type: 'line',
+      data: { labels: days.map(d => { const [,m,dd] = d.split('-'); return `${dd}/${m}`; }), datasets: [{ label: 'Respuestas', data: counts, borderColor: '#f5f5f5', backgroundColor: 'rgba(245,245,245,0.1)', tension: 0.35, fill: true, pointBackgroundColor: '#f5f5f5', pointRadius: 4 }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: '#999', font: { size: 11 } }, grid: { color: '#2a2a2a' } }, y: { ticks: { color: '#999', font: { size: 11 }, stepSize: 1 }, grid: { color: '#2a2a2a' }, beginAtZero: true } } }
+    });
+  }
+}
+
+// ============ RENDER CANCIONES ============
+function renderSongs() {
+  const entries = Object.entries(songsData).sort((a,b) => new Date(b[1].timestamp) - new Date(a[1].timestamp));
+  const total = entries.length;
+  const artistas = new Set(entries.map(([,r]) => (r.artista || '').toLowerCase().trim()));
+
+  $('stat-songs').textContent = total;
+  $('stat-artists').textContent = artistas.size;
+  if ($('stat-songs2')) $('stat-songs2').textContent = total;
+
+  if (!entries.length) {
+    $('canciones-list').innerHTML = '<p class="empty">Sin sugerencias todavía.</p>';
+  } else {
+    $('canciones-list').innerHTML = entries.map(([id, r]) => `
+      <div class="entry">
+        <div class="entry-main">
+          <div class="entry-name">"${r.cancion || ''}" — ${r.artista || ''}</div>
+          <div class="entry-detail">Pedida por ${r.nombre || ''}</div>
+        </div>
+        <div class="entry-date">${r.timestamp ? new Date(r.timestamp).toLocaleString('es-PY') : ''}</div>
+        <div class="entry-actions"><button class="btn danger xs" data-delete-song="${id}">🗑</button></div>
+      </div>
+    `).join('');
+    document.querySelectorAll('[data-delete-song]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('¿Borrar esta canción?')) return;
+        try { await remove(ref(db, 'canciones/' + btn.dataset.deleteSong)); } catch (err) { alert('Error: ' + err.message); }
+      });
+    });
+  }
+
+  if (charts.artists) charts.artists.destroy();
+  const ctxA = $('chart-artists');
+  if (ctxA) {
+    const artistCount = {};
+    entries.forEach(([, r]) => {
+      const a = (r.artista || '').trim();
+      if (!a) return;
+      artistCount[a] = (artistCount[a] || 0) + 1;
+    });
+    const sorted = Object.entries(artistCount).sort((a,b) => b[1] - a[1]).slice(0, 5);
+    charts.artists = new Chart(ctxA, {
+      type: 'bar',
+      data: { labels: sorted.map(s => s[0]), datasets: [{ label: 'Canciones', data: sorted.map(s => s[1]), backgroundColor: '#f5f5f5', borderRadius: 6 }] },
+      options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { ticks: { color: '#999', font: { size: 11 }, stepSize: 1 }, grid: { color: '#2a2a2a' }, beginAtZero: true }, y: { ticks: { color: '#f5f5f5', font: { size: 12 } }, grid: { display: false } } } }
+    });
+  }
+
+  if (charts.general) charts.general.destroy();
+  const ctxG = $('chart-general');
+  if (ctxG) {
+    const yes = Object.values(rsvpData).filter(r => (r.asistencia || '').includes('Sí')).length;
+    const no = Object.values(rsvpData).filter(r => (r.asistencia || '').includes('No')).length;
+    charts.general = new Chart(ctxG, {
+      type: 'bar',
+      data: { labels: ['Confirmados', 'No asisten', 'Canciones'], datasets: [{ data: [yes, no, total], backgroundColor: ['#4ade80', '#f87171', '#facc15'], borderRadius: 8 }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: '#f5f5f5', font: { size: 12 } }, grid: { display: false } }, y: { ticks: { color: '#999', font: { size: 11 }, stepSize: 1 }, grid: { color: '#2a2a2a' }, beginAtZero: true } } }
+    });
+  }
+}
+
+// ============ EXPORTAR RSVP ============
+$('export-rsvp-btn').addEventListener('click', () => {
+  const entries = Object.entries(rsvpData);
+  if (!entries.length) { alert('No hay respuestas.'); return; }
+  const rows = entries.map(([, r]) => ({ 'Nombre': r.nombre || '', 'Apellido': r.apellido || '', 'Asistencia': r.asistencia || '', 'Fecha': r.timestamp ? new Date(r.timestamp).toLocaleString('es-PY') : '' }));
+  const ws = XLSX.utils.json_to_sheet(rows);
+  ws['!cols'] = [{wch:20},{wch:20},{wch:18},{wch:25}];
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'RSVP');
+  const yes = rows.filter(r => r.Asistencia.includes('Sí')).length;
+  const no = rows.filter(r => r.Asistencia.includes('No')).length;
+  const ws2 = XLSX.utils.json_to_sheet([{ 'Métrica': 'Total', 'Cantidad': rows.length }, { 'Métrica': 'Confirmados', 'Cantidad': yes }, { 'Métrica': 'No asisten', 'Cantidad': no }]);
+  ws2['!cols'] = [{wch:25},{wch:12}];
+  XLSX.utils.book_append_sheet(wb, ws2, 'Resumen');
+  XLSX.writeFile(wb, `RSVP_Cinthia_Victor_${new Date().toISOString().split('T')[0]}.xlsx`);
+});
+
+// ============ EXPORTAR CANCIONES ============
+$('export-songs-btn').addEventListener('click', () => {
+  const entries = Object.entries(songsData);
+  if (!entries.length) { alert('No hay canciones.'); return; }
+  const rows = entries.map(([, r]) => ({ 'Invitado': r.nombre || '', 'Canción': r.cancion || '', 'Artista': r.artista || '', 'Fecha': r.timestamp ? new Date(r.timestamp).toLocaleString('es-PY') : '' }));
+  const ws = XLSX.utils.json_to_sheet(rows);
+  ws['!cols'] = [{wch:22},{wch:35},{wch:28},{wch:25}];
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Canciones');
+  XLSX.writeFile(wb, `Canciones_Cinthia_Victor_${new Date().toISOString().split('T')[0]}.xlsx`);
+});
+</script>
+
+</body>
 </html>
