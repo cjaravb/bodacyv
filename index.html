@@ -60,7 +60,7 @@
     .gallery .photo-frame { aspect-ratio:4/5; }
     .gallery figure:nth-child(3) .photo-frame { aspect-ratio:3/2; }
 
-    /* ============ SEPARADOR DECORATIVO: LÍNEA · PUNTOS · CORAZÓN ============ */
+    /* ============ SEPARADOR: LÍNEA · PUNTOS · CORAZÓN ============ */
     .deco-separator {
       display: flex;
       justify-content: center;
@@ -223,13 +223,16 @@
       }
     }
 
+    /* ============ RECOMENDACIONES (mismo estilo que el resto) ============ */
     .recommendations p {
-      font-family: 'Times New Roman', Times, Georgia, serif;
-      font-style: italic;
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      line-height: 1.7;
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-style: normal;
+      font-size: clamp(1rem, 1.5vw, 1.16rem);
+      line-height: 1.85;
+      color: var(--ink);
       max-width: 620px;
-      margin: 0 auto 1.5rem;
+      margin: 0 auto 1.2rem;
     }
 
     .reveal { opacity:0; transform:translateY(18px); transition:opacity .8s,transform .8s; }
@@ -364,24 +367,19 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
     <!-- ============ SEPARADOR: LÍNEA · PUNTOS · CORAZÓN ============ -->
     <div class="deco-separator" aria-hidden="true">
       <svg viewBox="0 0 600 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-        <!-- Línea izquierda -->
         <line x1="10" y1="20" x2="220" y2="20" stroke="#111" stroke-width="1.2" stroke-linecap="round"/>
-        <!-- Puntos izquierda -->
         <circle cx="238" cy="20" r="2" fill="#111"/>
         <circle cx="254" cy="20" r="2" fill="#111"/>
         <circle cx="270" cy="20" r="2" fill="#111"/>
-        <!-- Corazón relleno (centro) -->
         <path d="M 300 12
                  C 297 6, 288 6, 288 14
                  C 288 20, 300 28, 300 28
                  C 300 28, 312 20, 312 14
                  C 312 6, 303 6, 300 12 Z"
               fill="#111"/>
-        <!-- Puntos derecha -->
         <circle cx="330" cy="20" r="2" fill="#111"/>
         <circle cx="346" cy="20" r="2" fill="#111"/>
         <circle cx="362" cy="20" r="2" fill="#111"/>
-        <!-- Línea derecha -->
         <line x1="380" y1="20" x2="590" y2="20" stroke="#111" stroke-width="1.2" stroke-linecap="round"/>
       </svg>
     </div>
@@ -513,12 +511,14 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
      </div>
     </section>
 
+    <!-- ============ RECOMENDACIONES (mismo estilo que el resto) ============ -->
     <section data-template-id="adults-section" class="canva-section section recommendations" style="background: rgb(248, 248, 246);">
      <div class="narrow reveal text-center">
-      <p data-template-id="adults-kicker" id="t-adultsKicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">UNA NOTA CON CARIÑO</p>
+      <p data-template-id="adults-kicker" id="t-adultsKicker" class="canva-text eyebrow mb-8" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;"></p>
       <h2 data-template-id="adults-title" id="t-adultsTitle" class="canva-text section-title" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 24px; margin-bottom:1.5rem;">Recomendaciones.</h2>
-      <p id="t-adultsCopy" style="color: rgb(17, 17, 17); font-weight: 400; font-style: italic;">Para que todos podamos celebrar y disfrutar la noche con total libertad, hemos preparado una recepción exclusivamente para adultos.</p>
-      <p id="t-adultsCopy2" style="color: rgb(17, 17, 17); font-weight: 400; font-style: italic;">Agradecemos tu puntualidad, para que no te pierdas ningún momento especial.</p>
+      <p id="t-adultsCopy" style="color: rgb(17, 17, 17);">Para que todos podamos celebrar y disfrutar la noche con total libertad, hemos preparado una recepción exclusivamente para adultos.</p>
+<br>
+      <p id="t-adultsCopy2" style="color: rgb(17, 17, 17);">Agradecemos tu puntualidad, para que no te pierdas ningún momento especial.</p>
      </div>
     </section>
 
@@ -595,7 +595,7 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
        <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-02" id="g2" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=GALERIA+02" alt="GALERÍA 02"></div><figcaption id="t-galleryCap2" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 02</figcaption></figure>
        <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-03" id="g3" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/c8c8c8/555555.png?text=GALERIA+03" alt="GALERÍA 03"></div><figcaption id="t-galleryCap3" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 03</figcaption></figure>
        <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-04" id="g4" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/c8c8c8/555555.png?text=GALERIA+04" alt="GALERÍA 04"></div><figcaption id="t-galleryCap4" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 04</figcaption></figure>
-       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-05" id="g5" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=GALERIA+05" alt="GALERÍA 05"></div><figcaption id="t-galleryCap5" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 05</figcaption></figure>
+       <figure class="reveal"><div class="photo-frame"><img data-template-id="gallery-photo-05" id="g5" class="canva-image" loading="lazy" src="https://placehold.co/900x1100/d3d3d3/555555.png?text=GALERIA+05" alt="GALERÍA 05"></div><figcaption id="t-galleryCap5" class="canva-text eyebrow mt-3" style="color: rgb(17, 17, 17); font-weight: 400; font-style: normal; font-size: 16px;">GALERÍA 05</figcaption></figcaption></figure>
       </div>
      </div>
     </section>
