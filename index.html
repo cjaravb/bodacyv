@@ -251,6 +251,71 @@
       .bank-row { display:block; }
       .music-dock { font-size:.72rem; }
     }
+    /* ============ BOTÓN COPIAR ============ */
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .4rem;
+      margin-left: .8rem;
+      padding: .35rem .75rem;
+      background: transparent;
+      color: currentColor;
+      border: 1px solid currentColor;
+      border-radius: 100px;
+      font-family: 'Inter', sans-serif;
+      font-size: .6rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .25s ease;
+      opacity: .7;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    .copy-btn:hover {
+      opacity: 1;
+      background: currentColor;
+      color: var(--ink);
+    }
+    .section-dark .copy-btn:hover {
+      background: #f8f8f6;
+      color: #111;
+    }
+    .copy-btn svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .copy-btn.copied {
+      background: #4ade80;
+      border-color: #4ade80;
+      color: #0a0a0a;
+      opacity: 1;
+    }
+    @media(max-width:640px) {
+      .copy-btn {
+        display: inline-flex;
+        margin-left: 0;
+        margin-top: .5rem;
+      }
+      .bank-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .bank-row .value {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .3rem;
+      }
+    }
     @media(prefers-reduced-motion:reduce) {
       html { scroll-behavior:auto; }
       *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
@@ -535,8 +600,20 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
        <div class="bank-row"><span data-template-id="bank-name-label" id="t-bankNameLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Banco</span><span data-template-id="bank-name" id="t-bankName" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Basa</span></div>
        <div class="bank-row"><span data-template-id="bank-document-label" id="t-bankDocumentLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">N.º Documento</span><span data-template-id="bank-document" id="t-bankDocument" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">4560498</span></div>
        <div class="bank-row"><span data-template-id="bank-account-label" id="t-bankAccountLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">N.º Cuenta</span><span data-template-id="bank-account" id="t-bankAccount" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">155116331</span></div>
-       <div class="bank-row"><span data-template-id="bank-alias-label" id="t-bankAliasLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Alias</span><span data-template-id="bank-alias" id="t-bankAlias" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">4560498</span></div>
-       <div class="bank-row"><span data-template-id="bank-alias-type-label" id="t-bankAliasTypeLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Tipo de Alias</span><span data-template-id="bank-alias-type" id="t-bankAliasType" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">CI</span></div>
+       <div class="bank-row">
+         <span data-template-id="bank-alias-label" id="t-bankAliasLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Alias</span>
+         <span class="value" style="display:flex; align-items:center;">
+           <span data-template-id="bank-alias" id="t-bankAlias" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">4560498</span>
+           <button class="copy-btn" data-copy="t-bankAlias" type="button" aria-label="Copiar alias">
+             <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+             Copiar
+           </button>
+         </span>
+       </div>
+       <div class="bank-row">
+         <span data-template-id="bank-alias-type-label" id="t-bankAliasTypeLabel" class="canva-text eyebrow" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">Tipo de Alias</span>
+         <span data-template-id="bank-alias-type" id="t-bankAliasType" class="canva-text" style="color: rgb(248, 248, 246); font-weight: 400; font-style: normal; font-size: 16px;">CI</span>
+       </div>
       </div>
      </div>
     </section>
@@ -916,6 +993,47 @@ Con mucha alegría, te invitamos a acompañarnos en este día tan especial.</p>
         msg.textContent = '¡Tu canción quedó registrada. Gracias!';
         form.reset();
       } catch { msg.textContent = 'Error al enviar. Intentá de nuevo.'; }
+    });
+    // ============ COPIAR AL PORTAPAPELES ============
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const targetId = btn.dataset.copy;
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        const text = target.textContent.trim();
+        const originalHTML = btn.innerHTML;
+
+        try {
+          // Intento moderno
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            // Fallback para navegadores viejos o sin HTTPS
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          }
+
+          // Feedback visual
+          btn.classList.add('copied');
+          btn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> ¡Copiado!';
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerHTML = originalHTML;
+          }, 1800);
+        } catch (err) {
+          console.error('Error al copiar:', err);
+          btn.innerHTML = '❌ Error';
+          setTimeout(() => { btn.innerHTML = originalHTML; }, 1800);
+        }
+      });
     });
   </script>
  </body>
